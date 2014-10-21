@@ -156,7 +156,9 @@ if (isset($_POST['submit'])) {
     <label for="subject">Subject</label>
     <input type="text" name="subject">
     <label for="message">Message</label>
-    <textarea name="message" rows="10">Hi Everything Dojo,</textarea>
+    <textarea name="message" rows="10">Hi Everything Dojo,
+
+    </textarea>
     <br />
     <?php
       require_once('recaptchalib.php');
