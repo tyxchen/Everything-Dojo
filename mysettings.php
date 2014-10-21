@@ -105,11 +105,11 @@ $rs_settings->execute(array($_SESSION['user_id']));
     </div>
   </div>
 
-  <?php
+  <?php //spit out all errors
   if (!empty($err)) {
     echo "<p id=\"errors\">";
     foreach ($err as $e) {
-      echo $e."<br />";
+      echo "Error: ".$e."<br />";
     }
     echo "</p>";
   }

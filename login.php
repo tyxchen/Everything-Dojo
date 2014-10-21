@@ -115,10 +115,10 @@ This is an automated response. Do not reply to this email.";
 ?>
 <section id="content">
   <?php //spit out all errors
-  if (!empty($err))  {
+  if (!empty($err)) {
     echo "<p id=\"errors\">";
     foreach ($err as $e) {
-      echo $e."<br />";
+      echo "Error: ".$e."<br />";
     }
     echo "</p>";
   } ?>

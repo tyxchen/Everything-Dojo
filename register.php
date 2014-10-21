@@ -162,14 +162,14 @@ EOT;
   <?php
   } else { ?>
 
-  <p id="errors">
-    <?php //spit out all errors
-    if (!empty($err)) {
-      foreach ($err as $e) {
-        echo "ERROR - ".$e."<br />";
-      }
-    } ?>
-  </p>
+  <?php //spit out all errors
+  if (!empty($err)) {
+    echo "<p id=\"errors\">";
+    foreach ($err as $e) {
+      echo "Error: ".$e."<br />";
+    }
+    echo "</p>";
+  } ?>
 
   <p>Register here. Please fill out all fields.</p>
   <form action="register.php" method="post" name="regForm">

@@ -16,19 +16,19 @@ if (isset($_POST['submit'])) {
   $resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
 
   if (empty($data['name']) || empty($data['email']) || empty($data['reason']) || empty($data['message'])) {
-    $err[] = "Error: Not all fields are filled out.";
+    $err[] = "Not all fields are filled out.";
   }
 
   if (!isUserID($data['name'])) {
-    $err[] = "Error: Your name is too crazy. Please stick to 3-20 characters long, and containing only alphanumeric characters and underscores.";
+    $err[] = "Your name is too crazy. Please stick to 3-20 characters long, and containing only alphanumeric characters and underscores.";
   }
 
   if (!isEmail($data['email'])) {
-    $err[] = "Error: Invalid email address.";
+    $err[] = "Invalid email address.";
   }
 
   if (!$resp->is_valid) {
-    $err[] = "Error: ReCaptcha response invalid! Please try again.";
+    $err[] = "reCAPTCHA response invalid! Please try again.";
   }
 
   $reasons = array("other" => "green",
@@ -64,6 +64,7 @@ if (isset($_POST['submit'])) {
 
   //data is now server-side validated
 
+  //see if email matches any user
   $emailmatch = $dbc->prepare("SELECT * FROM users WHERE user_email = '".$data['email']."'");
   $emailmatch->execute();
   $emailmatch = $emailmatch->fetchAll(PDO::FETCH_ASSOC);
@@ -73,23 +74,32 @@ if (isset($_POST['submit'])) {
     $data['username'] = $emailmatch[0]['user_name'];
   }
 
-  $postdata = array();
+  if (empty($err)) {
+    //create posting array
+    $postdata = array();
 
-  $postdata['key'] = $trellokey;
-  $postdata['token'] = $trellotoken;
-  $postdata['name'] = $data['subject'];
-  $postdata['desc'] .= "###Title: ".$data['email'];
-  $postdata['desc'] .= "**Email**: ".$data['email'];
-  if (isset($data['id'])) {
-    $postdata['desc'] .= "\n**Has EvDo account**: ".$data['username']." (ID ".$data['id'].")";
+    $postdata['key'] = $trellokey;
+    $postdata['token'] = $trellotoken;
+    $postdata['name'] = $data['subject'];
+    $postdata['desc'] .= "###Title: ".$data['email'];
+    $postdata['desc'] .= "**Email**: ".$data['email'];
+    if (isset($data['id'])) {
+      $postdata['desc'] .= "\n**Has EvDo account**: ".$data['username']." (ID ".$data['id'].")";
+    }
+    $postdata['desc'] .= "\n\n**Message**:\n\n".$data['message']."\n\n";
+    $postdata['due'] = null;
+    $postdata['labels'] = $data['label'];
+    $postdata['idList'] = $trellolistid;
+    $postdata['urlSource'] = null;
+
+    curl_post("https://trello.com/1/cards", $postdata);
+
+    if ($result) {
+      header("Location: contact.php?done=yes");
+    } else {
+      $err[] = "The cURLing failed!";
+    }
   }
-  $postdata['desc'] .= "\n\n**Message**:\n\n".$data['message']."\n\n";
-  $postdata['due'] = null;
-  $postdata['labels'] = $data['label'];
-  $postdata['idList'] = $trellolistid;
-  $postdata['urlSource'] = null;
-
-  curl_post("https://trello.com/1/cards", $postdata);
 
 }
 ?>
@@ -105,10 +115,20 @@ if (isset($_POST['submit'])) {
   get_header();
 ?>
 <section id="content">
-<?php if (isset($_GET['done'])) { ?>
-
-<?php } else { ?>
   <h1>Contact Us</h1>
+<?php if (isset($_GET['done'])) { ?>
+  <p>Thanks, we've received your message. If you asked for personal support, we'll get back to you in a couple days. If you filed a bug report or submitted a feature request, you can check out our Trello board to track your request!</p><!--no linking yet...the board referred to doesn't exist at time of writing-->
+<?php } else { ?>
+
+  <?php //spit out all errors
+  if (!empty($err)) {
+    echo "<p id=\"errors\">";
+    foreach ($err as $e) {
+      echo "Error: ".$e."<br />";
+    }
+    echo "</p>";
+  } ?>
+
   <p>Having trouble with something not working on the site? Perhaps you have a bug report or a feature request? Just want to let us know how much you like us today? Use the form below.</p>
   <br />
   <form action="contact.php" method="post">
@@ -118,8 +138,8 @@ if (isset($_POST['submit'])) {
     <label for="email">Email</label>
     <?php if ($_SESSION['user_id'] > 0){ ?>
       <label class="small">So we can contact you back. You are logged in as <b><?php echo get_user($_SESSION['user_id']); ?>.</b></label>
-      <input type="text" name="email-dolly" value="<?php echo get_all_user($_SESSION['user_id'])['user_email'];?>" style="width:<?php echo strlen(get_all_user($_SESSION['user_id'])['user_email'])*11;?>px;" disabled="disabled">
-      <input type="text" name="email" value="<?php echo get_all_user($_SESSION['user_id'])['user_email'];?>" hidden="hidden">
+      <input type="text" name="email-dolly" value="<?php echo get_all_user($_SESSION['user_id'])['user_email']; ?>" style="width:<?php echo strlen(get_all_user($_SESSION['user_id'])['user_email'])*11; ?>px;" disabled="disabled">
+      <input type="text" name="email" value="<?php echo get_all_user($_SESSION['user_id'])['user_email']; ?>" hidden="hidden">
     <?php } else { ?>
       <label class="small">So we can contact you back. If you have an account on Everything Dojo, please use the same email you used to register so that we can identify your account or sign in.</label>
       <input type="text" name="email">
