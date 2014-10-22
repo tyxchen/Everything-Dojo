@@ -1,5 +1,5 @@
 /* jshint browser:true, jquery:true, -W098 */
-/* global Message:false, marked:false */
+/* global Message:false, marked:false, Prism:false */
 
 $(function () {
   // add title attribute to announcements
@@ -47,6 +47,7 @@ $(function () {
           });
         });
         $("#post").prop("disabled", "disabled");
+        $(this).parent().parent().parent().children(".post-edit").prop("disabled", "disabled");
       } else if ($(this).val().length > 40000) {
         message.assign("The message cannot have more than 40000 characters", "error").show(function () {
           $("[name='desc-source']").next().css({
@@ -55,15 +56,14 @@ $(function () {
           });
         });
         $("#post").prop("disabled", "disabled");
+        $(this).parent().parent().parent().children(".post-edit").prop("disabled", "disabled");
       } else {
         message.purge();
-        $(this).parent().next().children("[name='preview']").html(marked($(this).val(), {
-          sanitize: true,
-          breaks: true
-        }));
-        Prism.highlightAll();
+        $(this).parent().next().children("[name='preview']").html(marked($(this).val(), markedOptions));
+        Prism.highlightAll(document.querySelector("[name='preview'] pre"));
         if ($("[name='title']").val().match(/\S/g) !== null && $("[name='title']").val().match(/\S/g).length >= 5) {
           $("#post").prop("disabled", "");
+          $(this).parent().parent().parent().children(".post-edit").prop("disabled", "");
         }
       }
     }
@@ -72,14 +72,14 @@ $(function () {
   // make form submit on ctrl+enter/cmd+enter
   $("[name='desc-source']").keydown(function (e) {
     if ((e.keyCode == 10 || e.keyCode == 13) && (e.ctrlKey || e.keyCode == 224 || e.keyCode == 17 || e.keyCode == 91) && !$("#post").is("[disabled]")) {
-      $("#post").trigger("click");
+      $(this).parent().parent().next().next().trigger("click");
     }
   });
 
   // close form on escape
   $("[name='title'], [name='desc-source']").keydown(function (e) {
     if (e.keyCode == 27) {
-      $("#cancel").trigger("click");
+      $(this).parents("form").children(".cancel").trigger("click");
     }
   });
 });
@@ -94,7 +94,19 @@ function mark_all_read(forum_id, user_id) {
     },
     type: 'post',
     success: function() {
-      location.reload();
+      $(".topic-icon.unread-icon").removeClass("unread-icon").addClass("read-icon");
+      $(".msg").html("All posts have been marked as read.");
+      $(".msg").fadeIn(300);
+      setTimeout(function () {
+        $(".msg").fadeOut(2000);
+      }, 5000);
     }
   });
 }
+
+// marked options
+
+var markedOptions = {
+  sanitize: true,
+  breaks: true
+};

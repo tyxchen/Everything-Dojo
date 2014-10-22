@@ -1,7 +1,7 @@
 <?php
   $id = $_GET['f'];
   if (empty($id)) {
-    $id = 0;
+    $id = 1;
   } elseif($id == '') {
     redirect(URL_DISCUSS);
   } else {
@@ -15,6 +15,10 @@
 
   if ($id == 1) {
     $typearg = 1;
+  } else if ($id == 4) {
+    if ($_SESSION['user_level'] < 3){
+      echo "<meta http-equiv=\"refresh\" content=\"0;URL=/discuss.php\">";
+    }
   } else {
     $typearg = 0;
   }
@@ -36,9 +40,15 @@
       echo '</div>';
     }
     unset($_SESSION['err']);
-  ?>
+    $stickies = array();
+    foreach($topics as $topic){
+      if ($topic['type'] == 2){
+        $stickies[] = $topic;
+      }
+    }
+    ?>
   <fieldset id="topic-create-topic">
-  <legend>Add new topic</legend>
+  <legend>Create new topic</legend>
   <form action="discuss.php" method="post" id="form">
     <div class="field">
       Title: <input type="text" name="title" value="" /><br/>
@@ -54,10 +64,10 @@
         <div class="topic-text" name="preview"></div>
       </div>
     </div>
+    <input type="button" value="Cancel" class="danger cancel" id="cancel" />
+    <input type="button" value="Post" id="post" disabled />
     <input type="hidden" name="forum" value="<?php echo $id;?>" />
     <input type="hidden" name="mode" value="topic">
-    <input type="button" value="Cancel" class="danger" id="cancel" />
-    <input type="button" value="Post" id="post" disabled />
     <input type="submit" style="display:none" />
   </form>
   </fieldset>
@@ -78,7 +88,38 @@
     })
   </script>
   <?php }
+  if (!empty($stickies)){ ?>
+    <table class="discuss-table" style="background-color: #ecff67;">
+      <thead style="border-bottom: 1px black solid;">
+        <tr>
+          <td colspan="2">Sticky</td>
+          <td class="med-col center">Author</td>
+          <td class="small-col center">Comments</td>
+          <td class="small-col center">Viewed By</td>
+          <td class="med-col center">Last Post</td>
+        <tr>
+      </thead>
+      <tbody>
+  <?php foreach($stickies as $sticky){ ?>
+        <tr style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $sticky['topic_id']; ?>'">
+          <td class="tiny-col"><p class="topic-icon <?php if ($sticky['read'] == 1) { echo 'read-icon'; } else { echo 'unread-icon'; } ?>"></p></td>
+          <td><?php echo htmlspecialchars($sticky['title']); ?></td>
+          <td class="center"><?php echo get_user($sticky['user_id']); ?></td>
+          <td class="center"><?php echo (($type == 1) ? ($discuss->get_comment_count($sticky['topic_id'], $type) - 1) : ($discuss->get_comment_count($sticky['topic_id'], $type))); ?></td>
+          <td class="center"><?php echo $discuss->get_views($sticky['topic_id'], 1 - $typearg); ?></td>
+          <td class="center"><?php $lastpost = array_values($discuss->get_posts(intval($sticky['topic_id']), 'all', $typearg));
+          if (empty($lastpost)) {
+            echo date('M d, Y g:i a', $sticky['time'])."<br /><b>".get_user($sticky['user_id'])."</b>";
+          } else {
+            echo date('M d, Y g:i a', $lastpost[count($lastpost)-1]['time'])."<br /><b>".get_user($lastpost[count($lastpost)-1]['user_id'])."</b> ";
+          } ?></td>
+        </tr>
+  <?php } ?>
+      </tbody>
+    </table>
+  <?php }
   if ($_SESSION['user_id'] != 0) { ?>
+  <br/>
   <a href="javascript:;" onClick="mark_all_read(<?php echo $id . ', ' . $_SESSION['user_id']; ?>)" style="left: 5%; position: relative;">Mark All Read</a>
   <?php } ?>
     <table class="discuss-table">
@@ -109,23 +150,25 @@
         }
         ?>
         <tr style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $topic['topic_id']; ?>'">
-          <td class="tiny-col"><p class="topic-icon <?php if ($topic['read'] == 1) { echo 'read-icon'; } else { echo 'unread-icon'; }?>"></p></td>
+          <td class="tiny-col"><p class="topic-icon <?php if ($topic['read'] == 1) { echo 'read-icon'; } else { echo 'unread-icon'; } ?>"></p></td>
           <td><?php echo htmlspecialchars($topic['title']); ?></td>
           <td class="center"><?php echo $username; ?></td>
           <td class="center"><?php echo $comments; ?></td>
           <td class="center"><?php echo $discuss->get_views($topic['topic_id'], 1 - $typearg); ?></td>
-          <td class="center"><?php $lastpost = $discuss->get_posts(intval($topic['topic_id']), 'all', $typearg);
+          <td class="center"><?php $lastpost = array_values($discuss->get_posts(intval($topic['topic_id']), 'all', $typearg));
           if (empty($lastpost)) {
             echo date('M d, Y g:i a', $topic['time'])."<br /><b>".get_user($topic['user_id'])."</b>";
           } else {
             echo date('M d, Y g:i a', $lastpost[count($lastpost)-1]['time'])."<br /><b>".get_user($lastpost[count($lastpost)-1]['user_id'])."</b> ";
-          } ?></td>
+          } ?>
+          </td>
         </tr>
       <?php }
       } ?>
       </tbody>
     </table>
     <?php if ($_SESSION['user_id'] != 0) { ?>
+    <br/>
     <a href="javascript:;" onClick="mark_all_read(<?php echo $id . ', ' . $_SESSION['user_id']; ?>)" style="left: 5%; position: relative;">Mark All Read</a>
     <?php } ?>
 </section>

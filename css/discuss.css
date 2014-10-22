@@ -48,6 +48,14 @@
   width: 30vw;
 }
 
+/**
+ * Messages
+ */
+
+.msg + * {
+  margin-top: 0;
+}
+
 
 /*--ANNOUNCEMENTS--*/
 #announcements h3 { text-align: center; }
@@ -253,49 +261,66 @@ td.tiny-col { width: 3%; }
   margin-bottom: 1em;
 }
 
-.topic-reply-thanks {
+.topic-reply-panel {
+  padding: 0;
   display: inline-block;
-  height: 30px;
+  border: 1px solid #000000;
+  border-radius: 0.5em;
+  overflow: hidden;
   margin-left: 1em;
-  width: 30px;
-  border: 1px solid black;
+  margin-bottom: -0.5em;
+}
+
+.topic-reply-panel>div {
+  display: inline-block;
+  height: 1.5em;
+  width: 1.5em;
   text-align: center;
-  line-height: 30px;
+  line-height: 1.5em;
   vertical-align: middle;
-  border-radius: 30px;
   cursor: pointer;
   font-size: 20px;
   background-color: #FFFFFF;
   color: #000000;
   overflow: hidden;
-  -webkit-transition: 500ms ease;
-  transition: 500ms ease;
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+  border-right: 1px solid #000000;
 }
 
-.topic-reply-thanks:hover {
-  background-color: #51b835;
+.topic-reply-panel>div:last-child {
+  border-right: 0px solid #000000;
+}
+
+.topic-reply-panel>div:hover{
+  background-color: #509aff;
   color: #FFFFFF;
-  width: 150px;
-  -webkit-transition: 500ms ease;
-  transition: 500ms ease;
+  min-width: 160px;
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+}
+
+.topic-reply-disabled{
+  background-color: #d8d8d8 !important;
+  color: #000000 !important;
+  opacity: 0.6 !important;
+}
+.topic-reply-disabled:hover{
+  background-color: #bababa !important;
+  opacity: 0.8 !important;
 }
 
 .topic-reply-thanked {
-  background-color: #51b835;
-  color: #FFFFFF;
+  background-color: #51b835 !important;
+  color: #FFFFFF !important;
 }
-
-/* next person who reads this code and agrees it's useless delete it
-.topic-reply-thanked:hover {
-  background-color: #51b835;
-  color: #FFFFFF;
-} */
 
 .topic-reply {
   position: relative;
   border: 1px solid black;
+
   border-radius: 0;
-  margin-left: 2em;
+  margin-left: 2.3em;
   border-left: none;
   border-top: 0 solid white;
 }
@@ -310,11 +335,38 @@ td.tiny-col { width: 3%; }
   background: #3589fb;
 }
 
+.topic-reply > a {
+  position: absolute;
+  top: 0;
+  left: -2.8em;
+  width: 2.3em;
+  color: #888;
+  font-family: Lato, sans-serif;
+  text-align: right;
+  opacity: 0.6;
+  padding: 1.5em 0.3em 1.5em 0;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+
+.topic-reply:hover > a {
+  opacity: 0.8;
+}
+
+.topic-reply > a:hover {
+  opacity: 1;
+}
+
 .topic-reply-top { padding: 1em 1em; }
 
 .topic-reply-text > *:not(.topic-reply-top) {
   padding: 0 1.5em;
   padding-bottom: 1em;
+}
+
+.avatar {
+  float: right;
+  border-radius: 10%;
 }
 
 .topic-text > pre[class*="language-"] {
@@ -346,6 +398,21 @@ td.tiny-col { width: 3%; }
   animation: targetPost 2.3s linear;
 }
 
+.topic-reply:target::before {
+  background-color: #bebe35;
+}
+
+/* hack to make targeted comment's coloured bar entirely within post */
+.topic-reply:target + .topic-reply::before {
+  top: -1px;
+  height: calc(100% + 2px);
+}
+
+.topic-reply:target > a {
+  color: #a3a312;
+  opacity: 0.8;
+}
+
 /*--POSTING--*/
 [type="text"],
 textarea {
@@ -354,12 +421,18 @@ textarea {
   box-sizing: border-box;
 }
 
-.split { width: 50%; }
+.split {
+  width: 50%;
+  padding-right: 0.2em;
+  box-sizing: border-box;
+}
 .split.right {
   position: absolute;
   top: 1.6em;
   bottom: 0.3em;
   right: 0;
+  padding-right: 0;
+  padding-left: 0.2em;
 }
 
 [name='preview'] {
@@ -372,7 +445,18 @@ textarea {
   box-sizing: border-box;
 }
 
-#cancel { float: left; }
-#post { float: right; }
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+button {
+  display: inline-block;
+}
 
-.note { left: auto; right: -0.5rem; }
+#cancel, .cancel-edit { float: left; }
+#post, .post-edit { float: right; }
+
+.note {
+  left: auto;
+  right: -0.5rem;
+  z-index: 999;
+}
