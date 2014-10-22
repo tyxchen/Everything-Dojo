@@ -15,7 +15,7 @@
   session_start();
 
   if ($_GET["mode"] == "index") {
-    $extra_style = "<link href=\"css/themizerindex.css\" rel=\"stylesheet\">";;
+    $extra_style = "<link href=\"css/themizerindex.min.css\" rel=\"stylesheet\">";;
     get_header();
   }
 ?>
@@ -94,8 +94,8 @@
   <link href="images/favicon.ico" rel="shortcut icon">
   <link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon.png">
 
-  <link rel="stylesheet" href="css/blog-style.css">
-  <link rel="stylesheet" href="css/slidersidebar.css">
+  <link rel="stylesheet" href="blog/css/blog-style.css">
+  <link rel="stylesheet" href="css/slidersidebar.min.css">
   <?php if ($_GET["mode"] == "regular") { ?>
   <link rel="stylesheet" href="css/spectrum.min.css">
   <link rel="stylesheet" href="css/prism.min.css">
@@ -107,7 +107,7 @@
   <script src="js/script.js"></script>
 
   <script src="js/themizer.js"></script>
-  <script src="js/blog-fn.js"></script>
+  <script src="blog/js/blog-fn.js"></script>
   <script src="js/ZeroClipboard.min.js"></script>
   <?php if ($_GET["mode"] == "regular") { ?>
   <script src="js/spectrum-1.3.4.min.js" onload="$.fn.spectrum.load = false;"></script>
@@ -130,7 +130,7 @@
   <?php } ?>
 
   <noscript>
-    <link href="css/noscript.css" rel="stylesheet">
+    <link href="css/noscript.min.css" rel="stylesheet">
   </noscript>
 
 </head>

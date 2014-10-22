@@ -10,16 +10,16 @@
     <link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon.png">
     <?php if ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)" && $title != "Try-It") { ?>
     <link href="/css/normalize.min.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style.min.css" rel="stylesheet">
     <?php } ?>
     <?php global $extra_style; print $extra_style; ?>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="/js/script.js"></script><?php //important notfication js has been moved to script.js ?>
+    <script src="/js/script.js"></script>
     <?php global $extra_js; print $extra_js; ?>
 
     <noscript>
-      <link href="/css/noscript.css" rel="stylesheet">
+      <link href="/css/noscript.min.css" rel="stylesheet">
     </noscript>
 
   </head>
@@ -54,7 +54,7 @@
 
           if ($mode == "view") { ?>
             <div class="search-container">
-              <script src="/js/highlight.js"></script>
+              <script src="/js/highlight.min.js"></script>
               <script src="/js/db-search.js"></script>
               <input class="search" type="text" placeholder="Search...">
               <div class="icon-box">

@@ -3,8 +3,8 @@
   include("include/include.php");
   include("include/themedb.php");
   session_start();
-  $extra_style = "<link rel=\"stylesheet\" href=\"css/prism.css\" />
-  <link rel=\"stylesheet\" href=\"css/database.css\" />";
+  $extra_style = "<link rel=\"stylesheet\" href=\"css/prism.min.css\" />
+  <link rel=\"stylesheet\" href=\"css/database.min.css\" />";
   $extra_js = "<script src=\"js/prism.min.js\"></script>
   <script src=\"js/database.js\"></script>";
   if(isset($_GET['mode'])) {

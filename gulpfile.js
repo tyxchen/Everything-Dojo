@@ -42,7 +42,6 @@ gulp.task("lint-css", function () {
 // Scripts
 gulp.task("scripts", ["lint-js"], function () {
   return gulp.src("src/js/*.js")
-    .pipe(rename({suffix: ".min"}))
     .pipe(argv.env === "production" ? changed(uglify()) : gutil.noop())
     .pipe(gulp.dest("js/"));
 });

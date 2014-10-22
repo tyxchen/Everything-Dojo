@@ -3,7 +3,7 @@
   include("include/include.php");
   include("include/discuss.php");
   session_start();
-  $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.css\" />
+  $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.min.css\" />
   <link rel=\"stylesheet\" href=\"css/prism.min.css\" />";
   $extra_js = "<script src=\"js/discuss.js\"></script>
   <script src=\"js/prism.min.js\"></script>
