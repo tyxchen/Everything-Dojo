@@ -24,21 +24,6 @@ if ($ajax) {
       exit("success");
     }
   }
-
-  // Checks if emails exist in database
-  if (isset($_GET['email'])) {
-    $email = $_GET['email'];
-    $query = "SELECT count(*) AS total FROM $table WHERE user_email=?";
-    $rs_duplicate = $dbc->prepare($query);
-    $rs_duplicate->execute(array($email));
-    list($total) = $rs_duplicate->fetchColumn();
-
-    if ($total > 0) {
-      exit("error");
-    } else {
-      exit("success");
-    }
-  }
 }
 
 if((isset($_POST['ajax']) && $_POST['ajax'] === "true") && $ajax) {
@@ -52,13 +37,13 @@ if((isset($_POST['ajax']) && $_POST['ajax'] === "true") && $ajax) {
 
   // Check/validate fields
   if (!$resp->is_valid) {
-    exit("recaptcha");
+    $err[] = "r";
   } elseif (!isUserID($data['user_name'])) {
-    exit("username");
+    $err[] = "n";
   } elseif (!isEmail($data['usr_email'])) {
-    exit("email");
+    $err[] = "e";
   } elseif (!checkPwd($data['pwd'], $data['pwd2'])) {
-    exit("password");
+    $err[] = "p";
   }
 
 } elseif (isset($_POST['doRegister'])) {
@@ -108,7 +93,7 @@ if (!empty($_POST)) {
 
   if ($email_total > 0) {
     if ($ajax) {
-      exit("username or email exists");
+      $err[] = "a";
     } else {
       $err[] = "The username/email already exists. Please try again with different username and email." ;
     }
