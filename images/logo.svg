@@ -6,7 +6,7 @@
   <path style="fill:#fdfeff;stroke:none;" d="M9 6L9 23L19 23L19 22L10 22L10 15L17.5 15L17.5 14L10 14L10 7L19 7L19 6z"/>
   <!-- V -->
   <path style="fill:#57c639;stroke:none;" d="M35 0L35 29L64 29L64 0L35 0z"/>
-  <path style="fill:#fdfeff;stroke:none;" d="M42 6.5L49 23.5L50 23.5L57 6.5L55.7 6.5L49.5 22.2L43.3 6.5z"/>
+  <path style="fill:#fdfeff;stroke:none;" d="M42 6L49 23L50 23L57 6L55.7 6L49.5 21.7L43.3 6z"/>
   <!-- D -->
   <path style="fill:#ff6d00;stroke:none;" d="M0 35L0 64L29 64L29 35L0 35z"/>
   <path style="fill:#fdfeff;stroke:none;" d="M8 41L8 58L14 58C23.7471 57.6773 23.658 41.3205 14 41z"/>

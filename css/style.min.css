@@ -279,6 +279,8 @@ header {
 #logo img {
   margin-bottom: -0.52083vh;
   /* fix IE not resizing images correctly */
+  min-width: 2.75rem;
+  min-height: 2.75rem;
   max-width: 2.75rem;
   max-height: 2.75rem;
 }
