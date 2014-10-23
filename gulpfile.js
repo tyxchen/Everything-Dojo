@@ -56,11 +56,13 @@ gulp.task("styles", ["lint-css"], function () {
 
 // Default task
 gulp.task("default", function () {
-  gulp.start("scripts", "styles");
+  gulp.start("scripts", "styles", "watch");
 });
 
 // Watch files
 gulp.task("watch", function () {
-  gulp.watch("src/css/*.css", "styles");
-  gulp.watch("src/js/*.js", "scripts");
+  if (!argv.nowatch) {
+    gulp.watch("src/css/*.css", ["styles"]);
+    gulp.watch("src/js/*.js", ["scripts"]);
+  }
 });

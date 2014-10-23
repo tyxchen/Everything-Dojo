@@ -78,7 +78,7 @@
       case 'index':
         include('include/themedb/index_body.php');
   if ($_SESSION['user_level'] == 5) { ?>
-  <div class="mcp-link"><a href="<?php echo URL_DATABASE; ?>?mode=mcp" class="mcp-link">ThemeDB Moderator CP</a></div>
+  <div class="mcp-link-wrapper"><a href="<?php echo URL_DATABASE; ?>?mode=mcp" class="mcp-link">ThemeDB Moderator CP</a></div>
   <?php }
         break;
       case 'submit':

@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* Database CSS */
 
-h2.view-header { margin-top: 3vh; }
+.view-header { margin-top: 3vh; }
 
 #tile-container {
   height: 34vh;
@@ -11,9 +11,9 @@ h2.view-header { margin-top: 3vh; }
   margin-right: auto;
 }
 
-a.database-link { color: white; }
+.database-link { color: white; }
 
-div.mcp-link {
+.mcp-link-wrapper {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -22,7 +22,7 @@ div.mcp-link {
   vertical-align: bottom;
 }
 
-a.mcp-link:link {
+.mcp-link:link {
   font-family: 'lato';
   font-size: 1.5rem;
 }
@@ -83,13 +83,13 @@ a.mcp-link:link {
   margin-right: 3px;
 }
 
-textarea#description {
+#description {
   width: 65vw;
   height: 10vh;
   font-family: Amble, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-textarea#css {
+#css {
   width: 65vw;
   height: 30vh;
   font-family: "Courier New", Courier, monospace;
@@ -105,7 +105,7 @@ textarea#css {
   margin-left: auto;
   margin-right: auto;
   padding: 2vh 2vw;
-  box-shadow: 0px 0px 10px #333;
+  box-shadow: 0 0 10px #333;
 }
 #popup-box h2 { color: white; }
 
@@ -137,7 +137,7 @@ textarea#css {
   margin-right: auto;
 }
 
-div.code {
+.code {
   font-size: 12px;
   height: 45vh;
   overflow: auto;
@@ -297,7 +297,7 @@ table .headingTr {
   padding: 7px;
   background: #83cdff;
   color: #f2f3f4;
-  border: 0px solid;
+  border: 0 solid;
   font-size: 150%;
 }
 .theme-name {
