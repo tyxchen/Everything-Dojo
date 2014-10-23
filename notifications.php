@@ -1,8 +1,7 @@
 <?php
   $title = "Notifications";
   include("include/include.php");
-  $extra_js = "<script src=\"js/index.js\"></script>
-  <script>$(function(){\$('.notification-link').hide()})</script>";
+  $extra_js = "<script>$(function(){\$('.notification-link').hide()})</script>";
   session_start();
 
   if (isset($_SESSION['user_id'])) {

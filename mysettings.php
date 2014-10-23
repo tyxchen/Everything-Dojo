@@ -53,7 +53,6 @@ $rs_settings->execute(array($_SESSION['user_id']));
 ?>
 <?php
   $title = "My Settings";
-  $extra_js = "<script src=\"js/index.js\"></script>";
   //dbc already included
   page_protect();
 

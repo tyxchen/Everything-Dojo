@@ -1,7 +1,6 @@
 <?php
   $title = "My Account";
   include("include/include.php");
-  $extra_js = "<script src=\"js/index.js\"></script>";
   session_start();
   page_protect();
 

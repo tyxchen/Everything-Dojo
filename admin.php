@@ -34,7 +34,6 @@ list($active) = $rs_active;
 ?>
 <?php
   $title = "Admin CP";
-  $extra_js = "<script src=\"js/index.js\"></script>";
   //dbc already included
   page_protect();
 
