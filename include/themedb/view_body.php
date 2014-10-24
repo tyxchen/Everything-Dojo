@@ -9,7 +9,7 @@
       <td class="med-col">Author</td>
       <td class="small-col">Version</td>
       <td class="small-col">Stage</td>
-    <tr>
+    </tr>
   </thead>
   ';
 
