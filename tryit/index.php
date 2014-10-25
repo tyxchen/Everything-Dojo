@@ -1,9 +1,9 @@
 <?php
   $title = "Try-It";
-  include("include/include.php");
-  include("include/themedb.php");
+  include("/include/include.php");
+  include("/include/themedb.php");
   session_start();
-  $extra_style = "<link rel=\"stylesheet\" href=\"blog/css/blog-style.css\">\n";
+  $extra_style = "<link rel=\"stylesheet\" href=\"/blog/css/blog-style.css\">\n";
   if (!empty($_GET['select'])) {
     $themedb = new themedb($dbc);
     $style = $themedb->get_themes(intval($_GET['select']), TRUE);
@@ -11,7 +11,7 @@
     $extra_style .= htmlspecialchars_decode($style['code']);
     $extra_style .= "</style>\n";
   }
-  $extra_style .= "<link rel=\"stylesheet\" href=\"css/slidersidebar.min.css\">";
+  $extra_style .= "<link rel=\"stylesheet\" href=\"/css/slidersidebar.min.css\">";
   $extra_js = "<script>
   $(function () {
     tryit();
@@ -193,7 +193,7 @@
 
     </section>
 
-    <span <?php if($_GET['select']) { ?>onClick="window.location.href='database.php?mode=view&view=style&id=<?php echo intval($_GET['select']); ?>'"<?php } ?> class="long linkbutton<?php if (!$_GET['select']) { echo ' disabled'; } ?>" id="view">View style in Database</span>
+    <span <?php if($_GET['select']) { ?>onClick="window.location.href='<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo intval($_GET['select']); ?>'"<?php } ?> class="long linkbutton<?php if (!$_GET['select']) { echo ' disabled'; } ?>" id="view">View style in Database</span>
 
   </section>
   <div id="side-resizer"></div>
