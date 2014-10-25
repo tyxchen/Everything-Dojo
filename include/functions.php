@@ -272,4 +272,52 @@
     curl_close($ch);
     return $result;
   }
+  
+  
+  /*Notifications function (removes extra unnecessary code from PHP pages)*/
+  function notifications() {
+  echo  
+        '<div id="notifications">
+        <div class="notification-arrow-up"></div>
+        <div id="notification-body">
+          <div id="notification-header">
+            <b>Notifications:</b>
+              <a href="javascript:;" style="float: right; margin-right: 2vw;" onClick="mark_all_read('.$_SESSION['user_id'].')">Mark all read</a>
+          </div>';
+          if (count($notification_data) == 0) {
+          echo '
+          <a href="javascript:;">
+          <div id="notification-0" class="notification read">
+            <div class="notification-color" style="background-color: #ccc"></div>
+            <div class="notification-text">No notifications</div>
+          </div>
+          </a>';
+          } else {
+            foreach ($notification_data as $notif) {
+              $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
+              echo '
+              <a href="'.$notif_data['url'].'" onClick="mark_read('.$notif['id'].')">
+              <div id="notification-'.$notif['id'].'" class="notification ';
+              if ($notif['read'] == 0) { echo 'unread'; } else { echo 'read'; }
+              echo
+              '">
+              <div class="notification-color" style="background-color: #'.$notif_data['data']['color'].'">'.substr($notif_data['data']['location'], 0, 1).'</div>
+              <div class="notification-text">
+                '.$notif_data['data']['subject'].'
+              </div>
+              <p class="time">
+                 '.date('D M d, Y g:i a', $notif['timestamp']).'
+              </p>
+            </div>
+          </a>';
+            }
+          }
+          echo '
+          <div id="notification-footer">
+            <a href="notifications.php">See All</a>
+          </div>
+        </div>
+      </div>';
+  }
+  
 ?>
