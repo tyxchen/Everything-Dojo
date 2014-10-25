@@ -16,7 +16,7 @@
   /* URL Constants */
   define("URL_DATABASE", "database.php");
   define("URL_DISCUSS", "/discuss");
-  define("URL_THEMIZER", "themizer.php");
+  define("URL_THEMIZER", "/themizer");
   define("URL_TRYIT", "tryit.php");
   define("SITE_ROOT", "http://rebuild.everythingdojo.com/");
 

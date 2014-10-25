@@ -11,11 +11,11 @@
     $title = "Themizer (Development Mode)";
   }
 
-  include("include/include.php");
+  include("/include/include.php");
   session_start();
 
   if ($_GET["mode"] == "index") {
-    $extra_style = "<link href=\"css/themizerindex.min.css\" rel=\"stylesheet\">";;
+    $extra_style = "<link href=\"/css/themizerindex.min.css\" rel=\"stylesheet\">";
     get_header();
   }
 ?>
@@ -24,11 +24,11 @@
   <section id="themizer-inner-wrap">
     <section id="left-wrap">
       <p class="heading">Style your blog, the easy way.</p>
-      <a href="themizer.php?mode=regular" class="linkbutton uppercase" target="_blank">Get Started</a>
+      <a href="<?php echo URL_THEMIZER; ?>?mode=regular" class="linkbutton uppercase" target="_blank">Get Started</a>
       <p class="note">Are you a developer? <a href="themizer.php?mode=development" target="_blank">Click Here</a> to go to development mode.</p>
     </section>
     <section id="right-wrap">
-      <img src="images/themizer.png" />
+      <img src="/images/themizer.png" />
     </section>
   </section>
 </section>
@@ -91,28 +91,28 @@
   <title>Everything Dojo &bull; <?php global $title; print $title; ?></title>
 
   <meta charset="utf-8">
-  <link href="images/favicon.ico" rel="shortcut icon">
+  <link href="/images/favicon.ico" rel="shortcut icon">
   <link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon.png">
 
-  <link rel="stylesheet" href="blog/css/blog-style.css">
-  <link rel="stylesheet" href="css/slidersidebar.min.css">
+  <link rel="stylesheet" href="/blog/css/blog-style.css">
+  <link rel="stylesheet" href="/css/slidersidebar.min.css">
   <?php if ($_GET["mode"] == "regular") { ?>
-  <link rel="stylesheet" href="css/spectrum.min.css">
-  <link rel="stylesheet" href="css/prism.min.css">
+  <link rel="stylesheet" href="/css/spectrum.min.css">
+  <link rel="stylesheet" href="/css/prism.min.css">
   <?php } else { ?>
-  <link rel="stylesheet" href="css/codemirror.min.css">
+  <link rel="stylesheet" href="/css/codemirror.min.css">
   <?php } ?>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="js/script.js"></script>
+  <script src="/js/script.js"></script>
 
-  <script src="js/themizer.js"></script>
-  <script src="blog/js/blog-fn.js"></script>
-  <script src="js/ZeroClipboard.min.js"></script>
+  <script src="/js/themizer.js"></script>
+  <script src="/blog/js/blog-fn.js"></script>
+  <script src="/js/ZeroClipboard.min.js"></script>
   <?php if ($_GET["mode"] == "regular") { ?>
-  <script src="js/spectrum-1.3.4.min.js" onload="$.fn.spectrum.load = false;"></script>
-  <script src="js/randomColor.min.js"></script>
-  <script src="js/prism.min.js"></script>
+  <script src="/js/spectrum-1.3.4.min.js" onload="$.fn.spectrum.load = false;"></script>
+  <script src="/js/randomColor.min.js"></script>
+  <script src="/js/prism.min.js"></script>
   <script>
     $(function () {
       $('#lightbox, #close-button').click(function () {
@@ -125,12 +125,12 @@
     });
   </script>
   <?php } else { ?>
-  <script src="js/codemirror-4.4.min.js"></script>
+  <script src="/js/codemirror-4.4.min.js"></script>
   <script>$(function () { themizerDev(); });</script>
   <?php } ?>
 
   <noscript>
-    <link href="css/noscript.min.css" rel="stylesheet">
+    <link href="/css/noscript.min.css" rel="stylesheet">
   </noscript>
 
 </head>
