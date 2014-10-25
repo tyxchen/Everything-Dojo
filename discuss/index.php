@@ -1,13 +1,13 @@
 <?php
   $title = "Discuss";
-  include("include/include.php");
-  include("include/discuss.php");
+  include("/include/include.php");
+  include("/include/discuss.php");
   session_start();
-  $extra_style = "<link rel=\"stylesheet\" href=\"css/discuss.min.css\" />
-  <link rel=\"stylesheet\" href=\"css/prism.min.css\" />";
-  $extra_js = "<script src=\"js/discuss.js\"></script>
-  <script src=\"js/prism.min.js\"></script>
-  <script src=\"js/marked.min.js\"></script>
+  $extra_style = "<link rel=\"stylesheet\" href=\"/css/discuss.min.css\" />
+  <link rel=\"stylesheet\" href=\"/css/prism.min.css\" />";
+  $extra_js = "<script src=\"/js/discuss.js\"></script>
+  <script src=\"/js/prism.min.js\"></script>
+  <script src=\"/js/marked.min.js\"></script>
   <script>$(function(){\$('pre code').each(function(){var h=$(this).html();h=h.replace(/&amp;quot;/g,'\"').replace(/&amp;#039;/g,'\'');$(this).html(h)})})</script>";
   get_header();
 
@@ -92,7 +92,7 @@
       }
       ?>
       <div id="notification-footer">
-        <a href="notifications.php">See All</a>
+        <a href="/notifications.php">See All</a>
       </div>
     </div>
   </div>
@@ -110,7 +110,7 @@
   <h3>Welcome, <?php echo get_user($_SESSION['user_id']);?>!</h3>
   <br/>
   <?php } else { ?>
-  <h3>Hello Guest. Please <a href="login.php">sign in</a>.</h3>
+  <h3>Hello Guest. Please <a href="/login.php">sign in</a>.</h3>
   <br/>
   <?php } ?>
   <?php
@@ -213,17 +213,17 @@
     <?php
     switch ($view) {
       case '':
-        include('include/discuss/index_body.php');
+        include('/include/discuss/index_body.php');
         break;
       case 'forum':
         echo '<a href="' . URL_DISCUSS. '">&laquo; Back to Discuss Index</a>';
-        include('include/discuss/forum_body.php');
+        include('/include/discuss/forum_body.php');
         break;
       case 'topic':
-        include('include/discuss/topic_body.php');
+        include('/include/discuss/topic_body.php');
         break;
       default:
-        echo "<b>Something wrong happened!</b> Discuss can't handle this request because it doesn't know how to do it! Don't worry, though; Try going <a href='discuss.php'>back to Discuss home page</a> or try our other services!";
+        echo "<b>Something wrong happened!</b> Discuss can't handle this request because it doesn't know how to do it! Don't worry, though; Try going <a href='" . URL_DISCUSS . "'>back to Discuss home page</a> or try our other services!";
         break;
     } ?>
 </section>
