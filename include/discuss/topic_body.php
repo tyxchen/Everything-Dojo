@@ -44,7 +44,7 @@
       <?php if (($_SESSION['user_id'] == $topic['user_id']) || ($_SESSION['user_level']) >= 3) { ?>
       <?php if ($_SESSION['user_level'] >= 3 && $typearg != 1) { ?>
       <div class="topic-reply-panel">
-        <div class="topic-top-archive" id="topic-top-archive"><img alt="Archive Topic" src="/images/trash.png" style="width: 0.55em; height: 0.75em;"> Archive Topic</div><div class="topic-top-move" id="topic-top-move" style="border-right: 0 solid #000000;">&rArr; Move Topic</div>
+        <div class="topic-top-archive" id="topic-top-archive"><img alt="Archive Topic" src="/images/trash.png" style="width: 0.55em; height: 0.75em;"> Archive Topic</div><div class="topic-top-move" id="topic-top-move">&rArr; Move Topic</div><div class="topic-top-sticky" id="topic-top-sticky" style="border-right: 0 solid #000000;" >&uarr; <?php if (intval($topic['type']) == 2) { echo "Unstick Topic"; } else { echo "Stick Topic"; } ?></div>
       </div>
       <script>
         $('#topic-top-move').on('click', function(e) {
@@ -64,7 +64,7 @@
               window.location.reload();
             }
             else{
-              alert("Something wrong happened. Please try again.");
+              alert(data+"Something wrong happened. Please try again.");
             }
           });
         });

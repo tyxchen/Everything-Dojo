@@ -151,10 +151,15 @@ switch ($_POST['action']) {
     }
     break;
   case "sticky":
-    if ($_SESSION['user_level'] >= 3){
+    if ($_SESSION['user_level'] >= 3 && $_POST['mode'] != 1){
+      $selected_result = $dbc->prepare("SELECT * FROM ".DISCUSS_TOPIC_TABLE." WHERE topic_id = :tid");
+      $selected_result->execute(array(
+        ':tid' => intval($_POST['id'])
+      ));
+      $selected_result = intval($selected_result->fetchAll(PDO::FETCH_ASSOC)[0]['type']);
       $selected_post = $dbc->prepare("UPDATE ".DISCUSS_TOPIC_TABLE." SET type = :skid WHERE topic_id = :tid");
       $selected_post->execute(array(
-        ':skid' => (($discuss->view_topic(intval($_POST['id']), intval($_POST['mode'])) ? 2 : 0),
+        ':skid' => ((intval($selected_result) == 2) ? 0 : 2),
         ':tid' => intval($_POST['id'])
       ));
       echo "good";
@@ -162,6 +167,7 @@ switch ($_POST['action']) {
     else{
       echo "fail";
     }
+    break;
   default:
     echo "No action exists or defined. Try again.";
 }
