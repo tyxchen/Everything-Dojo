@@ -14,7 +14,7 @@
   define("USERS_TABLE", "users");
 
   /* URL Constants */
-  define("URL_DATABASE", "database.php");
+  define("URL_DATABASE", "/database");
   define("URL_DISCUSS", "/discuss");
   define("URL_THEMIZER", "/themizer");
   define("URL_TRYIT", "tryit.php");

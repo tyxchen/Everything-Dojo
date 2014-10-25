@@ -1,12 +1,12 @@
 <?php
   $title = "Database";
-  include("include/include.php");
-  include("include/themedb.php");
+  include("/include/include.php");
+  include("/include/themedb.php");
   session_start();
-  $extra_style = "<link rel=\"stylesheet\" href=\"css/prism.min.css\" />
-  <link rel=\"stylesheet\" href=\"css/database.min.css\" />";
-  $extra_js = "<script src=\"js/prism.min.js\"></script>
-  <script src=\"js/database.js\"></script>";
+  $extra_style = "<link rel=\"stylesheet\" href=\"/css/prism.min.css\" />
+  <link rel=\"stylesheet\" href=\"/css/database.min.css\" />";
+  $extra_js = "<script src=\"/js/prism.min.js\"></script>
+  <script src=\"/js/database.js\"></script>";
   if(isset($_GET['mode'])) {
     $mode = $_GET['mode'];
   } else {
@@ -55,7 +55,7 @@
       }
       ?>
       <div id="notification-footer">
-        <a href="notifications.php">See All</a>
+        <a href="/notifications.php">See All</a>
       </div>
     </div>
   </div>
@@ -71,12 +71,12 @@
         </div>
   <?php
   if (!isset($_SESSION['user_id'])) {
-    include('include/themedb/view_body.php');
+    include('/include/themedb/view_body.php');
     // end guest case
   } else {
     switch ($mode) {
       case 'index':
-        include('include/themedb/index_body.php');
+        include('/include/themedb/index_body.php');
   if ($_SESSION['user_level'] == 5) { ?>
   <div class="mcp-link-wrapper"><a href="<?php echo URL_DATABASE; ?>?mode=mcp" class="mcp-link">ThemeDB Moderator CP</a></div>
   <?php }
@@ -85,44 +85,44 @@
   ?>
         <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
   <?php
-        include('include/themedb/submit_body.php');
+        include('/include/themedb/submit_body.php');
         break;
       case 'manage':
   ?>
         <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
   <?php
-        include('include/themedb/manage_body.php');
+        include('/include/themedb/manage_body.php');
         break;
       case 'view':
   ?>
         <?php if($_GET['view'] != ''){ ?><a href="<?php echo URL_DATABASE; ?>">Database Index</a> >> <a href="<?php echo URL_DATABASE; ?>?mode=view">View Options</a><?php } ?>
   <?php
-        include('include/themedb/view_body.php');
+        include('/include/themedb/view_body.php');
         break;
       case 'mcp':
         if ($_SESSION['user_level'] == 5) {
   ?>
         <a href="<?php echo URL_DATABASE; ?>">Back to Database Index</a>
   <?php
-          include('include/themedb/mcp_body.php');
+          include('/include/themedb/mcp_body.php');
         } else {
   ?>
         <?php if($_GET['view'] != ''){ ?><a href="<?php echo URL_DATABASE; ?>">Database Index</a> >> <a href="<?php echo URL_DATABASE; ?>?mode=view">View Options</a><?php } ?>
   <?php
-          include('include/themedb/view_body.php');
+          include('/include/themedb/view_body.php');
         }
         break;
       case 'edit':
   ?>
         <a href="<?php echo URL_DATABASE; ?>">Database Index</a> >> <a href="<?php echo URL_DATABASE; ?>?mode=view">View Options</a>
   <?php
-        include('include/themedb/edit_body.php');
+        include('/include/themedb/edit_body.php');
         break;
       case 'settings':
   ?>
         <a href="<?php echo URL_DATABASE; ?>">Database Index</a> >> <a href="<?php echo URL_DATABASE; ?>?mode=view">View Options</a>
   <?php
-        include('include/themedb/settings_body.php');
+        include('/include/themedb/settings_body.php');
         break;
     // end user mode
     }
