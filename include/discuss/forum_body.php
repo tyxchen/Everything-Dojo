@@ -30,7 +30,7 @@
   <h3 style="text-align: center;"><?php echo $forum_data['name']; ?></h3>
   <p style="text-align: center;"><?php echo $forum_data['description']; ?></p>
   <?php
-  if ($user_id > 0 and intval($id) != 1) {
+  if ($user_id > 0 && intval($id) != 1) {
     echo "<a id=\"topic-a-topic\" style=\"left:5%;position:relative\">+ Create New Topic</a><br />";
     if (!empty($_SESSION['err'])) {
       echo '<div id="errors">';

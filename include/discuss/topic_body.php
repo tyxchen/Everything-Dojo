@@ -29,7 +29,7 @@
   $data = $discuss->get_fora(intval($topic['forum_id']));
 ?>
 
-<?php if (!empty($topic) and (!empty($topic['title']))) { ?>
+<?php if (!empty($topic) && (!empty($topic['title']))) { ?>
 <a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo intval($topic['forum_id']);?>">&laquo; Back to <?php echo $data['name'];?></a>
 <section id="topic" style="margin-top: 1em;">
   <div id="discuss-topic-header">
@@ -41,8 +41,8 @@
       <?php $user = get_user(intval($topic['user_id'])); ?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
       <div style="display:inline-block; opacity: 0.6;">Posted by <?php echo $user;?> on <?php echo date('M d, Y g:i a', $topic['time']);?></div>
-      <?php if (($_SESSION['user_id'] == $topic['user_id']) or ($_SESSION['user_level']) >= 3) { ?>
-      <?php if ($_SESSION['user_level'] >= 3 and $typearg != 1) { ?>
+      <?php if (($_SESSION['user_id'] == $topic['user_id']) || ($_SESSION['user_level']) >= 3) { ?>
+      <?php if ($_SESSION['user_level'] >= 3 && $typearg != 1) { ?>
       <div class="topic-reply-panel">
         <div class="topic-top-archive" id="topic-top-archive"><img alt="Archive Topic" src="/images/trash.png" style="width: 0.55em; height: 0.75em;"> Archive Topic</div><div class="topic-top-move" id="topic-top-move" style="border-right: 0 solid #000000;">&rArr; Move Topic</div>
       </div>
@@ -52,6 +52,16 @@
           $.post('include/discuss/topic_ajax.php', {action: 'move', id: <?php echo intval($topic['topic_id']); ?>, location: loc, mode: <?php echo $typearg; ?>}, function(data) {
             if (data == "good"){
               window.location.href = 'discuss.php?view=topic&f='+loc+'&t=<?php echo $topic['topic_id'];?>';
+            }
+            else{
+              alert("Something wrong happened. Please try again.");
+            }
+          });
+        });
+        $('#topic-top-sticky').on('click', function(e) {
+          $.post('include/discuss/topic_ajax.php', {action: 'sticky', id: <?php echo intval($topic['topic_id']); ?>, mode: <?php echo $typearg; ?>}, function(data) {
+            if (data == "good"){
+              window.location.reload();
             }
             else{
               alert("Something wrong happened. Please try again.");
@@ -114,9 +124,9 @@
                 </div>";
             }
           ?>
-            <?php if($post['edit_id'] > 0 and $post['type'] == 0){ ?><p class="small">Last edited by <?php echo get_user($post['edit_id']); ?> on <?php echo date('M d, Y g:i a', $post['last_timestamp']);?></p><?php } ?>
+            <?php if($post['edit_id'] > 0 && $post['type'] == 0){ ?><p class="small">Last edited by <?php echo get_user($post['edit_id']); ?> on <?php echo date('M d, Y g:i a', $post['last_timestamp']);?></p><?php } ?>
           <?php
-            if (($_SESSION['user_id'] == $user['id']) or $_SESSION['user_level'] >= 5){
+            if (($_SESSION['user_id'] == $user['id']) || $_SESSION['user_level'] >= 5){
               echo
               "
               <form id='topic-reply-edit-box-".$post['post_id']."'>

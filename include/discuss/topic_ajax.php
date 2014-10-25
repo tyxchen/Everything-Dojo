@@ -1,4 +1,4 @@
-<?php 
+<?php
 error_reporting(E_ALL);
 session_start();
 include('../include.php');
@@ -150,6 +150,18 @@ switch ($_POST['action']) {
       echo "fail";
     }
     break;
+  case "sticky":
+    if ($_SESSION['user_level'] >= 3){
+      $selected_post = $dbc->prepare("UPDATE ".DISCUSS_TOPIC_TABLE." SET type = :skid WHERE topic_id = :tid");
+      $selected_post->execute(array(
+        ':skid' => (($discuss->view_topic(intval($_POST['id']), intval($_POST['mode'])) ? 2 : 0),
+        ':tid' => intval($_POST['id'])
+      ));
+      echo "good";
+    }
+    else{
+      echo "fail";
+    }
   default:
     echo "No action exists or defined. Try again.";
 }
