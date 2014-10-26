@@ -16,7 +16,7 @@
           <li><img src="http://www.artofproblemsolving.com/Forum/download/file.php?avatar=156828_1395017370.png"><a target="_blank" href="http://www.artofproblemsolving.com/Forum/memberlist.php?mode=viewprofile&u=156828">NeoMathematicalKid</a></li>
           <li><img src="http://www.artofproblemsolving.com/Forum/download/file.php?avatar=178792_1397856965.png"><a target="_blank" href="http://www.artofproblemsolving.com/Forum/memberlist.php?mode=viewprofile&u=178792">nxt</a></li>
           <li><img src="http://www.artofproblemsolving.com/Forum/download/file.php?avatar=81377_1393652565.png"><a target="_blank" href="http://www.artofproblemsolving.com/Forum/memberlist.php?mode=viewprofile&u=81377">PythonNut</a></li>
-          <!--insert RTG here-->
+          <li><img src="http://www.artofproblemsolving.com/Forum/download/file.php?avatar=209259_1413826790.jpg"><a target="_blank" href="http://www.artofproblemsolving.com/Forum/memberlist.php?mode=viewprofile&u=209259">RTG</a></li>
           <li><img src="http://www.artofproblemsolving.com/Forum/download/file.php?avatar=183270_1400039956.png"><a target="_blank" href="http://www.artofproblemsolving.com/Forum/memberlist.php?mode=viewprofile&u=183270">thatmathgeek</a></li>
           <li><img src="http://www.artofproblemsolving.com/Forum/download/file.php?avatar=114458_1377658805.png"><a target="_blank" href="http://www.artofproblemsolving.com/Forum/memberlist.php?mode=viewprofile&u=114458">thkim1011</a></li>
           <li><img src="http://www.artofproblemsolving.com/Forum/download/file.php?avatar=156833_1381259342.png"><a target="_blank" href="http://www.artofproblemsolving.com/Forum/memberlist.php?mode=viewprofile&u=156833">Tungsten</a></li>
@@ -32,6 +32,7 @@
               &bull; <a href="/admin.php" id="menu-admin">Admin CP</a> 
               <?php } //end admin ?>
               &bull; <a href="/contact.php">Contact Us</a></p>
+      <p><a href="/docs/tos.php">Terms of Service</a> &bull; <a href="/docs/privacy.php">Privacy Policy</a> &bull; <a href="/docs/conduct.php">Code of Conduct</a></p>
       <p>&copy;2014 Everything Dojo. Individual styles are copyright their creators.</p>
       <p>Made with <span class="heart">&hearts;</span><?php if (isset($_GET['unicorns'])) { echo " and unicorns"; } ?>.</p>
       <p>Server Time: <?php echo date("m/d/y G:i T"); ?></p>

@@ -129,7 +129,8 @@ if (isset($_POST['submit'])) {
     echo "</p>";
   } ?>
 
-  <p>Having trouble with something not working on the site? Perhaps you have a bug report or a feature request? Just want to let us know how much you like us today? Use the form below.</p>
+  <p>Having trouble with something not working on the site? Perhaps you have a bug report or a feature request? SOMETHING BAD HAPPENED? Just want to let us know how much you like us today? Use the form below.</p>
+  <p>Any messages you submit here are originally private, but you give us permission to make it public (always anonymous). If you want to make sure what you say is never public, choose "I need personal user support".</p>
   <br />
   <form action="contact.php" method="post">
     <label for="name">Name/Alias</label>

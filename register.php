@@ -75,7 +75,6 @@ if((isset($_POST['ajax']) && $_POST['ajax'] === "true") && $ajax) {
 }
 
 if (!empty($_POST)) {
-  $user_ip = $_SERVER['REMOTE_ADDR'];
   $sha1pass = PwdHash($data['pwd']);
   $host = $_SERVER['HTTP_HOST'];
   $activ_code = rand(1000, 9999);
@@ -107,8 +106,8 @@ if (!empty($_POST)) {
   }
 
   if (empty($err)) {
-    $sql_insert = $dbc->prepare("INSERT INTO $table (user_email, pwd, date, users_ip, activation_code, user_name) VALUES (?,?,NOW(),?,?,?)");
-    $sql_insert->execute(array($usr_email,$sha1pass,$user_ip,$activ_code,$user_name));
+    $sql_insert = $dbc->prepare("INSERT INTO $table (user_email, pwd, date, activation_code, user_name) VALUES (?,?,NOW(),?,?)");
+    $sql_insert->execute(array($usr_email,$sha1pass,$activ_code,$user_name));
     $user_id = $dbc->lastInsertId();
     $md5_id = md5($user_id);
     $dbc->prepare("UPDATE $table SET md5_id=? WHERE id=?")->execute(array($md5_id,$user_id));
@@ -171,7 +170,7 @@ EOT;
     echo "</p>";
   } ?>
 
-  <p>Register here. Please fill out all fields.</p>
+  <p>Register here. Please fill out all fields. Want to know what we do with your information? Read the <a href="/docs/privacy.php">Privacy Policy</a>.</p>
   <form action="register.php" method="post" name="regForm">
     <label>Username</label>
     <label class="small i">Only letters, numbers, and underscores, from 3-20 characters long.</label>
@@ -200,6 +199,9 @@ EOT;
         echo recaptcha_get_html($publickey);
       ?>
       <div id="message"></div>
+    </div>
+    <div class="field">
+      <input name="tos" type="checkbox" class="required"><label class="inline">I have read the <a href="/docs/tos.php">Terms of Service</a> and I agree to follow them to the best of my ability. (Please actually read them, they're fun to read.)</label>
     </div>
     <input type="hidden" name="ajax" value="false">
     <div class="field">
