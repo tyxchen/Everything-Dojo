@@ -26,6 +26,6 @@
     <textarea id="css" name="code"></textarea>
     <input type="submit" name="submit" style="font-size: 15px;" />
     <input type="hidden" name="mode" value="submit-theme" />
-    <p class="small">By submitting this theme, you are declaring it open-source licensed under the <a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
+    <p class="small">By submitting this theme, you are declaring it open-source.</p>
   </div>
 </form>

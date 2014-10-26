@@ -22,7 +22,7 @@
   <h2>Content you post</h2>
   <p>By submitting, posting, or displaying content on Everything Dojo, you're telling us these things are true:</p>
   <ul>
-    <li>The content is free, open-source stuff that is licensed under the <a href="http://opensource.org/licenses/MIT">MIT License</a>.</li>
+    <li>The content is free, open-source stuff.</li>
     <li>Anyone can fork the content and modify it and use it anywhere, given, of course, no plagiarism or making money off of it, etc.</li>
     <li>The content doesn't violate any copyrights or infringe any other intellectual property rights.</li>
     <li>The content is not deceptive or misleading.</li>
