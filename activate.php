@@ -96,7 +96,7 @@ This is an automated response. Do not reply to this email.";
   $title = "Account Activation";
   //dbc has been included already
   session_start();
-  get_header();
+  get_header(0);
 ?>
 <section id="content">
   <?php //spit out all errors
@@ -132,4 +132,4 @@ This is an automated response. Do not reply to this email.";
   <?php } //end no messages ?>
 </section>
 
-<?php get_footer(); ?>
+<?php get_footer(0); ?>
