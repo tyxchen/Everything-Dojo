@@ -10,7 +10,7 @@ include("constants.php");
 // notification class
 include("notification.php");
 // passwords
-include("password.php")
+include("password.php");
 
 date_default_timezone_set("America/Los_Angeles");
 ?>
