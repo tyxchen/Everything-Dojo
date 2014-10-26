@@ -152,7 +152,7 @@ EOT;
   $extra_js = "<script src='js/register.js'></script>";
   //dbc already included
   session_start();
-  get_header();
+  get_header(0);
 ?>
 <section id="content">
   <?php
@@ -211,4 +211,4 @@ EOT;
   </form>
   <?php } //end not done ?>
 </section>
-<?php get_footer(); ?>
+<?php get_footer(0); ?>

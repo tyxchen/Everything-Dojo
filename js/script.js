@@ -352,7 +352,7 @@ function sliderSidebar () { //referring to the exact and non-general (for lack o
   $("#sidebar-inner").width(sideWidth);
   $("#side-button")  .css("left", sideWidth);
 
-  $("#blog-body").load("blog/blog-index.html");
+  $("#blog-body").load("/blog/blog-index.html");
 
   // option slides sliding init
   $(".option").each(function () {
@@ -366,7 +366,7 @@ function sliderSidebar () { //referring to the exact and non-general (for lack o
 
   // view mode radios; these appear in both themizer & try-it
   $("[name='view']").change(function () {
-    $("#blog-body").load("blog/blog-" + $("[name='view'] :checked").val() + ".html", function () {
+    $("#blog-body").load("/blog/blog-" + $("[name='view'] :checked").val() + ".html", function () {
       $(".text").trigger("keyup");
     });
   });
