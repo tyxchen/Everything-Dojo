@@ -160,17 +160,21 @@
               <span class="title">Base theme</span>
               <p>
                 <select name="base">
-                  <option value="core">Core by Dojo</option>
-                  <option value="warped">Warped by Red</option>
-                  <option value="shadows">Shadows by nxt</option>
-                  <option value="curvy">Curvy by Tungsten</option>
+                  <?php
+                      foreach (scandir($_SERVER['DOCUMENT_ROOT'].'/blog/css') as $theme) {
+                        $disclude = array(".", "..", ".DS_Store", "blog-style.css");
+                        
+                        if (!in_array($theme, $disclude) && $theme != "") {
+                            $name = strstr(str_replace("_", " ", $theme), '.', true); //Convert _ to spaces and remove .css
+                            $theme = strstr($theme, '.', true); //Remove .css from [value] as themizer.js adds it back in
+                            echo '<option value="'.$theme.'">'.$name."</option>";
+                        }
+                      }
+                  ?>
                 </select>
               </p>
-              <?php endif; ?>
             </section>
           </section>
-
-          <?php if ($_GET["mode"] == "regular"): ?>
 
           <section class="option" id="option-body">
             <section class="option-title">
