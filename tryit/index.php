@@ -1,7 +1,7 @@
 <?php
   $title = "Try-It";
-  include("/include/include.php");
-  include("/include/themedb.php");
+  include("../include/include.php");
+  include("../include/themedb.php");
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"/blog/css/blog-style.css\">\n";
   if (!empty($_GET['select'])) {
@@ -49,7 +49,7 @@
         </section>
         <section class="option-wrap">
           <span class="title">Select theme</span>
-          <p>
+          <div>
             <form method="get" id="select-theme" name="select-theme">
               <select id="select" name="select" onChange="this.form.submit()">
                 <option value="" selected>NONE SELECTED</option>
@@ -179,15 +179,15 @@
                   }
 
                 ?>
-                </select>
-              <!--form element extended-->
-          </p>
-          <span class="title">Enable Development Themes</span>
-          <p>
+              </select>
             <!--form element extended-->
-              <input type="checkbox" name="dev" value="true" onChange="this.form.submit();" class="inline" <?php if (isset($_GET['dev'])) { echo "checked"; } ?>><label class="inline small">Try all styles, including possibly incomplete and buggy skins under development</label>
             </form>
-          </p>
+          </div>
+          <span class="title">Enable Development Themes</span>
+          <div>
+            <!--form element extended-->
+            <input type="checkbox" name="dev" value="true" onChange="this.form.submit();" class="inline" <?php if (isset($_GET['dev'])) { echo "checked"; } ?>><label class="inline small">Try all styles, including possibly incomplete and buggy skins under development</label>
+          </div>
         </section>
       </section>
 

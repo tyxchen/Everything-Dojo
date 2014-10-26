@@ -1,7 +1,7 @@
 <?php
   $title = "Discuss";
-  include("/include/include.php");
-  include("/include/discuss.php");
+  include("../include/include.php");
+  include("../include/discuss.php");
   session_start();
   $extra_style = "<link rel=\"stylesheet\" href=\"/css/discuss.min.css\" />
   <link rel=\"stylesheet\" href=\"/css/prism.min.css\" />";
@@ -9,7 +9,7 @@
   <script src=\"/js/prism.min.js\"></script>
   <script src=\"/js/marked.min.js\"></script>
   <script>$(function(){\$('pre code').each(function(){var h=$(this).html();h=h.replace(/&amp;quot;/g,'\"').replace(/&amp;#039;/g,'\'');$(this).html(h)})})</script>";
-  get_header(1);
+  get_header();
 
   if ($_SESSION['user_id'] != NULL) {
     $unread_count = $notification->count_unread($_SESSION['user_id']);
@@ -213,14 +213,14 @@
     <?php
     switch ($view) {
       case '':
-        include('/include/discuss/index_body.php');
+        include('../include/discuss/index_body.php');
         break;
       case 'forum':
         echo '<a href="' . URL_DISCUSS. '">&laquo; Back to Discuss Index</a>';
-        include('/include/discuss/forum_body.php');
+        include('../include/discuss/forum_body.php');
         break;
       case 'topic':
-        include('/include/discuss/topic_body.php');
+        include('../include/discuss/topic_body.php');
         break;
       default:
         echo "<b>Something wrong happened!</b> Discuss can't handle this request because it doesn't know how to do it! Don't worry, though; Try going <a href='" . URL_DISCUSS . "'>back to Discuss home page</a> or try our other services!";

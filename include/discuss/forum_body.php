@@ -17,7 +17,7 @@
     $typearg = 1;
   } else if ($id == 4) {
     if ($_SESSION['user_level'] < 3){
-      echo "<meta http-equiv=\"refresh\" content=\"0;URL=/discuss.php\">";
+      echo "<meta http-equiv=\"refresh\" content=\"0;URL=/index.php\">";
     }
   } else {
     $typearg = 0;
@@ -49,7 +49,7 @@
     ?>
   <fieldset id="topic-create-topic">
   <legend>Create new topic</legend>
-  <form action="discuss.php" method="post" id="form">
+  <form action="index.php" method="post" id="form">
     <div class="field">
       Title: <input type="text" name="title" value="" /><br/>
     </div>

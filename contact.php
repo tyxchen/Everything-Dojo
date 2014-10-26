@@ -112,7 +112,7 @@ if (isset($_POST['submit'])) {
     $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
     $notification_data = $notification->get_notifications($_SESSION['user_id']);
   }
-  get_header();
+  get_header(0);
 ?>
 <section id="content">
   <h1>Contact Us</h1>
@@ -170,4 +170,4 @@ if (isset($_POST['submit'])) {
 <?php } ?>
 </section>
 
-<?php get_footer(); ?>
+<?php get_footer(0); ?>

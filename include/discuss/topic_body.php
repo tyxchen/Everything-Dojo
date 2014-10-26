@@ -1,7 +1,7 @@
 <?php
 //get topics
   if (empty($_GET['f'])) {
-    exit("Topic not found: we couldn't find your topic because it doesn't exist. Don't worry, though; Try going <a href='discuss.php'>back to Discuss home page</a> or try our other services!");
+    exit("Topic not found: we couldn't find your topic because it doesn't exist. Don't worry, though; Try going <a href='index.php'>back to Discuss home page</a> or try our other services!");
   } else {
     //check if special
     if ($_GET['f'] == 1) {
@@ -19,7 +19,7 @@
       $type = 0;
     } else if (intval($_GET['f']) == 4) {
       if ($_SESSION['user_level'] < 3){
-        echo "<meta http-equiv=\"refresh\" content=\"0;URL=/discuss.php\">";
+        echo "<meta http-equiv=\"refresh\" content=\"0;URL=/index.php\">";
       }
     } else {
       $type = 1;
@@ -51,7 +51,7 @@
           var loc = prompt("Choose forum_id to move to.\n2) Feature Requests\n3) Bug Reports\n4) Archives");
           $.post('include/discuss/topic_ajax.php', {action: 'move', id: <?php echo intval($topic['topic_id']); ?>, location: loc, mode: <?php echo $typearg; ?>}, function(data) {
             if (data == "good"){
-              window.location.href = 'discuss.php?view=topic&f='+loc+'&t=<?php echo $topic['topic_id'];?>';
+              window.location.href = 'index.php?view=topic&f='+loc+'&t=<?php echo $topic['topic_id'];?>';
             }
             else{
               alert("Something wrong happened. Please try again.");
@@ -71,7 +71,7 @@
         $('#topic-top-archive').on('click', function(e) {
           $.post('include/discuss/topic_ajax.php', {action: 'move', id: <?php echo intval($topic['topic_id']); ?>, location: 4, mode: <?php echo $typearg; ?>}, function(data) {
             if (data == "good"){
-              window.location.href = 'discuss.php?view=topic&f=4&t=<?php echo $topic['topic_id'];?>';
+              window.location.href = 'index.php?view=topic&f=4&t=<?php echo $topic['topic_id'];?>';
             }
             else{
               alert("Something wrong happened. Please try again.");
@@ -267,7 +267,7 @@
 <a id="topic-a-comment">+ Add a comment</a>
 <fieldset id="topic-create-comment">
 <legend>Add new comment</legend>
-<form action="discuss.php" method="post" id="form">
+<form action="index.php" method="post" id="form">
   <div class="field" style="display:none">
     Title: <input type="text" name="title" value="RE: <?php echo $topic['title'];?>" /><br/>
   </div>
@@ -309,6 +309,6 @@
 <?php }
 } else {
   echo "<h1 style='text-align:center;'>Topic Not Found</h1>";
-  echo "<p style='text-align:center;'>The topic you were looking for is not found. Don't worry, though; Try going <a href='discuss.php'>back to Discuss home page</a> or try our other services!</p>";
+  echo "<p style='text-align:center;'>The topic you were looking for is not found. Don't worry, though; Try going <a href='index.php'>back to Discuss home page</a> or try our other services!</p>";
 }
 ?>

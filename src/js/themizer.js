@@ -97,7 +97,7 @@ $.fn.style = function (useName, value) {
 function themizerRegular () {
   sliderSidebar();
   // Base style
-  $("head").append("<link href='blog/css/core.css' rel='stylesheet' id='base-theme'>");
+  $("head").append("<link href='/blog/css/core.css' rel='stylesheet' id='base-theme'>");
 
   /* Get Code */
   $("#submit").click(function () {
@@ -169,7 +169,7 @@ function themizerRegular () {
 
   // Set baseTheme whenever base option is changed
   $("[name='base']").change(function () {
-    $("link[id='base-theme']").attr('href', "blog/css/" + $("[name='base'] :checked").val() + ".css", function () {
+    $("link[id='base-theme']").attr('href', "/blog/css/" + $("[name='base'] :checked").val() + ".css", function () {
       $(".text").trigger("keyup");
     });
     baseTheme = $("[name='base'] :checked").val();

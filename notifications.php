@@ -9,7 +9,7 @@
     $notification_data = $notification->get_notifications($_SESSION['user_id'], 1000);
   }
 
-  get_header(0, $notification_unread_count);
+  get_header(0);
 ?>
 <section id="content">
   <div id="notifications-test">

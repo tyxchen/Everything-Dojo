@@ -111,7 +111,7 @@ This is an automated response. Do not reply to this email.";
 <?php
   $title = "Login";
   //dbc was already got at the top; don't try again
-  get_header();
+  get_header(0);
 ?>
 <section id="content">
   <?php //spit out all errors
@@ -132,4 +132,4 @@ This is an automated response. Do not reply to this email.";
   </form>
 </section>
 
-<?php get_footer(); ?>
+<?php get_footer(0); ?>

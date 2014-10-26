@@ -1,4 +1,6 @@
 <?php
+  include("../include/include.php");
+
   if (!isset($_GET['mode'])) {
     $_GET['mode'] = "index";
   }
@@ -11,7 +13,6 @@
     $title = "Themizer (Development Mode)";
   }
 
-  include("/include/include.php");
   session_start();
 
   if ($_GET["mode"] == "index") {

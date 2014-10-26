@@ -6,20 +6,20 @@
     $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
     $notification_data = $notification->get_notifications($_SESSION['user_id']);
   }
-  get_header();
+  get_header(0);
 ?>
 <section id="content">
   <h1>What is this?</h1>
   <p>Everything Dojo is a website that is aimed at assisting AoPS users in writing and choosing CSS styles. It consists of four main sections: the Theme Database, the Themizer, the Try-It, and the discussion area.</p>
   <h2>Theme Database</h2>
-  <p>The Theme Database (henceforth referred to as the Theme DB) is a collection of styles written for AoPS blogs. All of them have been approved by a team of AoPS users like you, and are guaranteed to follow the following guidelines:
+  <div>The Theme Database (henceforth referred to as the Theme DB) is a collection of styles written for AoPS blogs. All of them have been approved by a team of AoPS users like you, and are guaranteed to follow the following guidelines:
     <ul>
       <li>They don't contain any content which your parents wouldn't want you to see.</li>
       <li>They don't make the blog impossible to use.</li>
       <li>They aren't simple alterations of already existing themes (e. g. only background is changed or only the colour of the links is different).</li>
     </ul>
     There are no limitations on the style of the theme, so you can probably find one that is just right for you and your blog.
-  </p>
+  </div>
 
   <h2>Themizer</h2>
   <p>The Themizer is a tool for creating your own simple themes. You can choose one of several base themes from which to start, then choose your background colour, the colour of the border around the entries, and the font. You can also add some of your own rules to the stylesheet for even more customization.</p>
@@ -58,4 +58,4 @@
   <p>If you'd like to help contribute to Everything Dojo by joining one of the two teams, please contact us through our contact form, or private message knittingfrenzy18 on AoPS.</p>
 </section>
 
-<?php get_footer(); ?>
+<?php get_footer(0); ?>

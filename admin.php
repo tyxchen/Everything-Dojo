@@ -42,7 +42,7 @@ list($active) = $rs_active;
     $notification_data = $notification->get_notifications($_SESSION['user_id']);
   }
 
-  get_header(0, $notification_unread_count);
+  get_header(0);
 ?>
 <section id="content">
   <div id="notifications">
@@ -234,4 +234,4 @@ list($active) = $rs_active;
   </form>
 </section>
 
-<?php get_footer(); ?>
+<?php get_footer(0); ?>
