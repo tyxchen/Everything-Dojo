@@ -42,8 +42,7 @@
           <td>-</td>
         </tr>
       <?php
-        }
-        else{
+        } else {
           for ($i = 0; $i < count($data['unapproved']); $i++) {
             $description = shorten_desc($data['unapproved'][$i]['description']);
       ?>

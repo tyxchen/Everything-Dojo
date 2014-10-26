@@ -89,8 +89,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
           <td>-</td>
         </tr>
       <?php
-        }
-        else{
+        } else {
           for ($i = 0; $i < count($data['approved']); $i++) {
             $description = shorten_desc($data['approved'][$i]['description']);
       ?>
@@ -171,7 +170,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
         </tr>
       </thead>
        <tbody>
-      <?php if(count($data['validated']) == 0) { ?>
+      <?php if (count($data['validated']) == 0) { ?>
         <tr>
           <td><b>No validated themes</b></td>
           <td>-</td>
