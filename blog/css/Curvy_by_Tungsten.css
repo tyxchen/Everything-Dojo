@@ -6,7 +6,8 @@ By AoPS user Tungsten, licensed under the GNU GPL v3 or later.
 Created as a base theme for the Themizer tool at Everything Dojo.
 */
 
-* {
+/* following hack prevents affecting styles on Themizer */
+*:not(#sidebar *) {
   border-color: black !important;
   box-sizing: border-box;
 }
