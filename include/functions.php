@@ -167,13 +167,8 @@
   }
 
   // Password and salt generation
-  function PwdHash($pwd, $salt = NULL) {
-    if ($salt === NULL) {
-      $salt = substr(md5(uniqid(rand(), true)), 0, SALT_LENGTH);
-    } else {
-      $salt = substr($salt, 0, SALT_LENGTH);
-    }
-    return $salt . sha1($pwd . $salt);
+  function PwdHash($pwd) {
+    return password_hash($pwd);
   }
 
   function checkAdmin() {
@@ -272,11 +267,11 @@
     curl_close($ch);
     return $result;
   }
-  
-  
+
+
   /*Notifications function (removes extra unnecessary code from PHP pages)*/
   function notifications() {
-  echo  
+  echo
         '<div id="notifications">
         <div class="notification-arrow-up"></div>
         <div id="notification-body">
@@ -319,5 +314,5 @@
         </div>
       </div>';
   }
-  
+
 ?>

@@ -16,7 +16,7 @@ if (isset($_POST['doUpdate'])) {
   $old_salt = substr($old['pwd'], 0, 9);
 
   //check for old password in md5 format
-  if ($old['pwd'] === PwdHash($_POST['pwd_old'], $old_salt)) {
+  if (password_verify($_POST['pwd_old'], $old['pwd'])) {
     if (checkPwd($_POST['pwd_new'], $_POST['pwd_again'])) {
       $newsha1 = PwdHash($_POST['pwd_new']);
       $result = $dbc->prepare("UPDATE $table SET pwd = ? WHERE id = ?");

@@ -38,7 +38,7 @@ if (isset($_POST['doLogin'])) {
       }
 
       //check against salt
-      if ($pwd === PwdHash($pass, substr($pwd, 0, 9))) {
+      if (password_verify($pass, $pwd)) {
         if (empty($err)) {
           // this sets session and logs user in
           session_start();
