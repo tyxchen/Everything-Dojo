@@ -342,7 +342,7 @@ class discuss {
 
       $result = $sth->fetch(PDO::FETCH_ASSOC);
 
-      $query = "SELECT `forum_id` FROM `" . DISCUSS_TOPIC_TABLE . "` WHERE `topic_id` = :id";
+      $query = "SELECT `forum_id`, `type` FROM `" . DISCUSS_TOPIC_TABLE . "` WHERE `topic_id` = :id";
       $sth = $this->dbc->prepare($query);
       $sth->execute(array(
         ':id' => $topic_id
@@ -351,6 +351,7 @@ class discuss {
       $forum = $sth->fetch(PDO::FETCH_ASSOC);
 
       $result['forum_id'] = $forum['forum_id'];
+      $result['type'] = $forum['type'];
 
       return $result;
     }

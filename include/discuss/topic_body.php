@@ -29,7 +29,7 @@
   $data = $discuss->get_fora(intval($topic['forum_id']));
 ?>
 
-<?php if (!empty($topic) && (!empty($topic['title']))) { ?>
+<?php if (!empty($topic) && !empty($topic['title'])) { ?>
 <a href="<?php echo URL_DISCUSS; ?>?view=forum&f=<?php echo intval($topic['forum_id']);?>">&laquo; Back to <?php echo $data['name'];?></a>
 <section id="topic" style="margin-top: 1em;">
   <div id="discuss-topic-header">
@@ -44,7 +44,7 @@
       <?php if (($_SESSION['user_id'] == $topic['user_id']) || ($_SESSION['user_level']) >= 3) { ?>
       <?php if ($_SESSION['user_level'] >= 3 && $typearg != 1) { ?>
       <div class="topic-reply-panel">
-        <div class="topic-top-archive" id="topic-top-archive"><img alt="Archive Topic" src="/images/trash.png" style="width: 0.55em; height: 0.75em;"> Archive Topic</div><div class="topic-top-move" id="topic-top-move">&rArr; Move Topic</div><div class="topic-top-sticky" id="topic-top-sticky" style="border-right: 0 solid #000000;" >&uarr; <?php if (intval($topic['type']) == 2) { echo "Unstick Topic"; } else { echo "Stick Topic"; } ?></div>
+        <div class="topic-top-archive" id="topic-top-archive"><img alt="Archive Topic" src="/images/trash.png" style="width: 0.55em; height: 0.75em;"> Archive Topic</div><div class="topic-top-move" id="topic-top-move">&rArr; Move Topic</div><div class="topic-top-sticky" id="topic-top-sticky" style="border-right: 0 solid #000000;" >&#x2605; <?php if (intval($topic['type']) == 2) { echo "Unsticky Topic"; } else { echo "Sticky Topic"; } ?></div>
       </div>
       <script>
         $('#topic-top-move').on('click', function(e) {
