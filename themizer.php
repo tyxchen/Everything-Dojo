@@ -173,9 +173,11 @@
                   ?>
                 </select>
               </p>
+              <?php endif; ?>
             </section>
           </section>
 
+          <?php if ($_GET['mode'] == "regular"): ?>
           <section class="option" id="option-body">
             <section class="option-title">
               <h5>Body</h5>
