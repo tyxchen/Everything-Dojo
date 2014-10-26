@@ -8,7 +8,7 @@
  */
 
 // Specify base theme
-var baseTheme = "Core_by_Dojo";
+var baseTheme = "core";
 
 // Set object for styling
 var styles = {
@@ -97,7 +97,7 @@ $.fn.style = function (useName, value) {
 function themizerRegular () {
   sliderSidebar();
   // Base style
-  $("head").append("<link href='blog/css/Core_by_Dojo.css' rel='stylesheet' id='base-theme'>");
+  $("head").append("<link href='/blog/css/core.css' rel='stylesheet' id='base-theme'>");
 
   /* Get Code */
   $("#submit").click(function () {

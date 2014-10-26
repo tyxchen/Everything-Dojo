@@ -2,8 +2,8 @@ $(function () {
   $("#popup-box").hide();
 
   // Options
-  $(".manage-item").each(function () {
-    $("#" + $(this).attr("id") + " .option-title").attr("onclick", "optionToggle('" + $(this).attr("id") + "')").addClass("collapsed");
+  $(".manage-header").each(function () {
+    $(this).attr("onclick", "$('#" + $(this).attr('id') + "').optionToggle()").addClass("collapsed");
   });
   $(".expanded").removeClass("collapsed");
   $(".expanded").next().slideDown(0);

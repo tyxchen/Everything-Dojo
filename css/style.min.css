@@ -222,6 +222,7 @@ i, .i { font-family: AmbleItalic, sans-serif; }
 code { font-family: Monaco, "Courier New", Courier, monospace; }
 
 .small { font-size: 0.65em; }
+.large { font-size: 1.15em; }
 
 
 /*--LAYOUT--*/

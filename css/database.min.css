@@ -183,11 +183,12 @@
 
 .manage-header h4 {
   color: white;
+  margin-top: 0.1em;
   margin-left: 1vw;
 }
 .option-wrap { display: none; /* eliminate loading delay */ }
 
-.collapsebutton::before, .collapsebutton::after { top: -0.9em; }
+.collapsebutton::before, .collapsebutton::after { top: -1.2em; }
 
 /* notification placement for database page */
 #notifications {
