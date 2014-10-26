@@ -49,7 +49,7 @@
       <script>
         $('#topic-top-move').on('click', function(e) {
           var loc = prompt("Choose forum_id to move to.\n2) Feature Requests\n3) Bug Reports\n4) Archives");
-          $.post('include/discuss/topic_ajax.php', {action: 'move', id: <?php echo intval($topic['topic_id']); ?>, location: loc, mode: <?php echo $typearg; ?>}, function(data) {
+          $.post('../include/discuss/topic_ajax.php', {action: 'move', id: <?php echo intval($topic['topic_id']); ?>, location: loc, mode: <?php echo $typearg; ?>}, function(data) {
             if (data == "good"){
               window.location.href = 'index.php?view=topic&f='+loc+'&t=<?php echo $topic['topic_id'];?>';
             }
@@ -59,7 +59,7 @@
           });
         });
         $('#topic-top-sticky').on('click', function(e) {
-          $.post('include/discuss/topic_ajax.php', {action: 'sticky', id: <?php echo intval($topic['topic_id']); ?>, mode: <?php echo $typearg; ?>}, function(data) {
+          $.post('../include/discuss/topic_ajax.php', {action: 'sticky', id: <?php echo intval($topic['topic_id']); ?>, mode: <?php echo $typearg; ?>}, function(data) {
             if (data == "good"){
               window.location.reload();
             }
@@ -69,7 +69,7 @@
           });
         });
         $('#topic-top-archive').on('click', function(e) {
-          $.post('include/discuss/topic_ajax.php', {action: 'move', id: <?php echo intval($topic['topic_id']); ?>, location: 4, mode: <?php echo $typearg; ?>}, function(data) {
+          $.post('../include/discuss/topic_ajax.php', {action: 'move', id: <?php echo intval($topic['topic_id']); ?>, location: 4, mode: <?php echo $typearg; ?>}, function(data) {
             if (data == "good"){
               window.location.href = 'index.php?view=topic&f=4&t=<?php echo $topic['topic_id'];?>';
             }
@@ -124,7 +124,7 @@
                 </div>";
             }
           ?>
-            <?php if($post['edit_id'] > 0 && $post['type'] == 0){ ?><p class="small">Last edited by <?php echo get_user($post['edit_id']); ?> on <?php echo date('M d, Y g:i a', $post['last_timestamp']);?></p><?php } ?>
+            <?php if (!empty($post['edit_id'])) { if($post['edit_id'] > 0 && $post['type'] == 0){ ?><p class="small">Last edited by <?php echo get_user($post['edit_id']); ?> on <?php echo date('M d, Y g:i a', $post['last_timestamp']);?></p><?php }} ?>
           <?php
             if (($_SESSION['user_id'] == $user['id']) || $_SESSION['user_level'] >= 5){
               echo
@@ -159,7 +159,7 @@
               if ($_SESSION['user_level'] >= 3){
                 echo "
                 \$('#topic-reply-cleanthanks-".$post['post_id']."').on('click', function(e) {
-                  \$.post('include/discuss/topic_ajax.php', {action: 'clear_thanks', id: ".intval($post['post_id']).", mode: ".intval($typearg)."}, function(data) {
+                  \$.post('../include/discuss/topic_ajax.php', {action: 'clear_thanks', id: ".intval($post['post_id']).", mode: ".intval($typearg)."}, function(data) {
                     if (data == \"good\"){
                       window.location.reload();
                     }
@@ -170,7 +170,7 @@
                 });
 
                 \$('#topic-reply-delete-".$post['post_id']."').on('click', function(e) {
-                  \$.post('include/discuss/topic_ajax.php', {action: 'delete', id: ".intval($post['post_id']).", mode: ".intval($typearg)."}, function(data) {
+                  \$.post('../include/discuss/topic_ajax.php', {action: 'delete', id: ".intval($post['post_id']).", mode: ".intval($typearg)."}, function(data) {
                     if (data == \"good\"){
                       window.location.reload();
                     }
@@ -184,7 +184,7 @@
               echo "\$('#post-edit-".$post['post_id']."').on('click', function(e) {
                   e.preventDefault();
                   if ($('#post-edit-".$post['post_id']."').prop('disabled') != true){
-                    \$.post('include/discuss/topic_ajax.php', {action: 'edit', id: ".intval($post['post_id']).", mode: ".intval($typearg).", text: $('#topic-reply-edit-desc-source-".$post['post_id']."').val()}, function(data) {
+                    \$.post('../include/discuss/topic_ajax.php', {action: 'edit', id: ".intval($post['post_id']).", mode: ".intval($typearg).", text: $('#topic-reply-edit-desc-source-".$post['post_id']."').val()}, function(data) {
                       var data_words = 'Could not parse message.';
                       switch (data.substr(0,6)){
                         case 'unauth':
@@ -218,7 +218,7 @@
             }
           ?>
         </div>
-        <?php echo "<a href='#{$i}' title='Permalink for comment #{$i}'>#{$i}</a>" ?>
+        <?php echo "<a href='#{$i}' title='Permalink for comment #{$i}'".(($post['type'] == 0) ? "" : " style='text-decoration: line-through;'").">#{$i}</a>" ?>
       </div>
     <?php
     } ?>
@@ -227,7 +227,7 @@
       var thankedPosts = [<?php echo implode(",", $thankedposts); ?>];
       function thankpost(post_id) {
         if ($.inArray(post_id, thankedPosts) >= 0) {
-          $.post("include/discuss/topic_ajax.php", {action: "thank", mode: <?php if (intval($_GET['f']) == 1) { echo "3"; } else { echo "2"; } ?>, id: post_id}, function(data) {
+          $.post("../include/discuss/topic_ajax.php", {action: "thank", mode: <?php if (intval($_GET['f']) == 1) { echo "3"; } else { echo "2"; } ?>, id: post_id}, function(data) {
             if (data.substr(0,7) == "success") {
               $('#topic-reply-thanks-'+post_id).html("&uArr; &nbsp;&nbsp;"+data.substr(8)+" Thanks");
               $('#topic-reply-thanks-'+post_id).removeClass('topic-reply-thanked');
@@ -237,7 +237,7 @@
             }
           });
         } else {
-          $.post("include/discuss/topic_ajax.php", {action: "thank", mode: <?php if (intval($_GET['f']) == 1) { echo "3"; } else { echo "2"; } ?>, id: post_id}, function(data) {
+          $.post("../include/discuss/topic_ajax.php", {action: "thank", mode: <?php if (intval($_GET['f']) == 1) { echo "3"; } else { echo "2"; } ?>, id: post_id}, function(data) {
             if (data.substr(0,7) == "success") {
               $('#topic-reply-thanks-'+post_id).html("&uArr; &nbsp;&nbsp;"+data.substr(8)+" Thanks!");
               $('#topic-reply-thanks-'+post_id).addClass('topic-reply-thanked');

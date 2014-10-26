@@ -134,7 +134,7 @@
       </thead>
       <tbody>
       <?php if (count($topics) == 0) { ?>
-        <tr style="cursor:pointer;">
+        <tr style="cursor:pointer; border-left-width: 0;">
           <td colspan="2">No topics</td>
           <td class="center">-</td>
           <td class="center">-</td>
@@ -149,7 +149,7 @@
           $comments = $comments - 1;
         }
         ?>
-        <tr style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $topic['topic_id']; ?>'">
+        <tr style="cursor:pointer;<?php if ($topic['read'] != 1) { echo ' border-left-color: #ffffff;'; }?>" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $topic['topic_id']; ?>'">
           <td class="tiny-col"><p class="topic-icon <?php if ($topic['read'] == 1) { echo 'read-icon'; } else { echo 'unread-icon'; } ?>"></p></td>
           <td><?php echo htmlspecialchars($topic['title']); ?></td>
           <td class="center"><?php echo $username; ?></td>
