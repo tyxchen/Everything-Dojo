@@ -12,7 +12,7 @@
   } else {
     $mode = 'index';
   }
-  get_header();
+  get_header(1);
 
   if ($_SESSION['user_id'] != NULL) {
     $unread_count = $notification->count_unread($_SESSION['user_id']);
@@ -128,4 +128,4 @@
     }
   } ?>
 </section>
-<?php get_footer(); ?>
+<?php get_footer(1); ?>

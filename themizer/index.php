@@ -16,7 +16,7 @@
 
   if ($_GET["mode"] == "index") {
     $extra_style = "<link href=\"/css/themizerindex.min.css\" rel=\"stylesheet\">";
-    get_header();
+    get_header(1);
   }
 ?>
 <?php if ($_GET["mode"] == "index"): ?>

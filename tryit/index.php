@@ -17,7 +17,7 @@
     tryit();
   });</script>";
 
-  get_header();
+  get_header(1);
 ?>
 
 <aside id="sidebar">
