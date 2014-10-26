@@ -98,6 +98,7 @@ function themizerRegular () {
   sliderSidebar();
   // Base style
   $("head").append("<link href='/blog/css/core.css' rel='stylesheet' id='base-theme'>");
+  $("head").append("<link href='/blog/css/Core_by_Dojo.css' rel='stylesheet' id='base-theme'>");
 
   /* Get Code */
   $("#submit").click(function () {

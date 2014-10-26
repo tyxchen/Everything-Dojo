@@ -81,8 +81,8 @@ if (isset($_POST['submit'])) {
     $postdata['key'] = $trellokey;
     $postdata['token'] = $trellotoken;
     $postdata['name'] = $data['subject'];
-    $postdata['desc'] .= "###Title: ".$data['email'];
-    $postdata['desc'] .= "**Email**: ".$data['email'];
+    $postdata['desc'] .= "###Title: ".$data['email']."\n";
+    $postdata['desc'] .= "**Email**: ".$data['email']."\n";
     if (isset($data['id'])) {
       $postdata['desc'] .= "\n**Has EvDo account**: ".$data['username']." (ID ".$data['id'].")";
     }

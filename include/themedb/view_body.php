@@ -1,7 +1,7 @@
 <?php
   $data = $themedb->get_themes();
   $view = $_GET['view'];
-  
+
   $tableHeader = '
   <thead>
     <tr class="headingTr">
@@ -117,17 +117,25 @@
     </div>
   </div>
 </div>
-      <?php if ($edit == TRUE || checkAdmin()){ ?><a href="<?php echo URL_DATABASE; ?>?mode=edit&id=<?php echo $id; ?>"><img src="../../images/edit.png" class="img-edit" /> Edit Theme</a> <a href="<?php echo URL_DATABASE; ?>?mode=settings&id=<?php echo $id; ?>"><img src="../../images/gear.png" class="img-edit" /> Manage Settings</a> <a href="javascript:;" class="view" onclick="popup_options('delete', <?php echo $style['id']; ?>);"><img src="../../images/trash.png" class="img-edit" /> Delete Theme</a><br /><?php } ?>
-      <?php echo $style['description']; ?><br />
-      <label><b>Screenshot:</b></label>
-      <img src="<?php echo $style['screenshot']; ?>" style="max-width: 65vw" /><br />
-      <a href="<?php echo '/tryit.php?select=' . $_GET['id'] . (in_array($style['stage'], array('[ALPHA]','[BETA]','[DEV]')) ? '&dev=dev' : '')?>">View this style in the Try-It!</a><br />
-      <label><b>Code:</b></label>
-      <div class="code">
-        <pre>
-          <code class="language-css"><?php echo nl2br($style['code']); ?></code>
-        </pre>
-      </div>
+<div id="theme">
+  <?php if ($edit == TRUE || checkAdmin()){ ?><a href="<?php echo URL_DATABASE; ?>?mode=edit&id=<?php echo $id; ?>"><img src="../../images/edit.png" class="img-edit" /> Edit Theme</a> <a href="<?php echo URL_DATABASE; ?>?mode=settings&id=<?php echo $id; ?>"><img src="../../images/gear.png" class="img-edit" /> Manage Settings</a> <a href="javascript:;" class="view" onclick="popup_options('delete', <?php echo $style['id']; ?>);"><img src="../../images/trash.png" class="img-edit" /> Delete Theme</a><?php } ?>
+  <section><?php echo $style['description']; ?></section>
+  <section>
+    <label><b>Screenshot:</b></label>
+    <img src="<?php echo $style['screenshot']; ?>" style="max-width: 65vw" />
+  </section>
+  <section>
+    <a href="<?php echo '/tryit.php?select=' . $_GET['id'] . (in_array($style['stage'], array('[ALPHA]','[BETA]','[DEV]')) ? '&dev=dev' : '')?>">View this style in the Try-It!</a>
+  </section>
+  <section>
+    <label><b>Code:</b></label>
+    <div class="code">
+      <pre>
+        <code class="language-css"><?php echo nl2br($style['code']); ?></code>
+      </pre>
+    </div>
+  </section>
+</div>
   <?php
       }
       break;

@@ -1,6 +1,10 @@
 @charset "utf-8";
 /* Database CSS */
 
+#content {
+  margin-top: 2vh;
+}
+
 .view-header { margin-top: 3vh; }
 
 #tile-container {
@@ -137,10 +141,15 @@
   margin-right: auto;
 }
 
+#theme section {
+  margin-top: 0.6em;
+}
+
 .code {
-  font-size: 12px;
+  font-size: 0.7em;
   height: 45vh;
   overflow: auto;
+  border-radius: 0.3em;
 }
 
 .img-edit {
@@ -183,11 +192,12 @@
 
 .manage-header h4 {
   color: white;
+  margin-top: 0.1em;
   margin-left: 1vw;
 }
 .option-wrap { display: none; /* eliminate loading delay */ }
 
-.collapsebutton::before, .collapsebutton::after { top: -0.9em; }
+.collapsebutton::before, .collapsebutton::after { top: -1.2em; }
 
 /* notification placement for database page */
 #notifications {
