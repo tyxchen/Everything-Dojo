@@ -319,6 +319,8 @@
 
   function notificationData() {
     global $notification;
+    global $notification_data;
+    global $unread_count;
     if ($_SESSION['user_id'] != NULL) {
       $unread_count = $notification->count_unread($_SESSION['user_id']);
       $notification_data = $notification->get_notifications($_SESSION['user_id']);
