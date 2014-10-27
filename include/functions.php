@@ -168,6 +168,7 @@
 
   // Password and salt generation
   function PwdHash($pwd) {
+//    include("include/password.php");
     return password_hash($pwd, PASSWORD_BCRYPT);
   }
 
@@ -271,7 +272,7 @@
 
   /*Notifications function (removes extra unnecessary code from PHP pages)*/
   function notifications() {
-  echo
+    echo
         '<div id="notifications">
         <div class="notification-arrow-up"></div>
         <div id="notification-body">
@@ -313,6 +314,12 @@
           </div>
         </div>
       </div>';
+  }
+  
+  function gravatar($email) {
+    $hash = md5(strtolower(trim($email)));
+    $user['photo'] = "http://www.gravatar.com/avatar/".$hash."?d=identicon";
+    return $user;
   }
 
 ?>
