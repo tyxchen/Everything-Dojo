@@ -8,7 +8,7 @@
  */
 
 // Specify base theme
-var baseTheme = "core";
+var baseTheme = "Core_by_Dojo";
 
 // Set object for styling
 var styles = {
