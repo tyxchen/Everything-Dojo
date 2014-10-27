@@ -19,6 +19,13 @@
   }
 }
 
+/**
+ * General
+ */
+
+#content {
+  margin-top: 2vh;
+}
 
 /*--NAVIGATION--*/
 #navigation {
@@ -32,6 +39,7 @@
   padding: 0;
   position: absolute;
   height: auto;
+  margin-top: 0;
 }
 
 .discuss-nav ul li a {
@@ -43,7 +51,7 @@
 
 /*--NOTIFICATIONS--*/
 #notifications {
-  top: 19vh;
+  top: 17vh;
   right: 5vw;
   width: 30vw;
 }
@@ -341,15 +349,13 @@
   color: #888;
   font-family: Lato, sans-serif;
   text-align: right;
-  opacity: 0;
+  opacity: 0.6;
   padding: 1.5em 0.3em 1.5em 0;
-  margin-left: 1.3em;
   -webkit-transition: opacity 0.3s ease, margin-left 0.3s ease;
   transition: opacity 0.3s ease, margin-left 0.3s ease;
 }
 
 .topic-reply:hover > a {
-  margin-left: 0;
   opacity: 0.8;
 }
 
