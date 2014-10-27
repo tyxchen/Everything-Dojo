@@ -11,10 +11,7 @@
   <script>$(function(){\$('pre code').each(function(){var h=$(this).html();h=h.replace(/&amp;quot;/g,'\"').replace(/&amp;#039;/g,'\'');$(this).html(h)})})</script>";
   get_header();
 
-  if ($_SESSION['user_id'] != NULL) {
-    $unread_count = $notification->count_unread($_SESSION['user_id']);
-    $notification_data = $notification->get_notifications($_SESSION['user_id']);
-  }
+  notificationData();
 
   if (empty($_GET['view'])) {
     $view = '';
