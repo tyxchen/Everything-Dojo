@@ -10,6 +10,7 @@
     <link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon.png">
     <?php if ($title != "Themizer (Regular Mode)" && $title != "Themizer (Development Mode)" && $title != "Try-It") { ?>
     <link href="/css/normalize.min.css" rel="stylesheet">
+    <link href="/css/fonts.min.css" rel="stylesheet">
     <link href="/css/style.min.css" rel="stylesheet">
     <?php } ?>
     <?php global $extra_style; print $extra_style; ?>

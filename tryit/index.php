@@ -3,7 +3,7 @@
   include("../include/include.php");
   include("../include/themedb.php");
   session_start();
-  $extra_style = "<link rel=\"stylesheet\" href=\"/blog/css/blog-style.css\">\n";
+  $extra_style = "<link rel=\"stylesheet\" href=\"/blog/css/blog-style.css\">";
   if (!empty($_GET['select'])) {
     $themedb = new themedb($dbc);
     $style = $themedb->get_themes(intval($_GET['select']), TRUE);
@@ -11,7 +11,8 @@
     $extra_style .= htmlspecialchars_decode($style['code']);
     $extra_style .= "</style>\n";
   }
-  $extra_style .= "<link rel=\"stylesheet\" href=\"/css/slidersidebar.min.css\">";
+  $extra_style .= "<link rel=\"stylesheet\" href=\"/css/slidersidebar.min.css\">
+    <link href=\"/css/fonts.min.css\" rel=\"stylesheet\">";
   $extra_js = "<script>
   $(function () {
     tryit();

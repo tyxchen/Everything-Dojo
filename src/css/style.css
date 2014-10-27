@@ -4,11 +4,6 @@ Everything Dojo CSS
 Please do not plagiarize
 */
 
-
-/*--FONT IMPORT--*/
-@import url('fonts.min.css');
-
-
 /*--UNIVERSAL RESET--*/
 * { margin: 0; padding: 0; }
 
