@@ -360,7 +360,7 @@ class discuss {
   // insert post
   function insert_post($forum, $user_id, $data) {
     if ($forum == 1) {
-      $query = "INSERT INTO ".DISCUSS_POSTS_SPECIAL_TABLE." (user_id, style_id, time, title, text) VALUES (:user, :topic, :time, :title, :text)";
+      $query = "INSERT INTO ".DISCUSS_POSTS_SPECIAL_TABLE." (user_id, style_id, time, title, text, source) VALUES (:user, :topic, :time, :title, :text, :source)";
     } else {
       $query = "INSERT INTO ".DISCUSS_POSTS_TABLE." (user_id, topic_id, time, title, text, source) VALUES (:user, :topic, :time, :title, :text, :source)";
     }
@@ -383,7 +383,6 @@ class discuss {
         ':text' => $this->filter_swear_words($data['desc-source']),
         ':source' => $this->filter_swear_words($data['desc-source'])
       ));
-
       $this->delete_views($data['t'], $user_id, 0);
     }
 
