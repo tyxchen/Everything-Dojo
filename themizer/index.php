@@ -26,7 +26,7 @@
     <section id="left-wrap">
       <p class="heading">Style your blog, the easy way.</p>
       <a href="<?php echo URL_THEMIZER; ?>?mode=regular" class="linkbutton uppercase" target="_blank">Get Started</a>
-      <p class="note">Are you a developer? <a href="themizer.php?mode=development" target="_blank">Click Here</a> to go to development mode.</p>
+      <p class="note">Are you a developer? <a href="?mode=development" target="_blank">Click Here</a> to go to development mode.</p>
     </section>
     <section id="right-wrap">
       <img src="/images/themizer.png" />

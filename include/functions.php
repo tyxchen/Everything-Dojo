@@ -310,21 +310,22 @@
           }
           echo '
           <div id="notification-footer">
-            <a href="notifications.php">See All</a>
+            <a href="http://everythingdojo.com/notifications.php">See All</a>
           </div>
         </div>
       </div>';
   }
-  
-  
+
+
   function notificationData() {
+    global $notification;
     if ($_SESSION['user_id'] != NULL) {
       $unread_count = $notification->count_unread($_SESSION['user_id']);
       $notification_data = $notification->get_notifications($_SESSION['user_id']);
     }
   }
-  
-  
+
+
   function gravatar($email) {
     $hash = md5(strtolower(trim($email)));
     $user['photo'] = "http://www.gravatar.com/avatar/".$hash."?d=identicon";
