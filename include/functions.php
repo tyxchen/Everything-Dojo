@@ -310,7 +310,7 @@
           }
           echo '
           <div id="notification-footer">
-            <a href="notifications.php">See All</a>
+            <a href="http://everythingdojo.com/notifications.php">See All</a>
           </div>
         </div>
       </div>';
