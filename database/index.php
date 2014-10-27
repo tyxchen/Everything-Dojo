@@ -14,10 +14,7 @@
   }
   get_header(1);
 
-  if ($_SESSION['user_id'] != NULL) {
-    $unread_count = $notification->count_unread($_SESSION['user_id']);
-    $notification_data = $notification->get_notifications($_SESSION['user_id']);
-  }
+  notificationData();
 ?>
 <section id="content">
   <?php notifications(); ?>
