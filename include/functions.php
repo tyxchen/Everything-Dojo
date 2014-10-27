@@ -168,7 +168,7 @@
 
   // Password and salt generation
   function PwdHash($pwd) {
-    return password_hash($pwd);
+    return password_hash($pwd, PASSWORD_BCRYPT);
   }
 
   function checkAdmin() {
