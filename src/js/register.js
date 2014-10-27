@@ -157,9 +157,9 @@ document.onready = function () {
    * Functions
    */
   function validateFinal () {
-    var list = [userName.el, userEmail.el, userPwd.el, userPwdVal.el];
+    var list = [userName.el, userEmail.el, userPwd.el, userPwdVal.el, document.querySelector("[name='tos']")];
     for (var i = 0; i < list.length; i++) {
-      if (/invalid/.test(list[i].className) || !list[i].value) {
+      if (/invalid/.test(list[i].className) || !list[i].value || !list[i].checked) {
         return false;
       }
     }
@@ -189,6 +189,9 @@ document.onready = function () {
 
     // ReCAPTCHA error message init
     var recaptchaMsg = new Message("#message");
+
+    // TOS
+    var tos = new Message("[name='tos']");
 
     // Prep form for AJAX submission
     $form.attr("onsubmit", "return false;").removeAttr("action");
@@ -233,6 +236,9 @@ document.onready = function () {
             if (msg.indexOf("p") !== -1) {
               userPwd.assign("Passwords did not meet the requirements or did not match.", "error").show();
               userPwdVal.assign("Passwords did not meet the requirements or did not match.", "error").show();
+            }
+            if (msg.indexOf("t") !== -1) {
+              tos.assign("Please agree to the Terms of Service before continuing", "error").show();
             }
             if (msg.indexOf("s") !== -1) {
               $("#content").animate({

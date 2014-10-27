@@ -38,12 +38,18 @@ if((isset($_POST['ajax']) && $_POST['ajax'] === "true") && $ajax) {
   // Check/validate fields
   if (!$resp->is_valid) {
     $err[] = "r";
-  } elseif (!isUserID($data['user_name'])) {
+  }
+  if (!isUserID($data['user_name'])) {
     $err[] = "n";
-  } elseif (!isEmail($data['usr_email'])) {
+  }
+  if (!isEmail($data['usr_email'])) {
     $err[] = "e";
-  } elseif (!checkPwd($data['pwd'], $data['pwd2'])) {
+  }
+  if (!checkPwd($data['pwd'], $data['pwd2'])) {
     $err[] = "p";
+  }
+  if (!isset($data['tos'])) {
+    $err[] = "t";
   }
 
 } elseif (isset($_POST['doRegister'])) {
@@ -71,6 +77,11 @@ if((isset($_POST['ajax']) && $_POST['ajax'] === "true") && $ajax) {
   // Check User Passwords
   if (!checkPwd($data['pwd'], $data['pwd2'])) {
     $err[] = "Invalid password or mismatch! Passwords must be at least 4 characters long and both fields must match.";
+  }
+
+  // TOS
+  if (!isset($data['tos'])) {
+    $err[] = "Please agree to the Terms of Service before continuing.";
   }
 }
 
@@ -201,7 +212,7 @@ EOT;
       <div id="message"></div>
     </div>
     <div class="field">
-      <input name="tos" type="checkbox" class="required"><label class="inline">I have read the <a href="/docs/tos.php">Terms of Service</a> and I agree to follow them to the best of my ability. (Please actually read them, they're fun to read.)</label>
+      <input name="tos" type="checkbox" class="required" value="1"><label class="inline">I have read the <a href="/docs/tos.php">Terms of Service</a> and I agree to follow them to the best of my ability. (Please actually read them, they're fun to read.)</label>
     </div>
     <input type="hidden" name="ajax" value="false">
     <div class="field">

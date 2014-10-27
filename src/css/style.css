@@ -89,9 +89,16 @@ input.danger:hover { background-color: #600; }
   margin: 0.7em auto;
 }
 
+/*--RADIOS/CHECKBOXES--*/
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 0.3em;
+}
 
 /*--INPUTS AND TEXTAREAS--*/
-input,
+input[type="text"],
+input[type="password"],
 textarea {
   background: #fff;
   border: 1px solid #222;
