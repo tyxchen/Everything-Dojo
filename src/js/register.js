@@ -221,43 +221,41 @@ document.onready = function () {
           });
         },
         success: function (msg) {
-          setTimeout(function () {
-            if (msg.indexOf("r") !== -1) {
-              recaptchaMsg.assign("Recaptcha failed! Please try again.", "error").show(function () {
-                recaptchaMsg.el.nextElementSibling.style.bottom = "1em";
-                recaptchaMsg.el.nextElementSibling.style.left = "325px";
-              });
-              submit.removeAttribute("disabled");
-            }
-            if (msg.indexOf("n") !== -1) {
-              userName.assign("Username is not a valid username.", "error").show();
-            }
-            if (msg.indexOf("e") !== -1) {
-              userEmail.assign("Email is not a valid email.", "error").show();
-            }
-            if (msg.indexOf("u") !== -1) {
-              userName.assign("Username already exists in database.", "error").show();
-            }
-            if (msg.indexOf("a") !== -1) {
-              userEmail.assign("Email already exists in database.", "error").show();
-            }
-            if (msg.indexOf("p") !== -1) {
-              userPwd.assign("Passwords did not meet the requirements or did not match.", "error").show();
-              userPwdVal.assign("Passwords did not meet the requirements or did not match.", "error").show();
-            }
-            if (msg.indexOf("t") !== -1) {
-              tos.assign("Please agree to the Terms of Service before continuing", "error").show();
-            }
-            if (msg.indexOf("s") !== -1) {
-              $("#content").animate({
-                opacity: 0
-              }, 500, function () {
-                $(this).css("opacity", 1).html("<p>Thank you; your registration is now complete. After activation, you can login <a href='login.php'>here</a>.</p>");
-              });
-            }
-            $submit.next().css("display", "");
-            Recaptcha.reload(); // automatically reload reCAPTCHA
-          }, 1000);
+          if (msg.indexOf("r") !== -1) {
+            recaptchaMsg.assign("Recaptcha failed! Please try again.", "error").show(function () {
+              recaptchaMsg.el.nextElementSibling.style.bottom = "1em";
+              recaptchaMsg.el.nextElementSibling.style.left = "325px";
+            });
+            submit.removeAttribute("disabled");
+          }
+          if (msg.indexOf("n") !== -1) {
+            userName.assign("Username is not a valid username.", "error").show();
+          }
+          if (msg.indexOf("e") !== -1) {
+            userEmail.assign("Email is not a valid email.", "error").show();
+          }
+          if (msg.indexOf("u") !== -1) {
+            userName.assign("Username already exists in database.", "error").show();
+          }
+          if (msg.indexOf("a") !== -1) {
+            userEmail.assign("Email already exists in database.", "error").show();
+          }
+          if (msg.indexOf("p") !== -1) {
+            userPwd.assign("Passwords did not meet the requirements or did not match.", "error").show();
+            userPwdVal.assign("Passwords did not meet the requirements or did not match.", "error").show();
+          }
+          if (msg.indexOf("t") !== -1) {
+            tos.assign("Please agree to the Terms of Service before continuing", "error").show();
+          }
+          if (msg.indexOf("s") !== -1) {
+            $("#content").animate({
+              opacity: 0
+            }, 500, function () {
+              $(this).css("opacity", 1).html("<p>Thank you; your registration is now complete. After activation, you can login <a href='login.php'>here</a>.</p>");
+            });
+          }
+          $submit.next().css("display", "");
+          Recaptcha.reload(); // automatically reload reCAPTCHA
         }
       });
     });

@@ -23,7 +23,7 @@ if (isset($_POST['doUpdate'])) {
       $result->execute(array($newsha1,$_SESSION['user_id']));
       $msg[] = "Your password has been updated!";
     } else {
-      $err[] = "Passwords must be at least 4 characters long, or your new passwords don't match.";
+      $err[] = "Passwords must be at least 6 characters long, or your new passwords don't match.";
     }
   } else {
     $err[] = "Your old password is incorrect. Please check your spelling and try again.";
