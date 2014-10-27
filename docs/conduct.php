@@ -22,7 +22,7 @@
   </ul>
 
   <h2>What's unacceptable</h2>
-  <p>If one of these adjectives applied to some public action, it's unacceptable.</p>
+  <p>If one of these adjectives applies to some public action, it's unacceptable.</p>
   <ul>
     <li>pornographic/sexual</li>
     <li>bigoted</li>

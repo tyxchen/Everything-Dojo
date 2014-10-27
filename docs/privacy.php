@@ -28,7 +28,7 @@
   </ul>
   <p>In general, we will not use your email unless we need to. It is not publicly visible, nor will we ever share it with anybody.</p>
   <p>If you send us a message through the contact form, we will receive it privately. Unless you mark it as a personal support message, we may make the message public (though always anonymous). If you do mark it as personal support, your message will forever be our secret.</p>
-  <p>When you register, your password is immediately securely hashed and stored in a MySQL database. Nobody knows what your password is except for you.</p>
+  <p>When you register, your password is immediately securely hashed and stored in a MySQL database. Nobody can know what your password is.</p>
 
   <h2>Other important things</h2>
   <p>We keep all your information as safe as possible, but we can't guarantee there won't be a data breach.</p>
