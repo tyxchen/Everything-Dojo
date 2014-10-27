@@ -42,6 +42,7 @@
   padding: 0;
   position: absolute;
   height: auto;
+  margin-top: 0;
 }
 
 .db-nav ul li a {
@@ -201,7 +202,7 @@
 
 /* notification placement for database page */
 #notifications {
-  top: 19vh;
+  top: 17vh;
   right: 5vw;
   width: 30vw;
 }
