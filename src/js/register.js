@@ -17,7 +17,8 @@ document.onready = function () {
   var userName   = new Message("[name='user_name']"),
       userEmail  = new Message("[name='usr_email']"),
       userPwd    = new Message("[name='pwd']"),
-      userPwdVal = new Message("[name='pwd2']");
+      userPwdVal = new Message("[name='pwd2']"),
+      tos        = new Message("[name='tos']");
 
   // Timeouts
   var userTimeout;
@@ -118,6 +119,16 @@ document.onready = function () {
     }
   };
 
+  // TOS
+  tos.el.onchange = function () {
+    if (tos.el.checked) {
+      tos.el.setAttribute("value", "yes");
+      toggleSubmitDisabled();
+    } else {
+      submit.setAttribute("disabled", true);
+    }
+  };
+
   /**
    * Validate on paste
    *
@@ -157,13 +168,13 @@ document.onready = function () {
    * Functions
    */
   function validateFinal () {
-    var list = [userName.el, userEmail.el, userPwd.el, userPwdVal.el, document.querySelector("[name='tos']")];
+    var list = [userName.el, userEmail.el, userPwd.el, userPwdVal.el];
     for (var i = 0; i < list.length; i++) {
-      if (/invalid/.test(list[i].className) || !list[i].value || !list[i].checked) {
+      if (/invalid/.test(list[i].className) || !list[i].value) {
         return false;
       }
     }
-    return true;
+    return tos.el.checked ? true : false; // finally, check TOS
   }
 
   function toggleSubmitDisabled () {
@@ -189,9 +200,6 @@ document.onready = function () {
 
     // ReCAPTCHA error message init
     var recaptchaMsg = new Message("#message");
-
-    // TOS
-    var tos = new Message("[name='tos']");
 
     // Prep form for AJAX submission
     $form.attr("onsubmit", "return false;").removeAttr("action");

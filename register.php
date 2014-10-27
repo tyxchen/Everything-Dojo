@@ -212,7 +212,7 @@ EOT;
       <div id="message"></div>
     </div>
     <div class="field">
-      <input name="tos" type="checkbox" class="required" value="1"><label class="inline">I have read the <a href="/docs/tos.php">Terms of Service</a> and I agree to follow them to the best of my ability. (Please actually read them, they're fun to read.)</label>
+      <input name="tos" type="checkbox" class="required"><label class="inline">I have read the <a href="/docs/tos.php">Terms of Service</a> and I agree to follow them to the best of my ability. (Please actually read them, they're fun to read.)</label>
     </div>
     <input type="hidden" name="ajax" value="false">
     <div class="field">

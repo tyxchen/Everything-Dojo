@@ -42,9 +42,9 @@ ol {
 
 /*--BUTTONS--*/
 /* Based heavily on Quizlet buttons */
-input[type="submit"],
-input[type="button"],
-input[type="reset"],
+[type="submit"],
+[type="button"],
+[type="reset"],
 button {
   display: block;
   background: #85B900;
@@ -61,23 +61,23 @@ button {
   width: auto;
 }
 
-input[type="submit"]:hover,
-input[type="button"]:hover,
-input[type="reset"]:hover,
+[type="submit"]:hover,
+[type="button"]:hover,
+[type="reset"]:hover,
 button:hover {
   background: #739F02;
   box-shadow: 0 0 0.36rem rgba(0, 0, 0, 0.3) inset;
 }
 
-input[type="submit"].inline,
-input[type="button"].inline,
-input[type="reset"].inline,
+[type="submit"].inline,
+[type="button"].inline,
+[type="reset"].inline,
 button.inline {
   display: inline; /* because of precedence rules + jquery (preventing use of !important) */
 }
 
-input.danger       { background-color: #800; }
-input.danger:hover { background-color: #600; }
+.danger       { background-color: #800; }
+.danger:hover { background-color: #600; }
 
 .linkbutton {
   background: transparent;
@@ -91,14 +91,14 @@ input.danger:hover { background-color: #600; }
 
 /*--RADIOS/CHECKBOXES--*/
 
-input[type="radio"],
-input[type="checkbox"] {
+[type="radio"],
+[type="checkbox"] {
   margin: 0.3em;
 }
 
 /*--INPUTS AND TEXTAREAS--*/
-input[type="text"],
-input[type="password"],
+[type="text"],
+[type="password"],
 textarea {
   background: #fff;
   border: 1px solid #222;
