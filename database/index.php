@@ -36,7 +36,7 @@
     switch ($mode) {
       case 'index':
         include('../include/themedb/index_body.php');
-        if ($_SESSION['user_level'] == 5) {
+        if ($_SESSION['user_level'] >= 3) {
           echo '<div class="mcp-link-wrapper"><a href="' .  URL_DATABASE . '?mode=mcp" class="mcp-link">ThemeDB Moderator CP</a></div>';
         }
         break;
@@ -59,7 +59,7 @@
         break;
 
       case 'mcp':
-        if ($_SESSION['user_level'] == 5) {
+        if ($_SESSION['user_level'] >= 5) {
           echo '<a href="' . URL_DATABASE . '">Back to Database Index</a>';
           include('../include/themedb/mcp_body.php');
         } else {
