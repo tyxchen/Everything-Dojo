@@ -33,6 +33,17 @@
     $name = $name['user_name'];
     return $name;
   }
+  
+  function get_user_info($user_id) { /*Would like to see this and get_user() combined in the near future*/
+    global $dbc;
+
+    $sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");
+    $sth->execute(array(
+      ':id' => intval($user_id)
+    ));
+    $user = $sth->fetch(PDO::FETCH_ASSOC);
+    return $user;
+  }
 
   function get_all_user($user_id) {
     global $dbc;
@@ -168,6 +179,7 @@
 
   // Password and salt generation
   function PwdHash($pwd) {
+//    include("include/password.php");
     return password_hash($pwd, PASSWORD_BCRYPT);
   }
 
@@ -315,6 +327,7 @@
       </div>';
   }
 
+
   function notificationData() {
     global $notification;
     global $notification_data;
@@ -326,10 +339,12 @@
   }
 
 
-  function gravatar($email) {
+  function gravatar($user_id) {
+    $row = get_user_info($user_id);
+    $email = $row['user_email'];
     $hash = md5(strtolower(trim($email)));
-    $user['photo'] = "http://www.gravatar.com/avatar/".$hash."?d=identicon";
-    return $user;
+    $avatar = "http://www.gravatar.com/avatar/".$hash."?d=identicon";
+    return $avatar;
   }
 
 ?>
