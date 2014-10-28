@@ -334,7 +334,7 @@
 .topic-reply {
   position: relative;
   border: 1px solid black;
-  padding-bottom: 4%; /*for avatars*/
+  padding-bottom: 6vw; /*for avatars*/
   border-radius: 0;
   margin-left: 2.3em;
   border-left: none;
@@ -429,8 +429,13 @@
   opacity: 0.8;
 }
 
-.avatar {
+.reply-avatar {
   float: left;
+}
+
+.topic-avatar {
+  float: left;
+  margin-right: 1vw;
 }
 
 /*--POSTING--*/

@@ -37,6 +37,7 @@
   </div>
   <div id="topic-main">
     <?php if (isset($_GET["unicorns"])) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?> ><?php } ?>
+    <?php echo '<img class="topic-avatar" src="'.gravatar($topic['user_id']).'"/>'; //Avatar ?>
     <div class="topic-text" id="topic-main-text">
       <?php $user = get_user(intval($topic['user_id'])); ?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
@@ -113,7 +114,7 @@
             ?>
           </div>
           <?php
-            echo '<img class="avatar" src="'.gravatar($post['user_id']).'"/>'; //Avatar
+            echo '<img class="reply-avatar" src="'.gravatar($post['user_id']).'"/>'; //Avatar
             
             if ($post['type'] == 0) {
               echo "<div id='topic-reply-message-".$post['post_id']."'>".$post['text']."</div>";
