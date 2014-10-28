@@ -181,13 +181,13 @@
 
                 ?>
               </select>
+              <span class="title">Enable Development Themes</span>
+              <div>
+                <!--form element extended-->
+                <input type="checkbox" name="dev" value="true" onChange="this.form.submit();" class="inline" <?php if (isset($_GET['dev'])) { echo "checked"; } ?>><label class="inline small">Try all styles, including possibly incomplete and buggy skins under development</label>
+              </div>
             <!--form element extended-->
             </form>
-          </div>
-          <span class="title">Enable Development Themes</span>
-          <div>
-            <!--form element extended-->
-            <input type="checkbox" name="dev" value="true" onChange="this.form.submit();" class="inline" <?php if (isset($_GET['dev'])) { echo "checked"; } ?>><label class="inline small">Try all styles, including possibly incomplete and buggy skins under development</label>
           </div>
         </section>
       </section>
