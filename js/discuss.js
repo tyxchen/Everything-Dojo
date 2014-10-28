@@ -1,1 +1,112 @@
-function mark_all_read(e,t){$.ajax({url:"/include/ajax_handler.php",data:{action:"discuss_mark_read",forum_id:e,user_id:t},type:"post",success:function(){$(".topic-icon.unread-icon").removeClass("unread-icon").addClass("read-icon"),$(".msg").html("All posts have been marked as read."),$(".msg").fadeIn(300),setTimeout(function(){$(".msg").fadeOut(2e3)},5e3)}})}$(function(){$(".discuss-announcement").each(function(){$(this).attr("title",$(this).text())}),$("#fora > a").mousedown(function(e){e.preventDefault()}),$("[name='title']").keyup(function(e){var t=new Message($(this)),a="which"in e?e.which:e.keyCode;(a>47&&60>a||a>64&&91>a||a>95&&112>a||a>185&&193>a||a>218&&223>a||32==a||8==a||13==a||46==a)&&(null===$(this).val().match(/\S/g)||$(this).val().match(/\S/g).length<5?(t.assign("The title must have at least 5 characters (excluding whitespace)","error").show(),$("#post").prop("disabled","disabled")):$(this).val().length>64?(t.assign("The title cannot have more than 64 characters","error").show(),$("#post").prop("disabled","disabled")):(t.purge(),null!==$("[name='desc-source']").val().match(/\S/g)&&$("[name='desc-source']").val().match(/\S/g).length>=10&&$("#post").prop("disabled","")))}),$("[name='desc-source']").keyup(function(e){var t=new Message($(this)),a="which"in e?e.which:e.keyCode;(a>47&&60>a||a>64&&91>a||a>95&&112>a||a>185&&193>a||a>218&&223>a||32==a||8==a||13==a||46==a)&&(null===$(this).val().match(/\S/g)||$(this).val().match(/\S/g).length<10?(t.assign("The message must have at least 10 characters (excluding whitespace)","error").show(function(){$("[name='desc-source']").next().css({top:0,bottom:"auto"})}),$("#post").prop("disabled","disabled"),$(this).parent().parent().parent().children(".post-edit").prop("disabled","disabled")):$(this).val().length>4e4?(t.assign("The message cannot have more than 40000 characters","error").show(function(){$("[name='desc-source']").next().css({top:0,bottom:"auto"})}),$("#post").prop("disabled","disabled"),$(this).parent().parent().parent().children(".post-edit").prop("disabled","disabled")):(t.purge(),$(this).parent().next().children("[name='preview']").html(marked($(this).val(),markedOptions)),Prism.highlightAll(document.querySelector("[name='preview'] pre")),null!==$("[name='title']").val().match(/\S/g)&&$("[name='title']").val().match(/\S/g).length>=5&&($("#post").prop("disabled",""),$(this).parent().parent().parent().children(".post-edit").prop("disabled",""))))}),$("[name='desc-source']").keydown(function(e){10!=e.keyCode&&13!=e.keyCode||!e.ctrlKey&&224!=e.keyCode&&17!=e.keyCode&&91!=e.keyCode||$("#post").is("[disabled]")||$(this).parent().parent().next().next().trigger("click")}),$("[name='title'], [name='desc-source']").keydown(function(e){27==e.keyCode&&$(this).parents("form").children(".cancel").trigger("click")})});var markedOptions={sanitize:!0,breaks:!0};
+/* jshint browser:true, jquery:true, -W098 */
+/* global Message:false, marked:false, Prism:false */
+
+$(function () {
+  // add title attribute to announcements
+  // uses .each as otherwise `this` would refer to window
+  $(".discuss-announcement").each(function () {
+    $(this).attr("title", $(this).text());
+  });
+
+  // make forum links undraggable
+  $("#fora > a").mousedown(function (e) {
+    e.preventDefault();
+  });
+
+  // JS validation
+  $("[name='title']").keyup(function (e) {
+    var title = new Message($(this)),
+        keycode = ('which' in e) ? e.which : e.keyCode; // key validation
+
+    if ((keycode > 47 && keycode < 60) || (keycode > 64 && keycode < 91) || (keycode > 95 && keycode < 112) || (keycode > 185 && keycode < 193) || (keycode > 218 && keycode < 223) || keycode == 32 || keycode == 8 || keycode == 13 || keycode == 46) {
+      if ($(this).val().match(/\S/g) === null || $(this).val().match(/\S/g).length < 5) {
+        title.assign("The title must have at least 5 characters (excluding whitespace)", "error").show();
+        $("#post").prop("disabled", "disabled");
+      } else if ($(this).val().length > 64) {
+        title.assign("The title cannot have more than 64 characters", "error").show();
+        $("#post").prop("disabled", "disabled");
+      } else {
+        title.purge();
+        if ($("[name='desc-source']").val().match(/\S/g) !== null && $("[name='desc-source']").val().match(/\S/g).length >= 10) {
+          $("#post").prop("disabled", "");
+        }
+      }
+    }
+  });
+
+  $("[name='desc-source']").keyup(function (e) {
+    var message = new Message($(this)),
+        keycode = ('which' in e) ? e.which : e.keyCode; // key validation
+
+    if ((keycode > 47 && keycode < 60) || (keycode > 64 && keycode < 91) || (keycode > 95 && keycode < 112) || (keycode > 185 && keycode < 193) || (keycode > 218 && keycode < 223) || keycode == 32 || keycode == 8 || keycode == 13 || keycode == 46) {
+      if ($(this).val().match(/\S/g) === null || $(this).val().match(/\S/g).length < 10) {
+        message.assign("The message must have at least 10 characters (excluding whitespace)", "error").show(function () {
+          $("[name='desc-source']").next().css({
+            top: 0,
+            bottom: 'auto'
+          });
+        });
+        $("#post").prop("disabled", "disabled");
+        $(this).parent().parent().parent().children(".post-edit").prop("disabled", "disabled");
+      } else if ($(this).val().length > 40000) {
+        message.assign("The message cannot have more than 40000 characters", "error").show(function () {
+          $("[name='desc-source']").next().css({
+            top: 0,
+            bottom: 'auto'
+          });
+        });
+        $("#post").prop("disabled", "disabled");
+        $(this).parent().parent().parent().children(".post-edit").prop("disabled", "disabled");
+      } else {
+        message.purge();
+        $(this).parent().next().children("[name='preview']").html(marked($(this).val(), markedOptions));
+        Prism.highlightAll(document.querySelector("[name='preview'] pre"));
+        if ($("[name='title']").val().match(/\S/g) !== null && $("[name='title']").val().match(/\S/g).length >= 5) {
+          $("#post").prop("disabled", "");
+          $(this).parent().parent().parent().children(".post-edit").prop("disabled", "");
+        }
+      }
+    }
+  });
+
+  // make form submit on ctrl+enter/cmd+enter
+  $("[name='desc-source']").keydown(function (e) {
+    if ((e.keyCode == 10 || e.keyCode == 13) && (e.ctrlKey || e.keyCode == 224 || e.keyCode == 17 || e.keyCode == 91) && !$("#post").is("[disabled]")) {
+      $(this).parent().parent().next().next().trigger("click");
+    }
+  });
+
+  // close form on escape
+  $("[name='title'], [name='desc-source']").keydown(function (e) {
+    if (e.keyCode == 27) {
+      $(this).parents("form").children(".cancel").trigger("click");
+    }
+  });
+});
+
+function mark_all_read(forum_id, user_id) {
+  $.ajax({
+    url: '/include/ajax_handler.php',
+    data: {
+      action: 'discuss_mark_read',
+      forum_id: forum_id,
+      user_id: user_id
+    },
+    type: 'post',
+    success: function() {
+      $(".topic-icon.unread-icon").removeClass("unread-icon").addClass("read-icon");
+      $(".msg").html("All posts have been marked as read.");
+      $(".msg").fadeIn(300);
+      setTimeout(function () {
+        $(".msg").fadeOut(2000);
+      }, 5000);
+    }
+  });
+}
+
+// marked options
+
+var markedOptions = {
+  sanitize: true,
+  breaks: true
+};

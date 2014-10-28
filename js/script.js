@@ -1,1 +1,506 @@
-function Message(e){if("string"==typeof e)this.el=document.querySelector(e);else if(e instanceof jQuery)this.el=e.context;else{if(!(e instanceof Element))throw new Error("selector does not refer to an element.");this.el=e}}function sliderHeader(){var e=$("header").attr("class"),t=$("header").height();$("header").css("position","absolute").append('<div id="header-button" class="slideButton down '+e+'"></div>');var i=!0;$("header").addClass("opened"),$("#header-button").click(function(){i?($("header").animate({top:-t},400,function(){$(this).removeClass("opened").addClass("closed")}),$(this).animate({top:t},400),i=!1):($("header").removeClass("closed").addClass("opened").animate({top:0},400),$(this).animate({top:t},400),i=!0)})}function sliderSidebar(){var e=$(window).height()/100,t=$("#sidebar").width(),i=2*e,s=null,n=!0;$("#sidebar").append('<div id="side-button" class="slideButton right">&laquo;</div>');var o=!0;$("#sidebar").addClass("opened"),$("#side-button").click(function(){t=$("#sidebar").width(),o?($("#sidebar").animate({left:-t},400,function(){$(this).removeClass("opened").addClass("closed")}),$(this).html("&raquo;").animate({left:t},400),o=!1):($("#sidebar").removeClass("closed").addClass("opened").animate({left:0},400),$(this).html("&laquo;").animate({left:t},400),o=!0)}),$("#sidebar").css("font-size",2*e),$("#sidebar-inner").width(t),$("#side-button").css("left",t),$("#blog-body").load("/blog/blog-index.html"),$(".option").each(function(){var e=$(this).attr("id");$("#"+e+" .option-title").attr("onclick","$(this).optionToggle()").addClass("collapsed")}),$(".expanded").removeClass("collapsed"),$(".expanded").next().slideDown(),$("[name='view']").change(function(){$("#blog-body").load("/blog/blog-"+$("[name='view'] :checked").val()+".html",function(){$(".text").trigger("keyup")})}),$("#side-resizer").mousedown(function(){$(document).mousemove(function(i){var s=i.pageX;t=s>34*e?s:t,$("#sidebar-inner").css({width:t-2*e}),$("#side-button").css({left:t-2*e,transition:"0s linear"})})}),$(document).bind("mouseup click",function(){$(document).unbind("mousemove"),$("#side-button").css({transition:""})}),$("#side-button").click(function(){"0px"==$("#sidebar").css("left")&&$("#sidebar").hasClass("opened")?($("#side-button").addClass("triggered"),n=!0):$("#side-button").removeClass("targeted")}),$(window).bind("mousemove scroll",function(e){clearTimeout(s),n===!0&&$(".closed #side-button").addClass("triggered").animate({left:t},100),e.pageX<2*t/3?$(".closed #side-button").addClass("targeted"):$(".closed #side-button").removeClass("targeted"),n=!1,s=setTimeout(function(){$("#side-button").removeClass("triggered"),$(".closed #side-button:not(:hover):not(.targeted)").animate({left:t-i},1500),$(".closed #side-button.targeted:not(:hover)").animate({left:t-2*i},3e3,function(){$("#side-button").removeClass("targeted")}),n=!0},4e3)})}function tryit(){sliderSidebar(),$(window).mousemove()}function show_notifications(){$("#notifications").toggle(350)}function mark_read(e){$.ajax({url:"/include/ajax_handler.php",data:{action:"mark_read",notification_id:e},type:"post",success:function(){}})}function mark_all_read(e){$.ajax({url:"/include/ajax_handler.php",data:{action:"mark_all_read",user_id:e},type:"post",success:function(){location.reload()}})}Array.prototype.last=function(e){return this[this.length-(e>=1&&e<this.length?e:1)]},Message.prototype.assign=function(e,t){return this.msg=e,t||this.type?this.type=t||this.type:console.error("Type is undefined"),this},Message.prototype.show=function(e){var t={error:" invalid",correct:" valid",notification:""},i=this.el;if(this.elType=t[this.type]||this.type,i.className=i.className.match(/(invalid|valid)/)?i.className.replace(/ (invalid|valid)/,this.elType):i.className+this.elType,i.nextElementSibling&&i.nextElementSibling.className.match(/(error|correct|notification)/))i.nextElementSibling.className.match(/(error|correct|notification)/)&&this.replace();else{var s="<div class='note "+this.type+"'>"+this.msg+"</div>";i.insertAdjacentHTML("afterend",s)}return"function"==typeof e&&e(),this},Message.prototype.replace=function(e){var t=this.el.nextElementSibling;return t&&(t.className=t.className.replace(/(error|correct|notification)/,this.type),t.innerHTML=this.msg,this.el.className=this.el.className.replace(/ (invalid|valid)/,this.elType)),"function"==typeof e&&e(),this},Message.prototype.hide=function(e){var t=this.el.nextElementSibling;return t&&t.className.match(/(^|\s)(error|correct|notification)($|\s)/)&&this.el.parentNode.removeChild(t),"function"==typeof e&&e(),this},Message.prototype.purge=function(e){return this.hide(),this.el.className=this.el.className.replace(/(^|\s)(invalid|valid)($|\s)/,"$3"),"function"==typeof e&&e(),this},function(e){e.fn.popUp=function(t){var i=this,s=i.css("top");return this.css("top",t),e(".overlay-wrapper").css({"pointer-events":"all","background-color":"rgba(255, 255, 255, 0.5)"}),e(".overlay-wrapper").click(function(){i.css("top",s),e(".overlay-wrapper").css({"pointer-events":"","background-color":""})}),e("#credits").click(function(e){e.stopPropagation()}),this},e.fn.scrollTo=function(t){return t=t||1e3,e("html, body").animate({scrollTop:this.offset().top},t),this},e.fn.optionToggle=function(){e(this).next().slideToggle();var t=e(this);return t.hasClass("collapsed")?t.removeClass("collapsed").addClass("expanded"):t.removeClass("expanded").addClass("collapsed"),this},e.fn.styleRandomColor=function(){var e=randomColor();return this.prev(".text").val(e).trigger("keyup"),this.next(".color-picker").spectrum("set",e),this}}(jQuery),$(function(){$("#notifications").hide(),$("body").click(function(e){0===$(e.target).closest(".notification-link, #notifications").length&&$("#notifications").hide("fast","swing")})});
+/* global ZeroClipboard:false, Prism:false, randomColor:false */
+
+//This document requires jQuery to be loaded in order to properly run.
+
+
+/*******************
+ * ARRAY FUNCTIONS *
+ *******************/
+
+/**
+ * Returns the `nth` last element of an array. If `nth` is not
+ * specified or `nth > Array.length`, returns the last element instead.
+ *
+ * @param {Integer} [nth] If specified, the nth last element of the array
+ */
+Array.prototype.last = function(nth) {
+  return this[this.length - (1 <= nth && nth < this.length ? nth : 1)];
+};
+
+/**********************************************************************
+ *                                                                    *
+ *                   Adds messages next to elements                   *
+ *        Originially designed for register.php, now site-wide        *
+ *                                                                    *
+ **********************************************************************/
+
+/**
+ * Base class for adding messages.
+ *
+ * TODO: Add support for multiple elements
+ *
+ * @class Message
+ * @constructor
+ */
+function Message (selector) {
+  if (typeof selector === "string") {
+    this.el = document.querySelector(selector);
+  } else if (selector instanceof jQuery) {
+    this.el = selector.context;
+  } else if (selector instanceof Element) {
+    this.el = selector;
+  } else {
+    throw new Error("selector does not refer to an element.");
+  }
+//  if (this.el.length < 2) {
+//    this.el = this.el[0];
+//  console.log(this.el);
+//  } else {
+//    this.multiple = true;
+//  }
+}
+
+/**
+ * Assigns text and type to an element's message. Alias for <el>.msg = msg and <el>.type = type
+ *
+ * @method assign
+ * @param {String} msg The message.
+ * @param {String} [type] The type.
+ * @chainable
+ */
+Message.prototype.assign = function (msg, type) {
+  this.msg = msg;
+  if (type || this.type) {
+    this.type = type || this.type;
+  } else {
+    console.error("Type is undefined");
+  }
+  return this;
+};
+
+/**
+ * Shows an element's message
+ *
+ * @method show
+ * @param {Function} [fn] A function to be fired when the event is complete
+ * @chainable
+ */
+Message.prototype.show = function (fn) {
+  var tmpType = {
+    "error"       : " invalid",
+    "correct"     : " valid",
+    "notification": ""
+  };
+
+  var el = this.el;
+
+  // Get elClass
+  this.elType = tmpType[this.type] || this.type;
+
+  el.className = !el.className.match(/(invalid|valid)/) ? el.className + this.elType : el.className.replace(/ (invalid|valid)/, this.elType);
+
+  // insert message in DOM right after element
+  if (!el.nextElementSibling || !el.nextElementSibling.className.match(/(error|correct|notification)/)) {
+    var insertEl = "<div class='note " + this.type + "'>" + this.msg + "</div>";
+    el.insertAdjacentHTML("afterend", insertEl);
+  } else if (el.nextElementSibling.className.match(/(error|correct|notification)/)) {
+    this.replace();
+  }
+
+  if (typeof fn === "function") {
+    fn();
+  }
+
+  return this;
+};
+
+/**
+ * Replaces an element's message
+ *
+ * @method replace
+ * @param {Function} [fn] A function to be fired when the event is complete
+ * @chainable
+ */
+Message.prototype.replace = function (fn) {
+  var msgWrap = this.el.nextElementSibling;
+  if (msgWrap) {
+    msgWrap.className = msgWrap.className.replace(/(error|correct|notification)/, this.type);
+    msgWrap.innerHTML = this.msg;
+    this.el.className = this.el.className.replace(/ (invalid|valid)/, this.elType);
+  }
+
+  if (typeof fn === "function") {
+    fn();
+  }
+
+  return this;
+};
+
+/**
+ * Hides an element's message, but keeps the corresponding class
+ *
+ * @method hide
+ * @param {Function} [fn] A function to be fired when the event is complete
+ */
+Message.prototype.hide = function (fn) {
+  var msgWrap = this.el.nextElementSibling;
+  if (msgWrap && msgWrap.className.match(/(^|\s)(error|correct|notification)($|\s)/)) {
+    this.el.parentNode.removeChild(msgWrap);
+  }
+
+  if (typeof fn === "function") {
+    fn();
+  }
+
+  return this;
+};
+
+/**
+ * Completely removes all traces of an element's message
+ *
+ * @method purge
+ * @param {Function} [fn] A function to be fired when the event is complete
+ */
+Message.prototype.purge = function (fn) {
+  this.hide();
+
+  this.el.className = this.el.className.replace(/(^|\s)(invalid|valid)($|\s)/, "$3");
+
+  if (typeof fn === "function") {
+    fn();
+  }
+  return this;
+};
+
+
+/******************
+ * jQuery PLUGINS *
+ ******************/
+
+(function ($) {
+  /**
+   * Popup function
+   * Mainly for #credits, but can be used in other places
+   *
+   * @param {String} top How far the popup should be from the top of the window
+   */
+  $.fn.popUp = function(top) {
+    var that = this,
+        itop = that.css("top");
+    this.css("top", top);
+    $(".overlay-wrapper").css({
+      "pointer-events"  : "all",
+      "background-color": "rgba(255, 255, 255, 0.5)"
+    });
+
+    //Exit popup
+    $(".overlay-wrapper").click(function() {
+      that.css("top", itop);
+      $(".overlay-wrapper").css({
+        "pointer-events"  : "",
+        "background-color": ""
+      });
+    });
+    $('#credits').click(function(e){
+        e.stopPropagation(); //clicking on the box doesn't work, but only OUTSIDE of the box closes.
+    });
+
+    return this;
+  };
+
+  /**
+   * Scroll to an element.
+   * Based on https://stackoverflow.com/a/6677069
+   *
+   * @param {Integer} [duration=1000] Duration, in milliseconds, of the animation
+   */
+  $.fn.scrollTo = function (duration) {
+    duration = duration || 1000;
+
+    $('html, body').animate({
+      scrollTop: this.offset().top
+    }, duration);
+
+    // make chainable
+    return this;
+  };
+
+  /**
+   * Toggle options
+   */
+  $.fn.optionToggle = function () {
+    $(this).next().slideToggle();
+    var content = $(this);
+
+    if (content.hasClass("collapsed")) {
+      content.removeClass("collapsed").addClass("expanded");
+    } else {
+      content.removeClass("expanded").addClass("collapsed");
+    }
+
+    return this;
+  };
+
+  /**
+   * Generate random colour
+   * Uses randomColor.js
+   */
+
+  $.fn.styleRandomColor = function () {
+    var colour = randomColor();
+    this.prev(".text").val(colour).trigger("keyup");
+    this.next(".color-picker").spectrum("set", colour);
+
+    return this;
+  };
+
+}(jQuery));
+
+/**
+ * makes the header an absolutely positioned element with a slide
+ * in/out button for pages which can't have elements affecting
+ * viewport size (themizer, try-it)
+ * NOT IN USE
+ */
+
+function sliderHeader () {
+  var classcolor = $("header").attr("class");
+  var headerHeight = $("header").height();
+  $("header").css("position", "absolute")
+             .append('<div id="header-button" class="slideButton down ' + classcolor + '"></div>');
+
+  var openHeader = true;
+  $("header").addClass("opened");
+
+  $("#header-button").click(function () {
+    if (openHeader) {
+      $("header").animate({
+        top: -headerHeight
+      }, 400, function () {
+        $(this).removeClass("opened").addClass("closed");
+      });
+
+      $(this).animate({
+        top: headerHeight
+      }, 400);
+
+      openHeader = false;
+
+    } else {
+      $("header").removeClass("closed").addClass("opened").animate({
+        top: 0
+      }, 400);
+
+      $(this).animate({
+        top: headerHeight
+      }, 400);
+
+      openHeader = true;
+    }
+  });
+}
+
+/**
+ * sliding sidebar in and out with responsive sizing and ultra cool open close button functionality
+ */
+function sliderSidebar () { //referring to the exact and non-general (for lack of a better word) functionality of the sidebar in Themizer and Try-It
+  /*** VARIABLES ***/
+  // get viewport height
+  var vh = $(window).height()/100;
+
+  // find width of sidebar and of sideButton
+  var sideWidth = $("#sidebar").width(), //32 * vh used to be here but it was being overwritten by this later declaration w/ CSS
+      sideButtonWidth =  2*vh;
+
+  // set whether user is active or not for later
+  var idleTimer = null,
+      idleState = true;
+
+  // figure out width of sidebar for positioning when hidden/shown
+
+  /*** FUNCTIONS ***/
+  // add open/hide button
+  $("#sidebar").append('<div id="side-button" class="slideButton right">&laquo;</div>');
+
+  // sidebar is opened at first
+  var openSide = true;
+  $("#sidebar").addClass("opened");
+
+  // main sliding function
+  $("#side-button").click(function () {
+    sideWidth = $("#sidebar").width(); // in case sidebar has been resized
+    if (openSide) {
+      $("#sidebar").animate({
+        left: -sideWidth
+      }, 400, function () {
+        $(this).removeClass("opened").addClass("closed");
+      });
+
+      $(this).html("&raquo;")
+             .animate({
+        left: sideWidth
+      }, 400);
+
+      openSide = false;
+
+    } else {
+      $("#sidebar").removeClass("closed").addClass("opened").animate({
+        left: 0
+      }, 400);
+
+      $(this).html("&laquo;")
+             .animate({
+        left: sideWidth
+      }, 400);
+
+      openSide = true;
+    }
+  });
+
+  // Set sidebar styles
+  $("#sidebar")      .css("font-size", 2*vh);
+  $("#sidebar-inner").width(sideWidth);
+  $("#side-button")  .css("left", sideWidth);
+
+  $("#blog-body").load("/blog/blog-index.html");
+
+  // option slides sliding init
+  $(".option").each(function () {
+    var id = $(this).attr('id');
+    $("#" + id + " .option-title").attr("onclick", "$(this).optionToggle()").addClass("collapsed");
+  });
+
+  // set all options with class `expanded` to be open
+  $(".expanded").removeClass("collapsed");
+  $(".expanded").next().slideDown();
+
+  // view mode radios; these appear in both themizer & try-it
+  $("[name='view']").change(function () {
+    $("#blog-body").load("/blog/blog-" + $("[name='view'] :checked").val() + ".html", function () {
+      $(".text").trigger("keyup");
+    });
+  });
+
+  // resize sidebar
+  // modified from https://stackoverflow.com/a/4139860
+  $("#side-resizer").mousedown(function () {
+    $(document).mousemove(function (event) { // use document to avoid conflict with sideButton
+      var mousePosX = event.pageX;
+      sideWidth = mousePosX > 34*vh ? mousePosX : sideWidth; // set original width as minimum
+      $("#sidebar-inner").css({
+        "width": sideWidth - 2*vh
+      });
+      // move sideButton and remove transitions as they screw the former up
+      $("#side-button").css({
+        "left": sideWidth - 2*vh,
+        "transition": "0s linear"
+      });
+    });
+  });
+  $(document).bind("mouseup click", function () {
+    $(document).unbind("mousemove");
+    // readd transitions
+    $("#side-button").css({
+      "transition": ""
+    });
+  });
+
+  // Show/hide sideButton
+  // modify sideButton on click
+  $("#side-button").click(function () {
+    // fires when sidebar is to be closed
+    if ($("#sidebar").css("left") == "0px" && $("#sidebar").hasClass("opened")) {
+      $("#side-button").addClass("triggered");
+      idleState = true; // since user is active
+    } else {
+      $("#side-button").removeClass("targeted");
+    }
+  });
+
+  // show sideButton on mousemove + scroll
+  // taken and modified from http://css-tricks.com/snippets/jquery/fire-event-when-user-is-idle/
+  $(window).bind('mousemove scroll', function (event) {
+    clearTimeout(idleTimer); // clear timeout if user acts
+
+    // user active
+    if (idleState === true) {
+      // Reactivated event
+      $(".closed #side-button").addClass("triggered").animate({
+        left: sideWidth
+      }, 100);
+    }
+
+    // user mouse in "targeted" zone
+    // We cannot use jQuery animations as they are too CPU-intensive
+    // Instead, we just add .targeted.
+    if (event.pageX < sideWidth * 2/3) {
+      $(".closed #side-button").addClass("targeted");
+    } else {
+      $(".closed #side-button").removeClass("targeted");
+    }
+
+    idleState = false;
+
+    // user inactive
+    idleTimer = setTimeout(function () {
+      // Idle Event
+      // cursor outside target zone
+      $("#side-button").removeClass("triggered");
+      $(".closed #side-button:not(:hover):not(.targeted)").animate({
+        left: sideWidth - sideButtonWidth
+      }, 1500);
+      // cursor inside target zone
+      $(".closed #side-button.targeted:not(:hover)").animate({
+        left: sideWidth - 2*sideButtonWidth
+      }, 3000, function() {
+        $("#side-button").removeClass("targeted");
+      });
+      idleState = true;
+    }, 4000);
+  });
+}
+
+/*******************
+ *    TRY-IT JS    *
+ *******************/
+/**
+ * Try-It init
+ */
+function tryit () {
+  sliderSidebar();
+  $(window).mousemove();
+}
+
+
+/*******************
+ *  NOTIFICATIONS  *
+ *******************/
+$(function () {
+  $("#notifications").hide();
+
+  $('body').click(function (e) {
+    if($(e.target).closest('.notification-link, #notifications').length === 0) {
+      $("#notifications").hide("fast", "swing");
+    }
+  });
+});
+
+function show_notifications() {
+  $("#notifications").toggle(350);
+}
+
+function mark_read(id) {
+  $.ajax({
+    url: '/include/ajax_handler.php',
+    data: {
+      action: 'mark_read',
+      notification_id: id
+    },
+    type: 'post',
+    success: function() {}
+  });
+}
+
+function mark_all_read(user_id) {
+  $.ajax({
+    url: '/include/ajax_handler.php',
+    data: {
+      action: 'mark_all_read',
+      user_id: user_id
+    },
+    type: 'post',
+    success: function() {
+      location.reload();
+    }
+  });
+}
