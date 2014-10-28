@@ -248,12 +248,22 @@
 .topic-icon {
   width: 1em;
   height: 1em;
+  background-color: #1b63c6;
   border-radius: 50%;
   border: 1px black solid;
 }
 
-.read-icon { background-color: #1b63c6; }
-.unread-icon { background-color: #a82325; }
+.unread-topic .topic-icon {
+  background-color: #a82325;
+}
+
+.topic {
+  border-left: 0.2rem solid #509aff;
+}
+
+.unread-topic {
+  border-left-color: #e52d2d;
+}
 
 /*--TOPICS--*/
 #topic-main {
@@ -465,8 +475,4 @@ button {
   left: auto;
   right: -0.5rem;
   z-index: 999;
-}
-
-.discuss-table tbody>tr{
-  border-left: 0.2rem solid #509aff;
 }
