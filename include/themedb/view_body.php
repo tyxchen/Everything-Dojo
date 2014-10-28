@@ -125,7 +125,7 @@
     <img src="<?php echo $style['screenshot']; ?>" style="max-width: 65vw" />
   </section>
   <section>
-    <a href="<?php echo '/tryit.php?select=' . $_GET['id'] . (in_array($style['stage'], array('[ALPHA]','[BETA]','[DEV]')) ? '&dev=dev' : '')?>">View this style in the Try-It!</a>
+    <a href="<?php echo '/tryit/?select=' . $_GET['id'] . (in_array($style['stage'], array('[ALPHA]','[BETA]','[DEV]')) ? '&dev=dev' : '')?>">View this style in the Try-It!</a>
   </section>
   <section>
     <label><b>Code:</b></label>
