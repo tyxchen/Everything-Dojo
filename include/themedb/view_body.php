@@ -82,7 +82,7 @@
       break;
     case 'style':
       $id = $_GET['id'];
-      if ($_SESSION['user_level'] == 5) {
+      if ($_SESSION['user_level'] >= 4) {
         $moderator = 1;
       } else {
         $moderator = 0;
