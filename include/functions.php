@@ -315,22 +315,6 @@
       </div>';
   }
 
-
-  function notificationData() {
-    if ($_SESSION['user_id'] != NULL) {
-      $unread_count = $notification->count_unread($_SESSION['user_id']);
-      $notification_data = $notification->get_notifications($_SESSION['user_id']);
-    }
-  }
-
-
-  function gravatar($email) {
-    $hash = md5(strtolower(trim($email)));
-    $user['photo'] = "http://www.gravatar.com/avatar/".$hash."?d=identicon";
-    return $user;
-  }
-
-
   function notificationData() {
     global $notification;
     global $notification_data;
