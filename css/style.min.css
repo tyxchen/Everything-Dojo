@@ -237,7 +237,7 @@ code { font-family: Monaco, "Courier New", Courier, monospace; }
   -webkit-font-smoothing: antialiased;
 }
 
-body { background: white; }
+body { background: whitesmoke; }
 
 #wrap {
   width: 90%;
