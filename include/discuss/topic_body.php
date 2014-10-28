@@ -218,7 +218,7 @@
             }
           ?>
         </div>
-        <?php echo "<a href='#".$i."' title='Permalink for comment #".(($typearg == 1) ? $i+1 : $i)."'".(($post['type'] == 0) ? "" : " style='text-decoration: line-through;'"). ">#".(($typearg == 1) ? $i+1 : $i)."</a>"; ?>
+        <?php echo "<a href='#".$i."' title='Permalink for comment #".$i."'".(($post['type'] == 0) ? "" : " style='text-decoration: line-through;'"). ">#".$i."</a>"; ?>
       </div>
     <?php
     } ?>
