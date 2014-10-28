@@ -9,7 +9,7 @@ $data = $themedb->get_own_themes($_SESSION['user_id']);
     <div id="popup-inner">
       <div id="popup-form">
         Are you sure you want to <span id="replace"></span> this theme?
-        <form action="include/db-handler.php" method="post">
+        <form action="/include/db-handler.php" method="post">
           <input type="submit" name="submit" value="Confirm" style="font-size: 15px;" />
           <input type="hidden" value="" name="id" id="replace-id" />
           <input type="hidden" value="" name="mode" id="replace-form" />
