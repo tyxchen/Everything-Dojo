@@ -44,7 +44,7 @@
       <?php if (($_SESSION['user_id'] == $topic['user_id']) || ($_SESSION['user_level']) >= 3) { ?>
       <?php if ($_SESSION['user_level'] >= 3 && $typearg != 1) { ?>
       <div class="topic-reply-panel">
-        <div class="topic-top-archive" id="topic-top-archive"><img alt="Archive Topic" src="/images/trash.png" style="width: 0.55em; height: 0.75em;"> Archive Topic</div><div class="topic-top-move" id="topic-top-move">&rArr; Move Topic</div><div class="topic-top-sticky" id="topic-top-sticky" style="border-right: 0 solid #000000;" >&#x2605; <?php if (intval($topic['type']) == 2) { echo "Unsticky Topic"; } else { echo "Sticky Topic"; } ?></div>
+        <div class="topic-top-archive" id="topic-top-archive"><img alt="Archive Topic" src="/images/trash.png" style="width: 0.55em; height: 0.75em;"> Archive Topic</div><div class="topic-top-move" id="topic-top-move">&rArr; Move Topic</div><div class="topic-top-sticky" id="topic-top-sticky" style="border-right: 0 solid #000000;<?php if(intval($topic['type'] == 2)) echo 'background-color:#509aff;color:#fff;'; ?>" >&#x2605; <?php if (intval($topic['type']) == 2) { echo "Unsticky Topic"; } else { echo "Sticky Topic"; } ?></div>
       </div>
       <script>
         $('#topic-top-move').on('click', function(e) {
@@ -89,8 +89,8 @@
     <?php $thankedposts = [];
     // indice starts at 1 since get_posts deletes the first element (the root post)
     for ($i = 1; $i <= sizeof($posts); $i++) {
-      $post = $posts[$i]; ?>
-      <div class="topic-reply" id="<?php echo $i; ?>">
+      $post = $posts[$i];?>
+      <div class="topic-reply" id="<?php echo ".$i."; ?>">
         <?php if (isset($_GET["unicorns"])) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?>><?php } ?>
         <div class="topic-text topic-reply-text" <?php if($post == end($posts)) echo 'id="last"'; ?>>
           <?php $user = get_all_user($post['user_id']);?>
@@ -218,7 +218,7 @@
             }
           ?>
         </div>
-        <?php echo "<a href='#{$i}' title='Permalink for comment #{$i}'".(($post['type'] == 0) ? "" : " style='text-decoration: line-through;'").">#{$i}</a>" ?>
+        <?php echo "<a href='#".$i."' title='Permalink for comment #".$i."'".(($post['type'] == 0) ? "" : " style='text-decoration: line-through;'"). ">#".$i."</a>"; ?>
       </div>
     <?php
     } ?>
