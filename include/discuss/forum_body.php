@@ -89,7 +89,7 @@
   </script>
   <?php }
   if (!empty($stickies)){ ?>
-    <table class="discuss-table" style="background-color: #ecff67;">
+    <table class="discuss-table" style="background-color: #fbff67;">
       <thead style="border-bottom: 1px black solid;">
         <tr>
           <td colspan="2">Sticky</td>
@@ -101,8 +101,8 @@
       </thead>
       <tbody>
   <?php foreach($stickies as $sticky){ ?>
-        <tr style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $sticky['topic_id']; ?>'">
-          <td class="tiny-col"><p class="topic-icon <?php if ($sticky['read'] == 1) { echo 'read-icon'; } else { echo 'unread-icon'; } ?>"></p></td>
+        <tr class="topic <?php echo $sticky['read'] != 1 ? ' unread-topic' : ''; ?>" style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $sticky['topic_id']; ?>'">
+          <td class="tiny-col"><p class="topic-icon"></p></td>
           <td><?php echo htmlspecialchars($sticky['title']); ?></td>
           <td class="center"><?php echo get_user($sticky['user_id']); ?></td>
           <td class="center"><?php echo (($type == 1) ? ($discuss->get_comment_count($sticky['topic_id'], $type) - 1) : ($discuss->get_comment_count($sticky['topic_id'], $type))); ?></td>
