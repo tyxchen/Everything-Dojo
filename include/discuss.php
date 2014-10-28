@@ -483,6 +483,10 @@ class discuss {
       if ($type != 1) {
         unset($result[0]);
       }
+      else{
+        array_unshift($result, null);
+        unset($result[0]);
+      }
       return $result;
 
     }

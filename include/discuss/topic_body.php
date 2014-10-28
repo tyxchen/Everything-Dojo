@@ -88,7 +88,7 @@
   <?php if (!empty($posts)) { ?>
     <?php $thankedposts = [];
     // indice starts at 1 since get_posts deletes the first element (the root post)
-    for ($i = (($typearg == 1) ? 0 : 1); $i <= (($typearg == 1) ? sizeof($posts)-1 : sizeof($posts)); $i++) {
+    for ($i = 1; $i <= sizeof($posts); $i++) {
       $post = $posts[$i];?>
       <div class="topic-reply" id="<?php echo ".$i."; ?>">
         <?php if (isset($_GET["unicorns"])) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?>><?php } ?>
