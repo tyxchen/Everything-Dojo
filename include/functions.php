@@ -168,7 +168,6 @@
 
   // Password and salt generation
   function PwdHash($pwd) {
-//    include("include/password.php");
     return password_hash($pwd, PASSWORD_BCRYPT);
   }
 
@@ -315,16 +314,16 @@
         </div>
       </div>';
   }
-  
-  
+
+
   function notificationData() {
     if ($_SESSION['user_id'] != NULL) {
       $unread_count = $notification->count_unread($_SESSION['user_id']);
       $notification_data = $notification->get_notifications($_SESSION['user_id']);
     }
   }
-  
-  
+
+
   function gravatar($email) {
     $hash = md5(strtolower(trim($email)));
     $user['photo'] = "http://www.gravatar.com/avatar/".$hash."?d=identicon";

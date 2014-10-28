@@ -104,6 +104,8 @@
   <link rel="stylesheet" href="/css/codemirror.min.css">
   <?php } ?>
 
+  <link href="/css/fonts.min.css" rel="stylesheet">
+
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="/js/script.js"></script>
 
@@ -164,7 +166,7 @@
                   <?php
                       foreach (scandir($_SERVER['DOCUMENT_ROOT'].'/blog/css') as $theme) {
                         $disclude = array(".", "..", ".DS_Store", "blog-style.css");
-                        
+
                         if (!in_array($theme, $disclude) && $theme != "") {
                             $name = strstr(str_replace("_", " ", $theme), '.', true); //Convert _ to spaces and remove .css
                             $theme = strstr($theme, '.', true); //Remove .css from [value] as themizer.js adds it back in
