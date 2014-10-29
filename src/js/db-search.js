@@ -35,11 +35,13 @@ function contains(needle, haystack) {
   return haystack.indexOf(needle) > -1;
 }
 
-function containsAny(needle, haystack) {
-  var words = needle.split(" ");
+function containsAny(words, haystack) {
+  if (words.length === 0) { // Because sometimes an empty array doesn't equal [] DX
+    return true; // The empty set of strings is contained in all strings
+  }
 
   for (var i = 0; i < words.length; i ++) {
-    if (contains(words[i], haystack)) {
+    if (contains(words[i], haystack) || words[i] === "") { // All strings contain the empty string
       return true;
     }
   }
@@ -136,87 +138,18 @@ $(document).ready(function () {
       var author = $(this).children().first().next().text().toLowerCase();
 
       // Creator filter
-      var creators = query.creator;
-
-      var creatorMatch = false;
-
-      if (creators !== []) {
-        creators.some(function (c) {
-          if (contains(c, author)) {
-            creatorMatch = true;
-            return false;
-          }
-
-          return creatorMatch; // creatorMatch is true if a match has been found, and Array.prototype.some() stops if the callback returns true
-        });
-      }
-
-      else {
-        creatorMatch = true; // If no creators were specified, then the overall match shouldn't fail
-      }
+      var creatorMatch = containsAny(query.creator, author);
 
       // Release stage filter
-      var versions = query.version;
-
-      var versionMatch = false;
-
-      if (versions !== []) {
-        versions.some(function (v) {
-          if (contains(v, stage)) {
-            versionMatch = true;
-            return false;
-          }
-
-          return versionMatch; // versionMatch is true if a match has been found, and Array.prototype.some() stops if the callback returns true
-        });
-      }
-
-      else {
-        versionMatch = true; // If no versions were specified, then the overall match shouldn't fail
-      }
+      var versionMatch = containsAny(query.version, stage);
 
       // Required word filter
-      var requireds = query.required;
-
-      var requiredMatch = false;
-
-      if (requireds !== []) {
-        requireds.some(function (c) {
-          if (contains(c, mainText)) {
-            requiredMatch = true;
-            return false;
-          }
-
-          return requiredMatch; // requiredMatch is true if a match has been found, and Array.prototype.some() stops if the callback returns true
-        });
-      }
-
-      else {
-        requiredMatch = true; // If no required words were specified, then the overall match shouldn't fail
-      }
+      var requiredMatch = containsAny(query.required, mainText);
 
       // Forbidden word filter
-      var forbiddens = query.forbidden;
+      var forbiddenMatch = containsAny(query.forbidden, mainText);
 
-      var forbiddenMatch = false;
-
-      if (forbiddens !== []) {
-        forbiddens.some(function (c) {
-          if (contains(c, mainText)) {
-            forbiddenMatch = true;
-            return false;
-          }
-
-          return forbiddenMatch; // forbiddenMatch is true if a match has been found, and Array.prototype.some() stops if the callback returns true
-        });
-      }
-
-      else {
-        forbiddenMatch = true; // If no forbidden words were specified, then the overall match shouldn't fail
-      }
-
-
-      if (! (containsAny(query, mainText) && creatorMatch && versionMatch && requiredMatch && forbiddenMatch)) {
+      if (! (containsAny(query.search, mainText) && creatorMatch && versionMatch && requiredMatch && forbiddenMatch)) {
         $(this).fadeOut();
       }
 
@@ -225,7 +158,7 @@ $(document).ready(function () {
       }
 
       $(this).children().first().unhighlight({"element": "mark"}); // Unhighlight any leftover matches from last time around as they mess up the highlighting method
-      $(this).children().first().highlight(query.split(" "), {"element": "mark"}); // Highlight matches
+      $(this).children().first().highlight(query.search, {"element": "mark"}); // Highlight matches
     });
   });
 
