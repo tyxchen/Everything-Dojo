@@ -21,10 +21,10 @@
   define("SITE_ROOT", "http://rebuild.everythingdojo.com/");
 
   /* Version Constants */
-  define("VERSION_DATABASE", "2.0");
-  define("VERSION_DISCUSS", "2.0");
-  define("VERSION_THEMIZER", "2.0");
-  define("VERSION_TRYIT", "2.0");
+  define("VERSION_DATABASE", "2.0.1");
+  define("VERSION_DISCUSS", "2.0.1");
+  define("VERSION_THEMIZER", "2.0.1");
+  define("VERSION_TRYIT", "2.0.1");
 
   /* User Level Specifications */
   define ("ADMIN_LEVEL", 5);
