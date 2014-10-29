@@ -84,7 +84,7 @@ $rs_settings->execute(array($_SESSION['user_id']));
     <label>Old Password</label>
     <input type="password" name="pwd_old">
     <label>New Password</label>
-    <label class="small i">Must be at least 4 characters long.</label>
+    <label class="small i">Must be at least 6 characters long.</label>
     <input type="password" name="pwd_new">
     <label>Retype Password</label>
     <input type="password" name="pwd_again">
