@@ -17,7 +17,7 @@ if (!String.prototype.trim) {
     var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
     String.prototype.trim = function () {
       return this.replace(rtrim, "");
-    }
+    };
   })();
 }
 
@@ -106,15 +106,20 @@ function parseSearch(query) {
             case "-":
               forbiddenTerms.push(token.slice(1)); // Trim the - and add to the list of forbidden words searched for
               break;
+
+            default:
+              searchTerms.push(token);
           }
 
           break;
         }
 
+        break;
+
       default:
         searchTerms.push(token);
     }
-  })
+  });
 
   return {"search": searchTerms, "creator": creatorTerms, "version": versionTerms, "required": requiredTerms, "forbidden": forbiddenTerms};
 }
