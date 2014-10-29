@@ -4,7 +4,10 @@
   session_start();
   page_protect();
 
-  notificationData();
+  if (isset($_SESSION['user_id'])) {
+    $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
+    $notification_data = $notification->get_notifications($_SESSION['user_id']);
+  }
 
   get_header(0);
 ?>

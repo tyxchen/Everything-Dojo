@@ -23,7 +23,7 @@ if ($edit == false && checkAdmin() == 0) {
  >> <a href="<?php echo URL_DATABASE; ?>?mode=view&view=style&id=<?php echo $id; ?>">View Theme</a>
 
 <h2>Manage Theme Settings</h2>
-<form method="post" action="include/db-handler.php">
+<form method="post" action="/include/db-handler.php">
   <div>
     <?php
       if (in_array($style['stage'], $development_stages)) {
@@ -66,7 +66,7 @@ if ($edit == false && checkAdmin() == 0) {
         </table>
        </div>
     </div>
-    Transfer Ownership To:<br /> 
+    Transfer Ownership To:<br />
     <a href="javascript:;" onclick="popup_box()" class="view">Click to View Users</a><br />
     User ID: <input type="text" style="width: 30px" name="user_id" id="user_id" />
     <input type="submit" name="submit" style="font-size: 15px;" />

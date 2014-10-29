@@ -11,7 +11,10 @@
   <script>$(function(){\$('pre code').each(function(){var h=$(this).html();h=h.replace(/&amp;quot;/g,'\"').replace(/&amp;#039;/g,'\'');$(this).html(h)})})</script>";
   get_header();
 
-  notificationData();
+  if (isset($_SESSION['user_id'])) {
+    $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
+    $notification_data = $notification->get_notifications($_SESSION['user_id']);
+  }
 
   if (empty($_GET['view'])) {
     $view = '';
@@ -58,7 +61,7 @@
       <ul>
         <li><a href="/" id="nav-home">EvDo Home</a></li>
       <?php if (isset($_SESSION['user_id'])) { ?>
-        <li><a href="javascript:;" class="notification-link" onClick="show_notifications()">Notifications (<?php echo $unread_count; ?>)</a></li>
+        <li><a href="javascript:;" class="notification-link" onClick="show_notifications()">Notifications (<?php echo $notification_unread_count; ?>)</a></li>
       <?php } ?>
       </ul>
     </nav>

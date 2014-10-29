@@ -14,7 +14,10 @@
   }
   get_header(1);
 
-  notificationData();
+  if (isset($_SESSION['user_id'])) {
+    $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
+    $notification_data = $notification->get_notifications($_SESSION['user_id']);
+  }
 ?>
 <section id="content">
   <?php notifications(); ?>
@@ -23,7 +26,7 @@
             <ul>
               <li><a href="/" id="nav-home">EvDo Home</a></li>
             <?php if(isset($_SESSION['user_id'])) { ?>
-              <li><a href="javascript:;" class="notification-link" onClick="show_notifications()">Notifications (<?php echo $unread_count; ?>)</a></li>
+              <li><a href="javascript:;" class="notification-link" onClick="show_notifications()">Notifications (<?php echo $notification_unread_count; ?>)</a></li>
             <?php } ?>
             </ul>
           </nav>
@@ -36,7 +39,7 @@
     switch ($mode) {
       case 'index':
         include('../include/themedb/index_body.php');
-        if ($_SESSION['user_level'] == 5) {
+        if ($_SESSION['user_level'] >= 4) {
           echo '<div class="mcp-link-wrapper"><a href="' .  URL_DATABASE . '?mode=mcp" class="mcp-link">ThemeDB Moderator CP</a></div>';
         }
         break;
@@ -59,7 +62,7 @@
         break;
 
       case 'mcp':
-        if ($_SESSION['user_level'] == 5) {
+        if ($_SESSION['user_level'] >= 4) {
           echo '<a href="' . URL_DATABASE . '">Back to Database Index</a>';
           include('../include/themedb/mcp_body.php');
         } else {

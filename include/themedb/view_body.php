@@ -82,7 +82,7 @@
       break;
     case 'style':
       $id = $_GET['id'];
-      if ($_SESSION['user_level'] == 5) {
+      if ($_SESSION['user_level'] >= 4) {
         $moderator = 1;
       } else {
         $moderator = 0;
@@ -108,7 +108,7 @@
     <div id="popup-inner">
       <div id="popup-form">
         <p>Are you sure you want to <span id="replace"></span> this theme?</p>
-        <form action="include/db-handler.php" method="post">
+        <form action="/include/db-handler.php" method="post">
           <input type="submit" name="submit" value="Confirm" style="font-size: 15px;" />
           <input type="hidden" value="" name="id" id="replace-id" />
           <input type="hidden" value="" name="mode" id="replace-form" />
@@ -125,7 +125,7 @@
     <img src="<?php echo $style['screenshot']; ?>" style="max-width: 65vw" />
   </section>
   <section>
-    <a href="<?php echo '/tryit.php?select=' . $_GET['id'] . (in_array($style['stage'], array('[ALPHA]','[BETA]','[DEV]')) ? '&dev=dev' : '')?>">View this style in the Try-It!</a>
+    <a href="<?php echo '/tryit/?select=' . $_GET['id'] . (in_array($style['stage'], array('[ALPHA]','[BETA]','[DEV]')) ? '&dev=dev' : '')?>">View this style in the Try-It!</a>
   </section>
   <section>
     <label><b>Code:</b></label>

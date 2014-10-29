@@ -1,6 +1,6 @@
 <h2>Submit a Theme</h2>
 
-<form method="post" action="include/db-handler.php">
+<form method="post" action="/include/db-handler.php">
   <div class="col" id="col1">
     <label>Theme name:</label>
     <input type="text" name="name" /><br />

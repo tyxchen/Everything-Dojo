@@ -147,7 +147,7 @@ list($active) = $rs_active;
     <tr>
       <td><?php echo $rrows['id']; ?></td>
       <td><?php echo $rrows['user_name']; ?></td>
-      <td><?php echo $rrows['user_email']; ?></td>
+      <td><?php echo preg_replace("/[^@\.]/", "*", $rrows['user_email']); ?></td>
       <td><?php echo $date; ?></td>
       <td><?php if(!$rrows['approved']) { echo "Pending"; } else { echo "Active"; } ?>
       </td>

@@ -168,7 +168,6 @@
 
   // Password and salt generation
   function PwdHash($pwd) {
-//    include("include/password.php");
     return password_hash($pwd, PASSWORD_BCRYPT);
   }
 
@@ -272,6 +271,9 @@
 
   /*Notifications function (removes extra unnecessary code from PHP pages)*/
   function notifications() {
+    global $notification;
+    global $notification_data;
+
     echo
         '<div id="notifications">
         <div class="notification-arrow-up"></div>
@@ -310,12 +312,11 @@
           }
           echo '
           <div id="notification-footer">
-            <a href="http://everythingdojo.com/notifications.php">See All</a>
+            <a href="http://www.everythingdojo.com/notifications.php">See All</a>
           </div>
         </div>
       </div>';
   }
-
 
   function notificationData() {
     global $notification;

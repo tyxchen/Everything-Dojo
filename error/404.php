@@ -9,11 +9,11 @@
   <p class="error-explain">Sorry, we seem to have misplaced the page or document you requested. Either that, or we killed it (with fire!), or it didn't exist in the first place. Anyhow, you can try a couple of things:</p>
   <ul class="error-action">
     <li><a class="back-link" href="javascript:history.back()">Go back</a> from whence you came!</li>
-    <li>Go to the <a class="index-link" href="index.php">index</a>.</li>
-    <li>Take a look at all the fancy-schmancy styles available to you on the <a class="db-link" href="themedb.php">Theme Database</a> page.</li>
-    <li>Build your own theme with the <a class="themizer-link" href="themizer.php">Themizer</a>.</li>
-    <li>If you want to test out a theme before using it on your blog, <a class="tryit-link" href="tryit.php">Try-it</a> is the place for you.</li>
-    <li>Talk about stuff (like themes, HTML, and rants on 404 pages) on the <a class="discussion-link" href="discussion.php">fora</a> of this site.</li>
+    <li>Go to the <a class="index-link" href="/">index</a>.</li>
+    <li>Take a look at all the fancy-schmancy styles available to you on the <a class="db-link" href="/database/">Theme Database</a> page.</li>
+    <li>Build your own theme with the <a class="themizer-link" href="/themizer/">Themizer</a>.</li>
+    <li>If you want to test out a theme before using it on your blog, <a class="tryit-link" href="/tryit/">Try-it</a> is the place for you.</li>
+    <li>Talk about stuff (like themes, HTML, and rants on 404 pages) on the <a class="discussion-link" href="/discuss/">fora</a> of this site.</li>
     <li>Report this page to us at <a class="email" href="mailto:everythingdojo@gmail.com">everythingdojo@gmail.com</a></li>
   </ul>
 </section>
