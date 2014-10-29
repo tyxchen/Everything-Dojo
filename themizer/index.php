@@ -302,15 +302,15 @@
                 <h3>Comments</h3>
                 <span class="title">Background Color <span class="small">(Comments)</span></span>
                 <p>
-                  <input type="text" class="spectrum text" id="text-class_comment-backgroundColor" value="#EDEDEA" spellcheck="false">
+                  <input type="text" class="spectrum text" id="text-divclass_comment-backgroundColor" value="#EDEDEA" spellcheck="false">
                   <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
-                  <input type="color" class="spectrum color-picker" id="spectrum-class_comment-backgroundColor" value="#EDEDEA">
+                  <input type="color" class="spectrum color-picker" id="spectrum-divclass_comment-backgroundColor" value="#EDEDEA">
                 </p>
                 <span class="title">Background Color <span class="small">(Commentwrap)</span></span>
                 <p>
-                  <input type="text" class="spectrum text" id="text-class_commentwrap-backgroundColor" value="#EDEDEA" spellcheck="false">
+                  <input type="text" class="spectrum text" id="text-divclass_commentwrap-backgroundColor" value="#EDEDEA" spellcheck="false">
                   <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
-                  <input type="color" class="spectrum color-picker" id="spectrum-class_commentwrap-backgroundColor" value="#EDEDEA">
+                  <input type="color" class="spectrum color-picker" id="spectrum-divclass_commentwrap-backgroundColor" value="#EDEDEA">
                 </p>
               </section>
             </section>
@@ -325,15 +325,15 @@
               <section data-name="backgroundColor">
                 <span class="title">Background Color <span class="small">(Odd-numbered)</span></span>
                 <p>
-                  <input type="text" class="spectrum text" id="text-class_row1-backgroundColor" value="#EDEDEA" spellcheck="false">
+                  <input type="text" class="spectrum text" id="text-liclass_row1-backgroundColor" value="#EDEDEA" spellcheck="false">
                   <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
-                  <input type="color" class="spectrum color-picker" id="spectrum-class_row1-backgroundColor" value="#EDEDEA">
+                  <input type="color" class="spectrum color-picker" id="spectrum-liclass_row1-backgroundColor" value="#EDEDEA">
                 </p>
                 <span class="title">Background Color <span class="small">(Even-numbered)</span></span>
                 <p>
-                  <input type="text" class="spectrum text" id="text-class_row2-backgroundColor" value="#EDEDEA" spellcheck="false">
+                  <input type="text" class="spectrum text" id="text-liclass_row2-backgroundColor" value="#EDEDEA" spellcheck="false">
                   <span class="random-color" onclick="$(this).styleRandomColor();" title="Style with random color"></span>
-                  <input type="color" class="spectrum color-picker" id="spectrum-class_row2-backgroundColor" value="#EDEDEA">
+                  <input type="color" class="spectrum color-picker" id="spectrum-liclass_row2-backgroundColor" value="#EDEDEA">
                 </p>
               </section>
             </section>

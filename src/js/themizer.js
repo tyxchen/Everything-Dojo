@@ -23,8 +23,10 @@ var styles = {
   "class_comment-backgroundColor"     : "#EDEDEA",
   "class_commentwrap-backgroundColor" : "#EDEDEA",
   "id_headerspaceh1-color"            : "#000000",
-  "class_row1-backgroundColor"        : "#EDEDEA",
-  "class_row2-backgroundColor"        : "#EDEDEA"
+  "liclass_row1-backgroundColor"      : "#EDEDEA",
+  "liclass_row2-backgroundColor"      : "#EDEDEA",
+  "divclass_row1-backgroundColor"     : "#EDEDEA",
+  "divclass_row2-backgroundColor"     : "#EDEDEA",
 };
 
 /*
