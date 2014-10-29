@@ -1,3 +1,36 @@
+/* Polyfills / enhancements */
+if (!String.prototype.startsWith) {
+  Object.defineProperty(String.prototype, 'startsWith', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function (searchString, position) {
+      position = position || 0;
+      return this.lastIndexOf(searchString, position) === position;
+    }
+  });
+}
+
+if (!String.prototype.trim) {
+  (function(){
+    // Make sure we trim BOM and NBSP
+    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+    String.prototype.trim = function () {
+      return this.replace(rtrim, "");
+    }
+  })();
+}
+
+/* Taken from http://www.sitepoint.com/trimming-strings-in-javascript/ */
+String.prototype.trimLeft = function(charlist) {
+  if (charlist === undefined)
+    charlist = "\\s";
+
+  return this.replace(new RegExp("^[" + charlist + "]+"), "");
+};
+
+/* End polyfills / enhancements */
+
 function contains(needle, haystack) {
   return haystack.indexOf(needle) > -1;
 }
@@ -14,6 +47,78 @@ function containsAny(needle, haystack) {
   return false;
 }
 
+function parseSearch(query) {
+  query = query.toLowerCase().trim(); // Searches are case-insensitive and ignore leading and trailing whitespace
+
+  var tokens = query.split(" ");
+
+  var searchTerms = [],
+      creatorTerms = [],
+      versionTerms = [],
+      requiredTerms = [],
+      forbiddenTerms = [];
+
+  tokens.forEach(function (token) {
+    switch (token.charAt(0)) {
+      case "@":
+        creatorTerms.push(token.slice(1)); // Trim the @ and add to the list of creators searched for
+        break;
+
+      case "#":
+        versionTerms.push(token.slice(1)); // Trim the # and add to the list of versions searched for
+        break;
+
+      case "+":
+        requiredTerms.push(token.slice(1)); // Trim the + and add to the list of required words searched for
+        break;
+
+      case "-":
+        forbiddenTerms.push(token.slice(1)); // Trim the - and add to the list of forbidden words searched for
+        break;
+
+      case "\\":
+        var escaped = (function countBackslashes(input) {
+          if (input.charAt(0) === "\\") {
+            return 1 + countBackslashes(input.slice(1));
+          }
+
+          else {
+            return 0;
+          }
+        })(token) % 2 !== 0; // Recursive anonymous function hack to check if the number of backslashes is even or odd
+
+        token.trimLeft("\\"); // Remove the backslashes from the start of the string, we don't care about them any more
+
+        if (escaped) {
+          switch (token.charAt(0)) { // A wild recursive switch appeared!
+            case "@":
+              creatorTerms.push(token.slice(1)); // Trim the @ and add to the list of creators searched for
+              break;
+
+            case "#":
+              versionTerms.push(token.slice(1)); // Trim the # and add to the list of versions searched for
+              break;
+
+            case "+":
+              requiredTerms.push(token.slice(1)); // Trim the + and add to the list of required words searched for
+              break;
+
+            case "-":
+              forbiddenTerms.push(token.slice(1)); // Trim the - and add to the list of forbidden words searched for
+              break;
+          }
+
+          break;
+        }
+
+      default:
+        searchTerms.push(token);
+    }
+  })
+
+  return {"search": searchTerms, "creator": creatorTerms, "version": versionTerms, "required": requiredTerms, "forbidden": forbiddenTerms};
+}
+
 $(document).ready(function () {
   var search = $(".search");
 
@@ -23,8 +128,6 @@ $(document).ready(function () {
 
       var query = search.val().toLowerCase().trim(); // Leading and trailing whitespace makes all themes visible, so remove it
 
-      // FIXME filters are super buggy, save them for the next update.
-      /*
       var stage = $(this).children().last().text().toLowerCase();
       var author = $(this).children().first().next().text().toLowerCase();
       var authorRegex = /(^|[^\\])@[a-zA-Z0-9_]+(\b|$)/ig;
@@ -108,10 +211,10 @@ $(document).ready(function () {
 
           return forbiddenMatch; // forbiddenMatch is false if a forbidden word has been found, and Array.prototype.every() stops if the callback returns false
         });
-      }*/
+      }
 
 
-      if (! (containsAny(query, mainText) /*&& authorMatch && releaseMatch && requiredMatch && forbiddenMatch*/)) {
+      if (! (containsAny(query, mainText) && authorMatch && releaseMatch && requiredMatch && forbiddenMatch)) {
         $(this).fadeOut();
       }
 
