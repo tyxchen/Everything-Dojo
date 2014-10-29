@@ -172,7 +172,7 @@ $(document).ready(function () {
       }
 
       else {
-        versionMatch = true; // If no creators were specified, then the overall match shouldn't fail
+        versionMatch = true; // If no versions were specified, then the overall match shouldn't fail
       }
 
       // Required word filter
@@ -192,24 +192,27 @@ $(document).ready(function () {
       }
 
       else {
-        requiredMatch = true; // If no creators were specified, then the overall match shouldn't fail
+        requiredMatch = true; // If no required words were specified, then the overall match shouldn't fail
       }
 
       // Forbidden word filter
-      var forbiddens = query.match(forbiddenRegex);
+      var forbiddens = query.forbidden;
 
-      var forbiddenMatch = true;
+      var forbiddenMatch = false;
 
-      if (forbiddens !== null) {
-        forbiddens.every(function (f) {
-          f = f.slice(2);
-
-          if (contains(f, mainText)) {
-            forbiddenMatch = false;
+      if (forbiddens !== []) {
+        forbiddens.some(function (c) {
+          if (contains(c, mainText)) {
+            forbiddenMatch = true;
+            return false;
           }
 
-          return forbiddenMatch; // forbiddenMatch is false if a forbidden word has been found, and Array.prototype.every() stops if the callback returns false
+          return forbiddenMatch; // forbiddenMatch is true if a match has been found, and Array.prototype.some() stops if the callback returns true
         });
+      }
+
+      else {
+        forbiddenMatch = true; // If no forbidden words were specified, then the overall match shouldn't fail
       }
 
 
