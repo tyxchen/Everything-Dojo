@@ -103,8 +103,15 @@
           </nav>
           <?php } else { ?>
           <nav>
+            <?php 
+              if(isset($_SESSION['user_id'])) {
+                echo '<div id="user">';
+                echo '<img src="'.gravatar($_SESSION['user_id']).'"/>';
+                echo '<span class="user-name">'.$_SESSION['user_name'].'</span>';
+                if (isset($notification_unread_count)) { echo '<span style="color:red">('.$notification_unread_count.')</span>'; }
+                echo '</div>';
+            ?>
             <ul>
-              <?php if(isset($_SESSION['user_id'])) { ?>
               <li><a href="/myaccount.php" id="menu-myaccount">My Account</a></li>
               <li><a href="/mysettings.php" id="menu-mysettings">My Settings</a></li>
               <li><a href="javascript:;" onClick="show_notifications()" class="notification-link">Notifications <?php if (isset($notification_unread_count)) { echo "(".$notification_unread_count.")"; } ?></a></li>
