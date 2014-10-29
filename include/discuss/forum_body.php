@@ -149,7 +149,7 @@
           $comments = $comments - 1;
         }
         ?>
-        <tr class="topic<?php if ($topic['read'] != 1) echo ' unread=topic'; ?>" style="cursor:pointer;?>" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $topic['topic_id']; ?>'">
+        <tr class="topic<?php if ($topic['read'] != 1) echo ' unread-topic'; ?>" style="cursor:pointer;?>" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $topic['topic_id']; ?>'">
           <td class="tiny-col"><p class="topic-icon"></p></td>
           <td><?php echo htmlspecialchars($topic['title']); ?></td>
           <td class="center"><?php echo $username; ?></td>
