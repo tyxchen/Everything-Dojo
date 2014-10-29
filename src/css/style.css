@@ -419,15 +419,15 @@ button[disabled], input[disabled], button[disabled]:hover, input[disabled]:hover
 
 .msg {
   position: absolute;
-  top: 5.5rem;
-  left: 30%;
+  top: 4.5rem;
+  left: 29%;
   width: 40%;
   background: rgba(124, 171, 0, 0.4);
   font-family: 'Lato', sans-serif;
   font-size: 0.9em;
   font-weight: 400;
   text-align: center;
-  padding: 0.6em;
+  padding: 1%;
   border: 1px solid rgba(124, 171, 0, 0.7);
   border-radius: 1em;
 }
