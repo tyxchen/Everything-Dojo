@@ -156,25 +156,23 @@ $(document).ready(function () {
       }
 
       // Release stage filter
-      var releases = query.match(releaseRegex);
+      var versions = query.version;
 
-      var releaseMatch = false;
+      var versionMatch = false;
 
-      if (releases !== null) {
-        releases.some(function (r) {
-          r = r.slice(2);
-
-          if (contains(r, stage)) {
-            releaseMatch = true;
+      if (versions !== []) {
+        versions.some(function (v) {
+          if (contains(v, stage)) {
+            versionMatch = true;
             return false;
           }
 
-          return releaseMatch; // releaseMatch is true if a match has been found, and Array.prototype.some() stops if the callback returns true
+          return versionMatch; // versionMatch is true if a match has been found, and Array.prototype.some() stops if the callback returns true
         });
       }
 
       else {
-        releaseMatch = true;
+        versionMatch = true; // If no creators were specified, then the overall match shouldn't fail
       }
 
       // Required word filter
@@ -212,7 +210,7 @@ $(document).ready(function () {
       }
 
 
-      if (! (containsAny(query, mainText) && authorMatch && releaseMatch && requiredMatch && forbiddenMatch)) {
+      if (! (containsAny(query, mainText) && creatorMatch && versionMatch && requiredMatch && forbiddenMatch)) {
         $(this).fadeOut();
       }
 

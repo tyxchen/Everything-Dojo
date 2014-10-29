@@ -129,59 +129,50 @@ $(document).ready(function () {
 
   search.on("propertychange keyup input paste", function () {
     $(".style").each(function () {
+      var query = parseSearch(search.val());
+
       var mainText = $(this).children().first().text().toLowerCase();
-
-      var query = search.val().toLowerCase().trim(); // Leading and trailing whitespace makes all themes visible, so remove it
-
       var stage = $(this).children().last().text().toLowerCase();
       var author = $(this).children().first().next().text().toLowerCase();
-      var authorRegex = /(^|[^\\])@[a-zA-Z0-9_]+(\b|$)/ig;
-      var releaseRegex = /(^|[^\\])#\[?(release|beta|alpha|dev)\]?(\b|$)/ig;
-      var requiredRegex = /(^|[^\\])\+\S+(?=(\s|$))/ig;
-      var forbiddenRegex = /(^|[^\\])-\S+(?=(\s|$))/ig;
 
-      // Author filter
-      var authors = query.match(authorRegex);
+      // Creator filter
+      var creators = query.creator;
 
-      var authorMatch = false;
+      var creatorMatch = false;
 
-      if (authors !== null) {
-        authors.some(function (a) {
-          a = a.slice(2);
-
-          if (contains(a, author)) {
-            authorMatch = true;
+      if (creators !== []) {
+        creators.some(function (c) {
+          if (contains(c, author)) {
+            creatorMatch = true;
             return false;
           }
 
-          return authorMatch; // authorMatch is true if a match has been found, and Array.prototype.some() stops if the callback returns true
+          return creatorMatch; // creatorMatch is true if a match has been found, and Array.prototype.some() stops if the callback returns true
         });
       }
 
       else {
-        authorMatch = true;
+        creatorMatch = true; // If no creators were specified, then the overall match shouldn't fail
       }
 
       // Release stage filter
-      var releases = query.match(releaseRegex);
+      var versions = query.version;
 
-      var releaseMatch = false;
+      var versionMatch = false;
 
-      if (releases !== null) {
-        releases.some(function (r) {
-          r = r.slice(2);
-
-          if (contains(r, stage)) {
-            releaseMatch = true;
+      if (versions !== []) {
+        versions.some(function (c) {
+          if (contains(c, author)) {
+            versionMatch = true;
             return false;
           }
 
-          return releaseMatch; // releaseMatch is true if a match has been found, and Array.prototype.some() stops if the callback returns true
+          return versionMatch; // versionMatch is true if a match has been found, and Array.prototype.some() stops if the callback returns true
         });
       }
 
       else {
-        releaseMatch = true;
+        versionMatch = true; // If no creators were specified, then the overall match shouldn't fail
       }
 
       // Required word filter
@@ -219,7 +210,7 @@ $(document).ready(function () {
       }
 
 
-      if (! (containsAny(query, mainText) && authorMatch && releaseMatch && requiredMatch && forbiddenMatch)) {
+      if (! (containsAny(query, mainText) && creatorMatch && releaseMatch && requiredMatch && forbiddenMatch)) {
         $(this).fadeOut();
       }
 
