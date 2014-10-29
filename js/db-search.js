@@ -161,8 +161,8 @@ $(document).ready(function () {
       var versionMatch = false;
 
       if (versions !== []) {
-        versions.some(function (c) {
-          if (contains(c, author)) {
+        versions.some(function (v) {
+          if (contains(v, stage)) {
             versionMatch = true;
             return false;
           }
@@ -176,20 +176,23 @@ $(document).ready(function () {
       }
 
       // Required word filter
-      var requireds = query.match(requiredRegex);
+      var requireds = query.required;
 
-      var requiredMatch = true;
+      var requiredMatch = false;
 
-      if (requireds !== null) {
-        requireds.every(function (r) {
-          r = r.slice(2);
-
-          if (! contains(r, mainText)) {
-            requiredMatch = false;
+      if (requireds !== []) {
+        requireds.some(function (c) {
+          if (contains(c, mainText)) {
+            requiredMatch = true;
+            return false;
           }
 
-          return requiredMatch; // requiredMatch is false if a required word has not been found, and Array.prototype.every() stops if the callback returns false
+          return requiredMatch; // requiredMatch is true if a match has been found, and Array.prototype.some() stops if the callback returns true
         });
+      }
+
+      else {
+        requiredMatch = true; // If no creators were specified, then the overall match shouldn't fail
       }
 
       // Forbidden word filter
@@ -210,7 +213,7 @@ $(document).ready(function () {
       }
 
 
-      if (! (containsAny(query, mainText) && creatorMatch && releaseMatch && requiredMatch && forbiddenMatch)) {
+      if (! (containsAny(query, mainText) && creatorMatch && versionMatch && requiredMatch && forbiddenMatch)) {
         $(this).fadeOut();
       }
 
