@@ -1,1 +1,264 @@
-document.onready=function(){"use strict";function e(){for(var e=[s.el,a.el,r.el,i.el],t=0;t<e.length;t++)if(/invalid/.test(e[t].className)||!e[t].value)return!1;return o.el.checked?!0:!1}function t(){e()?d.removeAttribute("disabled"):d.setAttribute("disabled",!0)}var n,s=new Message("[name='user_name']"),a=new Message("[name='usr_email']"),r=new Message("[name='pwd']"),i=new Message("[name='pwd2']"),o=new Message("[name='tos']"),l=new XMLHttpRequest,d=document.getElementById("doRegister");s.el.onkeyup=function(e){var a=s.el.value,r="which"in e?e.which:e.keyCode;(r>47&&60>r||r>64&&91>r||r>95&&112>r||r>185&&193>r||r>218&&223>r||32==r||8==r||13==r||46==r)&&(/^[a-z\d_]{3,20}$/i.test(a)?(clearTimeout(n),s.purge(),s.el.parentNode.lastElementChild.style.display="inline",l.onreadystatechange=function(){4==l.readyState&&(200==l.status?"success"==l.responseText?(s.assign("Username is valid.","correct").show(),t(),s.el.parentNode.lastElementChild.style.display="none"):"error"==l.responseText&&(s.assign("Username already exists! Please choose a new one.","error").show(),d.setAttribute("disabled",!0),s.el.parentNode.lastElementChild.style.display="none"):0!==l.status&&(s.assign("A "+l.status+" error occurred. Please try again.","error").show(),d.setAttribute("disabled",!0),s.el.parentNode.lastElementChild.style.display="none"))},n=setTimeout(function(){try{l.open("GET","register.php?username="+a,!0),l.setRequestHeader("X-Requested-With","XMLHttpRequest"),l.send()}catch(e){window.alert("An AJAX error occured. Please check your internet connection and try again."),window.evdoDebug===!0&&console.log("Error: "+e)}},100)):(clearTimeout(n),l.abort(),s.assign("Invalid username. Usernames must be 3-20 characters long and can only contain alphanumeric characters and underscores.","error").show(),s.el.parentNode.lastElementChild.style.display="none",d.setAttribute("disabled",!0)))},a.el.onkeyup=function(e){var n=a.el.value,s="which"in e?e.which:e.keyCode;(s>47&&60>s||s>64&&91>s||s>95&&112>s||s>185&&193>s||s>218&&223>s||32==s||8==s||13==s||46==s)&&(/^\S+@(localhost|([\w\d-]{2,}\.){1,2}[a-z]{2,6})$/i.test(n)?(a.purge(),t()):(a.assign("Email entered is not a valid email.","error").show(),d.setAttribute("disabled",!0)))},r.el.onkeyup=i.el.onkeyup=function(){var e=r.el.value,n=i.el.value;e.length<6?r.assign("Passwords must be at least 6 characters long","error").show():e!=n?(i.assign("Passwords do not match.","error").show(),d.setAttribute("disabled",!0)):(r.purge(),i.purge(),t())},o.el.onchange=function(){o.el.checked?(o.el.setAttribute("value","yes"),t()):d.setAttribute("disabled",!0)},s.el.onpaste=function(){s.el.onkeyup({which:8,keyCode:8})},a.el.onpaste=function(){a.el.onkeyup({which:8,keyCode:8})},s.el.onblur=function(){s.hide()},a.el.onblur=function(){a.hide()},r.el.onblur=function(){r.hide()},i.el.onblur=function(){i.hide()},function(e){var t=e("[name='regForm']"),n=e("[name='doRegister']"),l=new Message("#message");t.attr("onsubmit","return false;").removeAttr("action"),e("[name='ajax']").val(!0),n.attr("type","button"),n.click(function(){e.ajax({type:"POST",url:"register.php",data:e("[name='regForm']").serialize(),beforeSend:function(){d.setAttribute("disabled",!0),l.purge(),n.next().css({display:"inline",left:"4rem",top:"0"})},success:function(t){-1!==t.indexOf("r")&&(l.assign("Recaptcha failed! Please try again.","error").show(function(){l.el.nextElementSibling.style.bottom="1em",l.el.nextElementSibling.style.left="325px"}),d.removeAttribute("disabled")),-1!==t.indexOf("n")&&s.assign("Username is not a valid username.","error").show(),-1!==t.indexOf("e")&&a.assign("Email is not a valid email.","error").show(),-1!==t.indexOf("u")&&s.assign("Username already exists in database.","error").show(),-1!==t.indexOf("a")&&a.assign("Email already exists in database.","error").show(),-1!==t.indexOf("p")&&(r.assign("Passwords did not meet the requirements or did not match.","error").show(),i.assign("Passwords did not meet the requirements or did not match.","error").show()),-1!==t.indexOf("t")&&o.assign("Please agree to the Terms of Service before continuing","error").show(),-1!==t.indexOf("s")&&e("#content").animate({opacity:0},500,function(){e(this).css("opacity",1).html("<p>Thank you; your registration is now complete. After activation, you can login <a href='login.php'>here</a>.</p>")}),n.next().css("display",""),Recaptcha.reload()}})})}(jQuery)};
+/* jshint browser:true */
+/* global Message:false */
+
+/**
+ * Provides field validation to register.php
+ */
+
+document.onready = function () {
+
+  "use strict";
+
+  /**
+   * Set variables
+   */
+
+  // Messages
+  var userName   = new Message("[name='user_name']"),
+      userEmail  = new Message("[name='usr_email']"),
+      userPwd    = new Message("[name='pwd']"),
+      userPwdVal = new Message("[name='pwd2']"),
+      tos        = new Message("[name='tos']");
+
+  // Timeouts
+  var userTimeout;
+
+  // AJAX stuff
+  var ajaxName  = new XMLHttpRequest();
+
+  // Submit button
+  var submit = document.getElementById("doRegister");
+
+  /**
+   * Validation
+   */
+
+  // Username
+  userName.el.onkeyup = function (e) {
+    var user    = userName.el.value,
+        keycode = ('which' in e) ? e.which : e.keyCode; // key validation
+
+    if ((keycode > 47 && keycode < 60) || (keycode > 64 && keycode < 91) || (keycode > 95 && keycode < 112) || (keycode > 185 && keycode < 193) || (keycode > 218 && keycode < 223) || keycode == 32 || keycode == 8 || keycode == 13 || keycode == 46) {
+      if (!/^[a-z\d_]{3,20}$/i.test(user)) {
+        clearTimeout(userTimeout);
+        ajaxName.abort(); // abort ajax request if already sent
+        userName.assign("Invalid username. Usernames must be 3-20 characters long and can only contain alphanumeric characters and underscores.", "error").show();
+        userName.el.parentNode.lastElementChild.style.display = "none"; // hide loading gif
+        submit.setAttribute("disabled", true);
+      } else {
+        clearTimeout(userTimeout);
+        userName.purge();
+        userName.el.parentNode.lastElementChild.style.display = "inline"; // show loading gif
+        // ajax to verify username
+        ajaxName.onreadystatechange = function () {
+          if (ajaxName.readyState == 4 ) {
+            if (ajaxName.status == 200) {
+              if (ajaxName.responseText == "success") {
+                userName.assign("Username is valid.", "correct").show();
+                toggleSubmitDisabled();
+                userName.el.parentNode.lastElementChild.style.display = "none"; // hide loading gif
+              } else if (ajaxName.responseText == "error") {
+                userName.assign("Username already exists! Please choose a new one.", "error").show();
+                submit.setAttribute("disabled", true);
+                userName.el.parentNode.lastElementChild.style.display = "none";
+              }
+            } else if (ajaxName.status !== 0) { // if an error actually occured, not just a request being aborted
+              userName.assign("A " + ajaxName.status + " error occurred. Please try again.", "error").show();
+              submit.setAttribute("disabled", true);
+              userName.el.parentNode.lastElementChild.style.display = "none";
+            }
+          }
+        };
+
+        // set 100ms timeout to account for typing
+        userTimeout = setTimeout(function () {
+          try {
+            ajaxName.open("GET", "register.php?username=" + user, true);
+            ajaxName.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            ajaxName.send();
+          } catch (error) {
+            window.alert("An AJAX error occured. Please check your internet connection and try again.");
+            if (window.evdoDebug === true) {
+              console.log("Error: " + error);
+            }
+          }
+        }, 100);
+      }
+    }
+  };
+
+  // Email
+  userEmail.el.onkeyup = function (e) {
+    var email   = userEmail.el.value,
+        keycode = ('which' in e) ? e.which : e.keyCode; // key validation
+
+    if ((keycode > 47 && keycode < 60) || (keycode > 64 && keycode < 91) || (keycode > 95 && keycode < 112) || (keycode > 185 && keycode < 193) || (keycode > 218 && keycode < 223) || keycode == 32 || keycode == 8 || keycode == 13 || keycode == 46) {
+      if (!/^\S+@(localhost|([\w\d-]{2,}\.){1,2}[a-z]{2,6})$/i.test(email)) {
+        userEmail.assign("Email entered is not a valid email.", "error").show();
+        submit.setAttribute("disabled", true);
+      } else {
+        userEmail.purge();
+        toggleSubmitDisabled();
+      }
+    }
+  };
+
+  // Passwords
+  userPwd.el.onkeyup = userPwdVal.el.onkeyup = function () {
+    var original = userPwd.el.value,
+        verify   = userPwdVal.el.value;
+    if (original.length < 6) {
+      userPwd.assign("Passwords must be at least 6 characters long", "error").show();
+    } else if (original != verify) {
+      userPwdVal.assign("Passwords do not match.", "error").show();
+      submit.setAttribute("disabled", true);
+    } else {
+      userPwd.purge();
+      userPwdVal.purge();
+      toggleSubmitDisabled();
+    }
+  };
+
+  // TOS
+  tos.el.onchange = function () {
+    if (tos.el.checked) {
+      tos.el.setAttribute("value", "yes");
+      toggleSubmitDisabled();
+    } else {
+      submit.setAttribute("disabled", true);
+    }
+  };
+
+  /**
+   * Validate on paste
+   *
+   * Arguments passed to onkeyup are an ugly hack to trigger key validation
+   * In this case, 8 is just an arbitrary keycode.
+   *
+   * And yes, I know onpaste is nonstandard.
+   */
+  userName.el.onpaste = function () {
+    userName.el.onkeyup({"which": 8, "keyCode": 8});
+  };
+
+  userEmail.el.onpaste = function () {
+    userEmail.el.onkeyup({"which": 8, "keyCode": 8});
+  };
+
+  /**
+   * Onblur effects
+   */
+  userName.el.onblur = function () {
+    userName.hide();
+  };
+
+  userEmail.el.onblur = function () {
+    userEmail.hide();
+  };
+
+  userPwd.el.onblur = function () {
+    userPwd.hide();
+  };
+
+  userPwdVal.el.onblur = function () {
+    userPwdVal.hide();
+  };
+
+  /**
+   * Functions
+   */
+  function validateFinal () {
+    var list = [userName.el, userEmail.el, userPwd.el, userPwdVal.el];
+    for (var i = 0; i < list.length; i++) {
+      if (/invalid/.test(list[i].className) || !list[i].value) {
+        return false;
+      }
+    }
+    return tos.el.checked ? true : false; // finally, check TOS
+  }
+
+  function toggleSubmitDisabled () {
+    if (!validateFinal()) {
+      submit.setAttribute("disabled", true);
+    } else {
+      submit.removeAttribute("disabled");
+    }
+  }
+
+  /**
+   * Submit form over AJAX
+   *
+   * Uses jQuery
+   */
+
+  /* global jQuery:true, Recaptcha:true */
+
+  (function ($) {
+    // Elements
+    var $form   = $("[name='regForm']"),
+        $submit = $("[name='doRegister']");
+
+    // ReCAPTCHA error message init
+    var recaptchaMsg = new Message("#message");
+
+    // Prep form for AJAX submission
+    $form.attr("onsubmit", "return false;").removeAttr("action");
+    $("[name='ajax']").val(true);
+    $submit.attr("type", "button");
+
+    $submit.click(function () {
+      $.ajax({
+        type: "POST",
+        url: "register.php",
+        data: $("[name='regForm']").serialize(),
+        beforeSend: function () {
+          submit.setAttribute("disabled", true);
+          recaptchaMsg.purge();
+          $submit.next().css({
+            display : "inline",
+            left    : "4rem",
+            top     : "0"
+          });
+        },
+        success: function (msg) {
+          if (msg.indexOf("r") !== -1) {
+            recaptchaMsg.assign("Recaptcha failed! Please try again.", "error").show(function () {
+              recaptchaMsg.el.nextElementSibling.style.bottom = "1em";
+              recaptchaMsg.el.nextElementSibling.style.left = "325px";
+            });
+            submit.removeAttribute("disabled");
+          }
+          if (msg.indexOf("n") !== -1) {
+            userName.assign("Username is not a valid username.", "error").show();
+          }
+          if (msg.indexOf("e") !== -1) {
+            userEmail.assign("Email is not a valid email.", "error").show();
+          }
+          if (msg.indexOf("u") !== -1) {
+            userName.assign("Username already exists in database.", "error").show();
+          }
+          if (msg.indexOf("a") !== -1) {
+            userEmail.assign("Email already exists in database.", "error").show();
+          }
+          if (msg.indexOf("p") !== -1) {
+            userPwd.assign("Passwords did not meet the requirements or did not match.", "error").show();
+            userPwdVal.assign("Passwords did not meet the requirements or did not match.", "error").show();
+          }
+          if (msg.indexOf("t") !== -1) {
+            tos.assign("Please agree to the Terms of Service before continuing", "error").show();
+          }
+          if (msg.indexOf("s") !== -1) {
+            $("#content").animate({
+              opacity: 0
+            }, 500, function () {
+              $(this).css("opacity", 1).html("<p>Thank you; your registration is now complete. After activation, you can login <a href='login.php'>here</a>.</p>");
+            });
+          }
+          $submit.next().css("display", "");
+          Recaptcha.reload(); // automatically reload reCAPTCHA
+        }
+      });
+    });
+  })(jQuery);
+
+};
