@@ -130,9 +130,7 @@
   <section>
     <label><b>Code:</b></label>
     <div class="code">
-      <pre>
-        <code class="language-css"><?php echo nl2br($style['code']); ?></code>
-      </pre>
+      <pre><code class="language-css"><?php echo nl2br($style['code']); ?></code></pre>
     </div>
   </section>
 </div>
