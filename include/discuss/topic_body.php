@@ -126,7 +126,7 @@
           ?>
             <?php if (!empty($post['edit_id'])) { if($post['edit_id'] > 0 && $post['type'] == 0){ ?><p class="small">Last edited by <?php echo get_user($post['edit_id']); ?> on <?php echo date('M d, Y g:i a', $post['last_timestamp']);?></p><?php }} ?>
           <?php
-            if (($_SESSION['user_id'] == $user['id']) || $_SESSION['user_level'] >= 5){
+            if (($_SESSION['user_id'] == $user['id']) || $_SESSION['user_level'] >= 3){
               echo
               "
               <form id='topic-reply-edit-box-".$post['post_id']."'>
