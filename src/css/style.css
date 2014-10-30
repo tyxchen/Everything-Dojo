@@ -296,6 +296,30 @@ header {
   height: 8.33333vh;
 }
 
+#user {
+  position: absolute;
+  top: 1vh;
+  right: 15vh;
+  z-index: 30;
+}
+
+#user-info {
+  position: absolute;
+  top: 1vh;
+  left: 8vh;
+  white-space: nowrap;
+}
+
+#user img { /*Copied from logo*/
+  margin-bottom: -0.52083vh;
+  /* fix IE not resizing images correctly */
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  max-width: 2.75rem;
+  max-height: 2.75rem;
+  border: 1px solid black;
+}
+
 nav {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   position: absolute;
@@ -305,19 +329,48 @@ nav {
   height: 8.33333vh;
 }
 
-nav ul {
+#user-menu {
   list-style: none;
-  position: relative;
+  display: none;
+  border: 1px solid #000000;
+  position: absolute;
+  padding: 2vh;
+  top: 10.5vh;
+  left: -33vh;
+  text-align: center;
+  white-space: nowrap;
 }
 
-nav ul li { display: inline-block; }
+#user-menu:after, #user-menu:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+#user-menu:after {
+	border-bottom-color: white;
+	border-width: 20px;
+	margin-left: -20px;
+}
+#user-menu:before {
+	border-bottom-color: #000000;
+	border-width: 21px;
+	margin-left: -21px;
+}
+
+#user-menu li:last-child {
+  border-top: 2px solid black;
+}
 
 nav ul a {
   color: black;
-  float: left;
   font-size: 1.412rem;
-  line-height: 2.5em;
-  padding: 0.167rem 0.417rem;
+  line-height: 1.75em;
   text-decoration: none;
   -webkit-transition: 0.4s ease-in-out;
   transition: 0.4s ease-in-out;
