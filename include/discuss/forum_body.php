@@ -101,7 +101,7 @@
       </thead>
       <tbody>
   <?php foreach($stickies as $sticky){ ?>
-        <tr class="topic <?php echo $sticky['read'] != 1 ? ' unread-topic' : ''; ?>" style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $sticky['topic_id']; ?>'">
+        <tr class="topic<?php echo $sticky['read'] != 1 ? ' unread-topic' : ''; ?>" style="cursor:pointer;" onclick="window.location.href='<?php echo URL_DISCUSS; ?>?view=topic&f=<?php echo intval($id); ?>&t=<?php echo $sticky['topic_id']; ?>'">
           <td class="tiny-col"><p class="topic-icon"></p></td>
           <td><?php echo htmlspecialchars($sticky['title']); ?></td>
           <td class="center"><?php echo get_user($sticky['user_id']); ?></td>
@@ -120,7 +120,7 @@
   <?php }
   if ($_SESSION['user_id'] != 0) { ?>
   <br/>
-  <a href="javascript:;" onClick="mark_all_read(<?php echo $id . ', ' . $_SESSION['user_id']; ?>)" style="left: 5%; position: relative;">Mark All Read</a>
+  <a href="javascript:;" onClick="mark_all_topics_read(<?php echo $id . ', ' . $_SESSION['user_id']; ?>)" style="left: 5%; position: relative;">Mark All Read</a>
   <?php } ?>
     <table class="discuss-table">
       <thead style="border-bottom: 1px black solid;">
@@ -169,6 +169,6 @@
     </table>
     <?php if ($_SESSION['user_id'] != 0) { ?>
     <br/>
-    <a href="javascript:;" onClick="mark_all_read(<?php echo $id . ', ' . $_SESSION['user_id']; ?>)" style="left: 5%; position: relative;">Mark All Read</a>
+    <a href="javascript:;" onClick="mark_all_topics_read(<?php echo $id . ', ' . $_SESSION['user_id']; ?>)" style="left: 5%; position: relative;">Mark All Read</a>
     <?php } ?>
 </section>

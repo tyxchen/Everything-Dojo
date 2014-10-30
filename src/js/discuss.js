@@ -84,7 +84,7 @@ $(function () {
   });
 });
 
-function mark_all_read(forum_id, user_id) {
+function mark_all_topics_read(forum_id, user_id) {
   $.ajax({
     url: '/include/ajax_handler.php',
     data: {
@@ -94,7 +94,7 @@ function mark_all_read(forum_id, user_id) {
     },
     type: 'post',
     success: function() {
-      $(".topic-icon.unread-icon").removeClass("unread-icon").addClass("read-icon");
+      $(".topic.unread-topic").removeClass("unread-topic");
       $(".msg").html("All posts have been marked as read.");
       $(".msg").fadeIn(300);
       setTimeout(function () {
