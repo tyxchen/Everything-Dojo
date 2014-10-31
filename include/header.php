@@ -104,7 +104,7 @@
           <?php } else { ?>
           <nav>
           <?php if(isset($_SESSION['user_id'])) { ?>
-            <div class="user"><img src="<?php echo gravatar($_SESSION['user_id']); ?>"><span class="user-notification-status<?php if (isset($notification_unread_count) && $_notification_unread_count > 0) echo ' new'; ?>"></span><span class="user-info"><?php echo $_SESSION['user_name'] . (isset($notification_unread_count) ? "&nbsp;(<span class='notification-count'>$notification_unread_count)</span>" : ""); ?></span>
+            <div class="user"><img src="<?php echo gravatar($_SESSION['user_id']); ?>"><span class="user-notification-status<?php if (isset($notification_unread_count) && $notification_unread_count > 0) echo ' new'; ?>"></span><span class="user-info"><?php echo $_SESSION['user_name'] . (isset($notification_unread_count) ? "&nbsp;(<span class='notification-count'>$notification_unread_count)</span>" : ""); ?></span>
               <ul class="user-menu">
                 <li><a href="javascript:;" onclick="show_notifications()" class="notification-link">Notifications <?php if (isset($notification_unread_count)) { echo "(<span class='notification-count'>$notification_unread_count</span>)"; } ?></a></li>
                 <hr>
