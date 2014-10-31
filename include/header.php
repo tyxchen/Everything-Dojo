@@ -103,35 +103,31 @@
           </nav>
           <?php } else { ?>
           <nav>
-            <?php 
-              if(isset($_SESSION['user_id'])) {
-                echo '<div id="user">';
-                echo '<img src="'.gravatar($_SESSION['user_id']).'"/>';
-                echo '<div id="user-info">';
-                echo '<div id="user-name">'.$_SESSION['user_name'].'</div>';
-                if (isset($notification_unread_count)) { echo '<span>('.$notification_unread_count.')</span>'; }
-                echo '</div>';
-                echo '</div>';
-            ?>
+          <?php if(isset($_SESSION['user_id'])) { ?>
+            <div class="user"><img src="<?php echo gravatar($_SESSION['user_id']); ?>"><span class="user-notification-status<?php if (isset($notification_unread_count) && $_notification_unread_count > 0) echo ' new'; ?>"></span><span class="user-info"><?php echo $_SESSION['user_name'] . (isset($notification_unread_count) ? "&nbsp;(<span class='notification-count'>$notification_unread_count)</span>" : ""); ?></span>
+              <ul class="user-menu">
+                <li><a href="javascript:;" onclick="show_notifications()" class="notification-link">Notifications <?php if (isset($notification_unread_count)) { echo "(<span class='notification-count'>$notification_unread_count</span>)"; } ?></a></li>
+                <hr>
+                <li><a href="/myaccount.php" class="menu-myaccount">My Account</a></li>
+                <li><a href="/mysettings.php" class="menu-mysettings">My Settings</a></li>
+                <?php if ($_SESSION['user_level'] >= 5) echo '<li><a href="/admin.php" class="menu-admincp">Admin CP</a></li>'; ?>
+                <hr>
+                <li><a href="/logout.php" class="menu-logout">Logout</a></li>
+              </ul>
+            </div>
+            <?php } else { ?>
+              <ul id="actions-menu">
+                <li><a href="/login.php" class="menu-login">Login</a></li>
+                <li><a href="/register.php" class="menu-register">Register</a></li>
+              </ul>
+            <?php } ?>
             <script>
-              $("#user").click(function() {
-                $("#user-menu").toggle();
+              $(".user").click(function () {
+                $(".user-menu").toggle();
               });
             </script>
-            <ul id="user-menu">
-              <li><a href="/myaccount.php" id="menu-myaccount">My Account</a></li>
-              <li><a href="/mysettings.php" id="menu-mysettings">My Settings</a></li>
-              <li><a href="javascript:;" onClick="show_notifications()" class="notification-link">Notifications <?php if (isset($notification_unread_count)) { echo "(".$notification_unread_count.")"; } ?></a></li>
-              <li><a href="/logout.php" id="menu-logout">Logout</a></li>
-              <?php } else { ?>
-            <ul id="actions-menu">
-              <li><a href="/login.php" id="menu-login">Login</a></li>
-              <li><a href="/register.php" id="menu-register">Register</a></li>
-            </ul>
-              <?php } ?>
-            </ul>
-          </nav>
           <?php } ?>
+          </nav>
 
         </section>
       </header>
