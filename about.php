@@ -41,6 +41,7 @@
   <ul>
     <li>csmath</li>
     <li>El_Ectric</li>
+    <li>EpicSkills32</li>
     <li>RTG</li>
   </ul>
   <br />
@@ -50,8 +51,8 @@
     <li>knittingfrenzy18</li>
     <li>NeoMathematicalKid</li>
     <li>Tungsten</li>
-    <li>thatmathgeek</li>
-    <li>nxt</li>
+    <li>thatmathgeek (encadyma)</li>
+    <li>nxt (Beat_4)</li>
     <li>PythonNut</li>
   </ul>
   <br />
