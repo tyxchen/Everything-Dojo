@@ -104,7 +104,7 @@ list($active) = $rs_active;
   <?php
   if (isset($_GET['doSearch'])) {
     $open = TRUE;
-    $sql = "SELECT * FROM $table";
+    $sql = "SELECT * FROM $table ORDER BY id";
     $total = $dbc->prepare($sql);
     $total->execute();
     $total = $total->fetchAll(PDO::FETCH_ASSOC);
