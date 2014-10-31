@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
     $postdata['key'] = $trellokey;
     $postdata['token'] = $trellotoken;
     $postdata['name'] = $data['subject'];
-    $postdata['desc'] .= "###Title: ".$data['email']."\n";
+    $postdata['desc'] = "###Title: ".$data['subject']."\n";
     $postdata['desc'] .= "**Email**: ".$data['email']."\n";
     if (isset($data['id'])) {
       $postdata['desc'] .= "\n**Has EvDo account**: ".$data['username']." (ID ".$data['id'].")";
@@ -92,7 +92,7 @@ if (isset($_POST['submit'])) {
     $postdata['idList'] = $trellolistid;
     $postdata['urlSource'] = null;
 
-    curl_post("https://trello.com/1/cards", $postdata);
+    $result = curl_post("https://trello.com/1/cards", $postdata);
 
     if ($result) {
       header("Location: contact.php?done=yes");
@@ -117,7 +117,7 @@ if (isset($_POST['submit'])) {
 <section id="content">
   <h1>Contact Us</h1>
 <?php if (isset($_GET['done'])) { ?>
-  <p>Thanks, we've received your message. If you asked for personal support, we'll get back to you in a couple days. If you filed a bug report or submitted a feature request, you can check out our Trello board to track your request!</p><!--no linking yet...the board referred to doesn't exist at time of writing-->
+  <p>Thanks, we've received your message. If you asked for personal support, we'll get back to you in a couple days. If you filed a bug report or submitted a feature request, you can check out our <a href="https://trello.com/b/9hdgO2hM/everything-dojo-public-board">Trello board</a> to track your request!</p>
 <?php } else { ?>
 
   <?php //spit out all errors
