@@ -25,7 +25,7 @@
     </article>
 
     <footer>
-      <p><a href="/">Home</a> &bull; <a href="/about.php">About</a> &bull; <a href="javascript:;" onclick="$('#credits').popUp('1%')">Credits</a> &bull; <a href="https://github.com/Deeg-Kim/Everything-Dojo">GitHub</a> &bull; <a href="https://github.com/Deeg-Kim/Everything-Dojo">Trello</a> <?php
+      <p><a href="/">Home</a> &bull; <a href="/about.php">About</a> &bull; <a href="javascript:;" onclick="$('#credits').popUp('1%')">Credits</a> &bull; <a href="https://github.com/Deeg-Kim/Everything-Dojo">GitHub</a> &bull; <a href="https://trello.com/b/9hdgO2hM/everything-dojo-public-board">Trello</a> <?php
               // will not work if dbc is not included on page
               if (isset($_SESSION['user_level']) && checkAdmin()) {
               ?>
