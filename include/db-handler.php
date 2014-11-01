@@ -12,6 +12,11 @@
       $data = $_POST;
       $data['submitted_by'] = $_SESSION['user_name'];
       $data['submitted_by_id'] = $_SESSION['user_id'];
+      if (mb_detect_encoding($data['code'], 'UTF-8', TRUE)) {
+        $_SESSION['err'][] = "Code submitted is not UTF-8!";
+        header('Location: /database/?mode=submit');
+        break;
+      }
       $_SESSION['id'] = $themedb->submit_theme($data);
 
       header('Location: ' . SITE_ROOT . 'include/db-success.php');
@@ -19,7 +24,7 @@
 
     case 'edit-theme':
       $data = $_POST;
-			$data['edit_id'] = $_SESSION['user_id'];
+      $data['edit_id'] = $_SESSION['user_id'];
       $_SESSION['id'] = $themedb->edit_theme($data);
 
       header('Location: ' . SITE_ROOT . 'include/db-success.php');
@@ -57,18 +62,18 @@
       header('Location: ' . SITE_ROOT . 'include/db-success.php');
       break;
 
-		case 'reject':
-			$data = $_POST;
-			$owner = $themedb->get_owner($data['id']);
-			$type = $themedb->reject_theme($data['id']);
-			if ($type == 'unapproved') {
-				$notification->insert_notification(3, $data['id'], $owner);
-			} elseif($type == 'unvalidated') {
-				$notification->insert_notification(4, $data['id'], $owner);
-			}
-			
-			header('Location: ' . SITE_ROOT . 'include/db-success.php');
-			break;
+    case 'reject':
+      $data = $_POST;
+      $owner = $themedb->get_owner($data['id']);
+      $type = $themedb->reject_theme($data['id']);
+      if ($type == 'unapproved') {
+        $notification->insert_notification(3, $data['id'], $owner);
+      } elseif($type == 'unvalidated') {
+        $notification->insert_notification(4, $data['id'], $owner);
+      }
+
+      header('Location: ' . SITE_ROOT . 'include/db-success.php');
+      break;
 
   }
 ?>

@@ -1,3 +1,11 @@
+<?php
+  echo "<p id=\"errors\">";
+  foreach ($_SESSION['err'] as $err) {
+    echo "Error: $err<br />";
+  }
+  echo "</p>";
+  unset($_SESSION['err']);
+?>
 <h2>Submit a Theme</h2>
 
 <form method="post" action="/include/db-handler.php">
