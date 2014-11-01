@@ -16,7 +16,7 @@ class theme_unvalidated {
   }
 
   function get_url() {
-    $url = SITE_ROOT . URL_DATABASE . "?mode=view&view=style&id=" . $this->id;
+    $url = URL_DATABASE . "?mode=view&view=style&id=" . $this->id;
     return $url;
   }
 }

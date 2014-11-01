@@ -16,7 +16,7 @@ class account_urgent {
   }
 
   function get_url() {
-    $url = SITE_ROOT . "mysettings.php";
+    $url = "/mysettings.php";
     return $url;
   }
 }
