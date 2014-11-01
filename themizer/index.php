@@ -5,12 +5,12 @@
     $_GET['mode'] = "index";
   }
 
-  if ($_GET["mode"] == "index") {
-    $title = "Themizer Index";
-  } elseif ($_GET["mode"] == "regular") {
+  if ($_GET["mode"] == "regular") {
     $title = "Themizer (Regular Mode)";
   } elseif ($_GET["mode"] == "development") {
     $title = "Themizer (Development Mode)";
+  } else {
+    $title = "Themizer (Index)";
   }
 
   session_start();

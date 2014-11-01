@@ -86,14 +86,14 @@
             <div id="logo">
               <a href="/"><?php print isset($_GET['unicorns']) ? '<img src="/images/unicorns.png" alt="Unicorns" style="margin-top:1rem" />' : '<img src="/images/logo.svg" alt="Logo" />'; ?></a>
             </div>
-            <?php if ($title != "Home" && $title != "Discuss" && $title != "Database" && $title != "Themizer Index") {
-              echo "<h1 class='big'>> $title</h1>";
-            } elseif ($title == "Themizer Index") {
-              echo "<h1 class='big'>> Themizer</h1>";
+            <?php if ($title != "Home" && $title != "Discuss" && $title != "Database" && $title != "Themizer (Index)") {
+              echo "<h1 class='big'>&gt; $title</h1>";
+            } elseif ($title == "Themizer (Index)") {
+              echo "<h1 class='big'>&gt; Themizer</h1>";
             } ?>
           </nav>
 
-          <?php if ($title == "Themizer Index") { ?>
+          <?php if ($title == "Themizer (Index)") { ?>
           <nav>
             <ul>
               <li><a onclick="$('#features').scrollTo()">Features</a></li>
