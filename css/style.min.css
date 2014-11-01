@@ -358,75 +358,6 @@ nav ul a:hover {
   padding-left: 0.5em;
 }
 
-.user-menu {
-  position: absolute;
-  top: 8.3vh;
-  left: -6.5vh;
-  display: none;
-  background: white;
-  width: 19vh;
-  line-height: 2em;
-  box-sizing: border-box;
-  text-align: center;
-  white-space: nowrap;
-  border: 1px solid #000000;
-  box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
-}
-
-.user-menu:after, .user-menu:before {
-  bottom: 100%;
-  left: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-
-.user-menu:after {
-  border-bottom-color: white;
-  border-width: 0.7rem;
-  margin-left: -0.7rem;
-}
-.user-menu:before {
-  border-bottom-color: #000000;
-  border-width: calc(0.7rem + 1px);
-  margin-left: calc(-0.7rem - 1px);
-}
-
-.user-menu li {
-  display: block;
-}
-
-.user-menu-inner {
-  overflow: auto;
-  max-height: 80vh;
-  padding: 0.5em 0;
-  margin: 0;
-}
-
-.user-menu hr {
-  margin: 0.5em 0;
-}
-
-.user-link {
-  display: inline-block;
-  width: 100%;
-  float: none;
-  line-height: 2em;
-  font-size: 1em;
-  padding: 0;
-  -webkit-transition: 0s linear;
-  transition: 0s linear;
-}
-
-.user-link:hover,
-.user-link.hover {
-  background-color: #7cab00;
-  color: white;
-}
-
 .user-notification-status {
   position: absolute;
   left: 2.3rem;
@@ -442,28 +373,94 @@ nav ul a:hover {
   display: block;
 }
 
+.user-menu {
+  position: absolute;
+  top: 8.3vh;
+  left: -6.5vh;
+  display: none;
+  background: white;
+  width: 19vh;
+  line-height: 2em;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
+  border: 1px solid #000000;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+}
+
+.user-menu:after,
+.user-menu:before {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.user-menu:after {
+  border-bottom-color: white;
+  border-width: 0.7rem;
+  margin-left: -0.7rem;
+}
+
+.user-menu:before {
+  border-bottom-color: #000000;
+  border-width: calc(0.7rem + 1px);
+  margin-left: calc(-0.7rem - 1px);
+}
+
+.user-menu li {
+  display: block;
+}
+
+.user-menu hr {
+  margin: 0.5em 0;
+}
+
+.user-menu-inner {
+  overflow: auto;
+  max-height: 80vh;
+  padding: 0.5em 0;
+  margin: 0;
+}
+
+.menu-link {
+  display: inline-block;
+  width: 100%;
+  float: none;
+  line-height: 2em;
+  font-size: 1em;
+  padding: 0;
+  -webkit-transition: 0s linear;
+  transition: 0s linear;
+}
+
+.menu-link:hover {
+  background-color: #a5d038;
+  color: #333;
+}
+
+.menu-notification-toggle.expanded {
+  background-color: #7cab00;
+  color: white
+}
+
 .menu-notification-body {
   max-height: 50vh;
   overflow-y: auto;
-}
-
-.menu-notification-link {
-  display: block;
-  white-space: normal;
 }
 
 .menu-notification-mark-all-read {
   border-bottom: 1px dotted #333;
 }
 
-.menu-notification-mark-all-read:hover {
-  background-color: transparent;
-  color: #555;
-}
-
 .menu-notification-item {
-  line-height: 1.5em;
-  padding: 0.3em 0 0.2em;
+  position: relative;
+  white-space: normal;
+  padding: 0.3em 0 0.6em;
   border-bottom: 1px dotted #333;
   overflow: auto hidden;
 }
@@ -473,18 +470,54 @@ nav ul a:hover {
   color: #333;
 }
 
+.menu-notification-item .time {
+  text-align: center;
+  font-size: 0.6em;
+  padding-bottom: 0;
+  margin-right: 0;
+}
+
+.menu-notification-item:hover .menu-notification-text {
+  background-color: transparent;
+  color: #333;
+}
+
+.menu-notification-item:hover .menu-notification-mark-read {
+  opacity: 0.6;
+}
+
+.menu-notification-item:hover .menu-notification-mark-read:hover {
+  opacity: 1;
+}
+
+.menu-notification-unread {
+  background-color: #ffc1c1;
+}
+
+.menu-notification-text {
+  display: block;
+  line-height: 1.5em;
+}
+
+.menu-notification-mark-read {
+  position: absolute;
+  bottom: -0.2em;
+  right: 0;
+  width: 1em;
+  opacity: 0;
+  -webkit-transition: 0.5s ease;
+  transition: 0.3s ease;
+}
+
 .menu-notification-none {
   color: #555;
+  font-size: 0.95em;
   padding-bottom: 0;
   border-bottom: none;
 }
 
 .menu-notification-none:hover {
   background-color: transparent;
-}
-
-.menu-notification-unread {
-  background-color: #ffc1c1;
 }
 
 /*--FOOTER--*/

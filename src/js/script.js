@@ -465,21 +465,12 @@ function tryit () {
 /*******************
  *  NOTIFICATIONS  *
  *******************/
-$(function () {
-  $("#notifications").hide();
-
-  $('body').click(function (e) {
-    if($(e.target).closest('.notification-link, #notifications').length === 0) {
-      $("#notifications").hide("fast", "swing");
-    }
-  });
-});
 
 function show_notifications() {
   $("#notifications").toggle(350);
 }
 
-function mark_read(id) {
+function mark_read (id) {
   $.ajax({
     url: '/include/ajax_handler.php',
     data: {
@@ -487,11 +478,14 @@ function mark_read(id) {
       notification_id: id
     },
     type: 'post',
-    success: function() {}
+    success: function () {
+      $("#menu-notification-" + id).removeClass("menu-notification-unread");
+      $("#notification-" + id).removeClass("unread").addClass("read");
+    }
   });
 }
 
-function mark_all_read(user_id) {
+function mark_all_read (user_id) {
   $.ajax({
     url: '/include/ajax_handler.php',
     data: {
@@ -499,8 +493,47 @@ function mark_all_read(user_id) {
       user_id: user_id
     },
     type: 'post',
-    success: function() {
-      location.reload();
+    success: function () {
+      $(".menu-notification-unread").removeClass("menu-notification-unread");
+      $(".notification-item.unread").removeClass("unread").addClass("read");
     }
   });
 }
+
+/*********************
+ * ONREADY FUNCTIONS *
+ *********************/
+
+$(function () {
+
+  // legacy notifications
+
+  $("#notifications").hide();
+
+  $('body').click(function (e) {
+    if($(e.target).closest('.notification-link, #notifications').length === 0) {
+      $("#notifications").hide("fast", "swing");
+    }
+  });
+
+  // Toggling user menu
+
+  $(".user").click(function (e) {
+    if (!$(e.target).closest(".user-menu").length) {
+      if ($(".user-menu").is(":visible")) {
+        $(".user-menu").hide();
+        $(this).removeClass("user-active");
+      } else {
+        $(".user-menu").show();
+        $(this).addClass("user-active");
+      }
+    }
+  });
+  // modified from http://stackoverflow.com/a/3028037
+  $(document).click(function (e) {
+    if (!$(e.target).closest('.user-menu, .user').length) {
+      $(".user-menu").hide();
+      $(".user-active").removeClass("user-active");
+    }
+  });
+});
