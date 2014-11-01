@@ -356,6 +356,9 @@ nav ul a:hover {
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
   box-shadow: 0 0 0.5em #57c0ad;
+  /* autoprefixer: off */
+  -webkit-box-shadow: 0 0 1em #57c0ad;
+  /* autoprefixer: on */
 }
 
 .user-info {
@@ -453,8 +456,12 @@ nav ul a:hover {
 }
 
 .menu-notification-toggle.expanded {
-  background-color: #7cab00;
-  color: white
+  background-color: #7cac00;
+  color: white;
+  box-shadow: inset 0 0 0.3em rgba(0, 0, 0, 0.2);
+  /* autoprefixer: off */
+  -webkit-box-shadow: inset 0 0 0.6em rgba(0, 0, 0, 0.2);
+  /* autoprefixer: on */
 }
 
 .menu-notification-body {

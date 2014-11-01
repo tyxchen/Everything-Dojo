@@ -16,6 +16,9 @@ $(function () {
       $("#notifications").hide("fast", "swing");
     }
   });
+
+  // position search bar due to menu
+  $('.search-container').css('right', parseInt($('.user').css('width')) + parseInt($('html').css('width'))/100 + 20);
 });
 
 function popup_box() {

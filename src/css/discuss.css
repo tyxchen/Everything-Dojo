@@ -48,6 +48,25 @@
   padding-top: 0;
 }
 
+/**
+ * Menus
+ */
+
+.user {
+  right: 1vw;
+}
+
+.user-info {
+  color: #fff;
+}
+
+.user-active img {
+  box-shadow: 0 0 0.5em #fff;
+  /* autoprefixer: off */
+  -webkit-box-shadow: 0 0 1em #fff;
+  /* autoprefixer: on */
+}
+
 
 /*--NOTIFICATIONS--*/
 #notifications {
