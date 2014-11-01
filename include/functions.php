@@ -295,7 +295,7 @@
               $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
               echo '
               <a href="'.$notif_data['url'].'" onClick="mark_read('.$notif['id'].')">
-              <div id="notification-'.$notif['id'].'" class="notification ';
+              <div id="notification-'.$notif['id'].'" class="notification-item ';
               if ($notif['read'] == 0) { echo 'unread'; } else { echo 'read'; }
               echo
               '">

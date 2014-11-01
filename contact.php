@@ -115,6 +115,7 @@ if (isset($_POST['submit'])) {
   get_header(0);
 ?>
 <section id="content">
+  <?php notifications(); ?>
   <h1>Contact Us</h1>
 <?php if (isset($_GET['done'])) { ?>
   <p>Thanks, we've received your message. If you asked for personal support, we'll get back to you in a couple days. If you filed a bug report or submitted a feature request, you can check out our <a href="https://trello.com/b/9hdgO2hM/everything-dojo-public-board">Trello board</a> to track your request!</p>

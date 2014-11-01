@@ -645,7 +645,6 @@ table a { color: #F99819; }
 #notification-header b { margin-left: 3vh; }
 
 .notification-item {
-  height: 8vh;
   padding-top: 0.5em;
   border-bottom: 1px #bbb solid;
 }
