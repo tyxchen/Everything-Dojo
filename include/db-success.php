@@ -82,16 +82,6 @@
       </div>
     </div>
   </div>
-  <div id="navigation">
-    <nav class="db-nav">
-      <ul>
-        <li><a href="/" id="nav-home">EvDo Home</a></li>
-      <?php if(isset($_SESSION['user_id'])) { ?>
-        <li><a href="javascript:;" class="notification-link" onClick="show_notifications()">Notifications (<?php echo $unread_count; ?>)</a></li>
-      <?php } ?>
-      </ul>
-    </nav>
-  </div>
   <p>Your action has been completed successfully.</p>
   <p>You will be redirected in <span id="counter">3</span> second(s).</p>
   <script>

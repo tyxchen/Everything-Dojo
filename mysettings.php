@@ -56,16 +56,9 @@ $rs_settings->execute(array($_SESSION['user_id']));
   //dbc already included
   page_protect();
 
-  if (isset($_SESSION['user_id'])) {
-    $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
-    $notification_data = $notification->get_notifications($_SESSION['user_id']);
-  }
-
   get_header(0);
 ?>
 <section id="content">
-  <?php notifications(); ?>
-
   <?php //spit out all errors
   if (!empty($err)) {
     echo "<p id=\"errors\">";

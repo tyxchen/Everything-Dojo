@@ -1,28 +1,27 @@
 <?php
   $title = "Notifications";
   include("include/include.php");
-  $extra_js = "<script>$(function(){\$('.notification-link').hide()})</script>";
   session_start();
 
   if (isset($_SESSION['user_id'])) {
     $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
-    $notification_data = $notification->get_notifications($_SESSION['user_id'], 1000);
+    $notification_data = array_reverse($notification->get_notifications($_SESSION['user_id'], 1000));
   }
 
   get_header(0);
 ?>
 <section id="content">
-  <div id="notifications-test">
+  <div id="notifications-main">
     <div id="notification-body" style="width:95%;margin:auto">
       <div id="notification-header" style="width:100%">
-        <b>notifications:</b>
-        <a href="javascript:;" style="float: right; margin-right: 2vw;" onclick="mark_all_read(<?php echo $_session['user_id']; ?>)">mark all read</a>
+        <b>Notifications:</b>
+        <a href="javascript:;" style="float: right; margin-right: 2vw;" onclick="mark_all_read(<?php echo $_session['user_id']; ?>)">Mark all read</a>
       </div>
       <?php if (count($notification_data) == 0) { ?>
       <a href="javascript:;">
       <div id="notification-0" class="notification-item read">
         <div class="notification-color" style="background-color: #ccc"></div>
-        <div class="notification-text">no notifications</div>
+        <div class="notification-text">No Notifications</div>
       </div>
       </a>
       <?php

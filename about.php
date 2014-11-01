@@ -2,10 +2,7 @@
   $title = "About";
   include("include/include.php");
   session_start();
-  if (isset($_SESSION['user_id'])) {
-    $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
-    $notification_data = $notification->get_notifications($_SESSION['user_id']);
-  }
+
   get_header(0);
 ?>
 <section id="content">

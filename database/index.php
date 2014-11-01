@@ -13,21 +13,17 @@
     $mode = 'index';
   }
   get_header(1);
-
-  notificationData();
 ?>
 <section id="content">
-  <?php notifications(); ?>
-        <div id="navigation">
-          <nav class="db-nav">
-            <ul>
-              <li><a href="/" id="nav-home">EvDo Home</a></li>
-            <?php if(isset($_SESSION['user_id'])) { ?>
-              <li><a href="javascript:;" class="notification-link" onClick="show_notifications()">Notifications (<?php echo $unread_count; ?>)</a></li>
-            <?php } ?>
-            </ul>
-          </nav>
-        </div>
+  <div id="navigation">
+    <nav class="db-nav">
+      <ul>
+        <?php if(isset($_SESSION['user_id'])) { ?>
+        <li><a href="/" id="nav-home">EvDo Home</a></li>
+        <?php } ?>
+      </ul>
+    </nav>
+  </div>
   <?php
   if (!isset($_SESSION['user_id'])) {
     include('../include/themedb/view_body.php');
