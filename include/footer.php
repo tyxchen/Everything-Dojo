@@ -25,13 +25,7 @@
     </article>
 
     <footer>
-      <p><a href="/">Home</a> &bull; <a href="/about.php">About</a> &bull; <a href="javascript:;" onclick="$('#credits').popUp('1%')">Credits</a> &bull; <a href="https://github.com/Deeg-Kim/Everything-Dojo">GitHub</a> <?php
-              // will not work if dbc is not included on page
-              if (isset($_SESSION['user_level']) && checkAdmin()) {
-              ?>
-              &bull; <a href="/admin.php" id="menu-admin">Admin CP</a> 
-              <?php } //end admin ?>
-              &bull; <a href="/contact.php">Contact Us</a></p>
+      <p><a href="/">Home</a> &bull; <a href="/about.php">About</a> &bull; <a href="javascript:;" onclick="$('#credits').popUp('1%')">Credits</a> &bull; <a href="https://github.com/Deeg-Kim/Everything-Dojo">GitHub</a> &bull; <a href="/contact.php">Contact Us</a></p>
       <p><a href="/docs/tos.php">Terms of Service</a> &bull; <a href="/docs/privacy.php">Privacy Policy</a> &bull; <a href="/docs/conduct.php">Code of Conduct</a></p>
       <p>&copy;2014 Everything Dojo. Individual styles are copyright their creators.</p>
       <p>Made with <span class="heart">&hearts;</span><?php if (isset($_GET['unicorns'])) { echo " and unicorns"; } ?>.</p>
