@@ -477,6 +477,7 @@ function mark_read (id) {
     success: function () {
       $("#menu-notification-" + id).removeClass("menu-notification-unread");
       $("#menu-notification-" + id + " .menu-notification-mark-read").addClass("marked");
+      $("#notification-" + id).removeClass("unread").addClass("read");
 
       $(".notification-unread-count").each(function () {
         $(this).text((parseInt($(this).text()) - 1).toString());
@@ -501,6 +502,7 @@ function mark_all_read (user_id) {
     type: 'post',
     success: function () {
       $(".menu-notification-unread").removeClass("menu-notification-unread");
+      $(".notification-item.unread").removeClass("unread").addClass("read");
       $(".notification-unread-count").text("0");
       $(".notification-left-unread-count").remove();
       $(".user-notification-status").removeClass("new");
