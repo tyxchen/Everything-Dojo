@@ -509,9 +509,14 @@ nav ul a:hover {
   transition: 0.3s ease;
 }
 
+.menu-notification-mark-read.marked {
+  color: #2c960f;
+  opacity: 1;
+}
+
 .menu-notification-none {
   color: #555;
-  font-size: 0.95em;
+  font-size: 0.9em;
   padding-bottom: 0;
   border-bottom: none;
 }

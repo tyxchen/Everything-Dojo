@@ -108,17 +108,15 @@
               $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
               $notification_data = array_reverse($notification->get_notifications($_SESSION['user_id'], 1000, TRUE));
             ?>
-            <div class="user"><img src="<?php echo gravatar($_SESSION['user_id']); ?>"><span class="user-notification-status<?php if (isset($notification_unread_count) && $notification_unread_count > 0) echo ' new'; ?>"></span><span class="user-info"><?php echo $_SESSION['user_name'] . (isset($notification_unread_count) ? "&nbsp;(<span class='notification-count'>$notification_unread_count)</span>" : ""); ?></span>
+            <div class="user"><img src="<?php echo gravatar($_SESSION['user_id']); ?>"><span class="user-notification-status<?php if (isset($notification_unread_count) && $notification_unread_count > 0) echo ' new'; ?>"></span><span class="user-info"><?php echo $_SESSION['user_name'] . (isset($notification_unread_count) ? "&nbsp;(<span class='notification-unread-count'>$notification_unread_count</span>)" : ""); ?></span>
               <div class="user-menu">
                 <ul class="user-menu-inner">
-                  <li><a href="javascript:;" onclick="$(this).parent().next().toggle();$(this).toggleClass('expanded');" class="menu-link menu-notification-toggle">Notifications <?php if (isset($notification_unread_count)) { echo "(<span class='notification-count'>$notification_unread_count</span>)"; } ?></a></li>
+                  <li><a href="javascript:;" onclick="$(this).parent().next().toggle();$(this).toggleClass('expanded');" class="menu-link menu-notification-toggle">Notifications <?php if (isset($notification_unread_count)) { echo "(<span class='notification-unread-count'>$notification_unread_count</span>)"; } ?></a></li>
                   <div class="menu-notification" style="display:none">
                     <?php if (count($notification_data) == 0) { ?>
-                    <a href="javascript:;" class="menu-link menu-notification-link menu-notification-none">
-                      <div id="menu-notification-0" class="menu-notification-item menu-notification-none">
-                        <div class="menu-notification-text">No new notifications</div>
-                      </div>
-                    </a>
+                    <div id="menu-notification-0" class="menu-notification-item menu-notification-none">
+                      <div class="menu-notification-text">No new notifications</div>
+                    </div>
                     <?php } else { ?>
                     <a href="javascript:;" onClick="mark_all_read('<?php echo $_SESSION['user_id'] ?>')" class="menu-link menu-notification-mark-all-read">Mark all read</a>
                     <div class="menu-notification-body">
@@ -141,7 +139,7 @@
                         </div>
                       <?php } ?>
                       <div class="menu-notification-footer">
-                        <a href="notifications.php" class="menu-link menu-notification-link">See All<?php print ($notification_unread_count - 3 > 0) ? ("&nbsp;(" . ($notification_unread_count - 3) . ")") : ""; ?></a>
+                        <a href="notifications.php" class="menu-link menu-notification-link">See All<?php print ($notification_unread_count - 3 > 0) ? ("<span class='notification-left-unread-count'>&nbsp;(" . ($notification_unread_count - 3) . ")</span>") : ""; ?></a>
                       </div>
                     </div>
                     <?php } ?>

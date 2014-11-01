@@ -480,7 +480,18 @@ function mark_read (id) {
     type: 'post',
     success: function () {
       $("#menu-notification-" + id).removeClass("menu-notification-unread");
+      $("#menu-notification-" + id + " .menu-notification-mark-read").addClass("marked");
       $("#notification-" + id).removeClass("unread").addClass("read");
+
+      $(".notification-unread-count").each(function () {
+        $(this).text((parseInt($(this).text()) - 1).toString());
+      });
+
+      setTimeout(function () {
+        $("#menu-notification-" + id).fadeOut(1000, function () {
+          $(this).remove();
+        });
+      }, 2000);
     }
   });
 }
@@ -496,6 +507,16 @@ function mark_all_read (user_id) {
     success: function () {
       $(".menu-notification-unread").removeClass("menu-notification-unread");
       $(".notification-item.unread").removeClass("unread").addClass("read");
+      $(".notification-unread-count").text("0");
+      $(".notification-left-unread-count").remove();
+      $(".user-notification-status").removeClass("new");
+
+      setTimeout(function () {
+        $(".menu-notification-item, .menu-notification-mark-all-read").fadeOut(1000, function () {
+          $(".menu-notification-body").html('<div id="menu-notification-0" class="menu-notification-item menu-notification-none"><div class="menu-notification-text">No new notifications</div></div>');
+        });
+      }, 2000);
+
     }
   });
 }
