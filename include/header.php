@@ -111,7 +111,7 @@
             <div class="user"><img src="<?php echo gravatar($_SESSION['user_id']); ?>"><span class="user-notification-status<?php if (isset($notification_unread_count) && $notification_unread_count > 0) echo ' new'; ?>"></span><span class="user-info"><?php echo $_SESSION['user_name'] . (isset($notification_unread_count) ? "&nbsp;(<span class='notification-unread-count'>$notification_unread_count</span>)" : ""); ?></span>
               <div class="user-menu">
                 <ul class="user-menu-inner">
-                  <li><a href="javascript:;" onclick="$(this).parent().next().toggle();$(this).toggleClass('expanded');" class="menu-link menu-notification-toggle">Notifications <?php if (isset($notification_unread_count)) { echo "(<span class='notification-unread-count'>$notification_unread_count</span>)"; } ?></a></li>
+                  <li><a href="javascript:;" onclick="$(this).parent().next().slideToggle(400);$(this).toggleClass('expanded');" class="menu-link menu-notification-toggle">Notifications <?php if (isset($notification_unread_count)) { echo "(<span class='notification-unread-count'>$notification_unread_count</span>)"; } ?></a></li>
                   <div class="menu-notification" style="display:none">
                     <?php if (count($notification_data) == 0) { ?>
                     <div id="menu-notification-0" class="menu-notification-item menu-notification-none">

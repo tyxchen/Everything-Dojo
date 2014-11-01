@@ -347,14 +347,19 @@ nav ul a:hover {
   max-width: 2.5rem;
   max-height: 2.5rem;
   vertical-align: middle;
-  border: 1px solid black;
+  border: 1px solid #ccc;
+  -webkit-transition: -webkit-transform 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .user-active img {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
   box-shadow: 0 0 0.5em #57c0ad;
 }
+
 .user-info {
-  vertical-align: top;
+  vertical-align: middle;
   padding-left: 0.5em;
 }
 
@@ -366,7 +371,7 @@ nav ul a:hover {
   height: 0.6rem;
   width: 0.6rem;
   background-color: red;
-  border-radius: 100%;
+  border-radius: 0.6rem;
 }
 
 .user-notification-status.new {
@@ -384,7 +389,8 @@ nav ul a:hover {
   box-sizing: border-box;
   text-align: center;
   white-space: nowrap;
-  border: 1px solid #000000;
+  border: 1px solid #ccc;
+  border-radius: 0.2em;
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
 }
 
@@ -407,7 +413,7 @@ nav ul a:hover {
 }
 
 .user-menu:before {
-  border-bottom-color: #000000;
+  border-bottom-color: #bbb;
   border-width: calc(0.7rem + 1px);
   margin-left: calc(-0.7rem - 1px);
 }
@@ -417,6 +423,9 @@ nav ul a:hover {
 }
 
 .user-menu hr {
+  height: 1px;
+  background-color: #ccc;
+  border: none;
   margin: 0.5em 0;
 }
 
