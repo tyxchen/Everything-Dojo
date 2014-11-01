@@ -159,7 +159,7 @@ if (isset($_POST['submit'])) {
     <label for="message">Message</label>
     <textarea name="message" rows="10">Hi Everything Dojo,
 
-    </textarea>
+</textarea> <!-- weird indentation is to avoid extra whitespace that causes code blocks to form -->
     <br />
     <?php
       require_once('recaptchalib.php');
