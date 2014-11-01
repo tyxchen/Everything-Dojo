@@ -350,6 +350,9 @@ nav ul a:hover {
   border: 1px solid black;
 }
 
+.user-active img {
+  box-shadow: 0 0 0.5em #57c0ad;
+}
 .user-info {
   vertical-align: top;
   padding-left: 0.5em;
@@ -357,19 +360,17 @@ nav ul a:hover {
 
 .user-menu {
   position: absolute;
-  top: 8vh;
-  left: -6vh;
+  top: 8.3vh;
+  left: -6.5vh;
   display: none;
   background: white;
-  width: 18vh;
+  width: 19vh;
   line-height: 2em;
   box-sizing: border-box;
   text-align: center;
   white-space: nowrap;
-  padding: 0.5em 0;
   border: 1px solid #000000;
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
-  margin: 0;
 }
 
 .user-menu:after, .user-menu:before {
@@ -398,7 +399,18 @@ nav ul a:hover {
   display: block;
 }
 
-.user-menu a {
+.user-menu-inner {
+  overflow: auto;
+  max-height: 80vh;
+  padding: 0.5em 0;
+  margin: 0;
+}
+
+.user-menu hr {
+  margin: 0.5em 0;
+}
+
+.user-link {
   display: inline-block;
   width: 100%;
   float: none;
@@ -409,13 +421,10 @@ nav ul a:hover {
   transition: 0s linear;
 }
 
-.user-menu a:hover {
+.user-link:hover,
+.user-link.hover {
   background-color: #7cab00;
   color: white;
-}
-
-.user-menu hr {
-  margin: 0.5em 0;
 }
 
 .user-notification-status {
@@ -433,6 +442,50 @@ nav ul a:hover {
   display: block;
 }
 
+.menu-notification-body {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.menu-notification-link {
+  display: block;
+  white-space: normal;
+}
+
+.menu-notification-mark-all-read {
+  border-bottom: 1px dotted #333;
+}
+
+.menu-notification-mark-all-read:hover {
+  background-color: transparent;
+  color: #555;
+}
+
+.menu-notification-item {
+  line-height: 1.5em;
+  padding: 0.3em 0 0.2em;
+  border-bottom: 1px dotted #333;
+  overflow: auto hidden;
+}
+
+.menu-notification-item:hover {
+  background-color: #a3ce30;
+  color: #333;
+}
+
+.menu-notification-none {
+  color: #555;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.menu-notification-none:hover {
+  background-color: transparent;
+}
+
+.menu-notification-unread {
+  background-color: #ffc1c1;
+}
 
 /*--FOOTER--*/
 footer {
