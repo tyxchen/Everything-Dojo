@@ -98,7 +98,7 @@
                             <?php echo $notif_data['data']['subject']; ?>
                           </a>
                           <p class="time"><?php echo date('D M d, Y g:i a', $notif['timestamp']); ?></p>
-                          <p class="menu-notification-mark-read" onclick="mark_read(<?php echo $notif['id']; ?>)">&#x2713;</p>
+                          <span class="menu-notification-mark-read" onclick="mark_read(<?php echo $notif['id']; ?>)" title="Mark as read">&#x2713;</span>
                         </div>
                       <?php } ?>
                       <div class="menu-notification-footer">
@@ -159,7 +159,7 @@
                             <?php echo $notif_data['data']['subject']; ?>
                           </a>
                           <p class="time"><?php echo date('D M d, Y g:i a', $notif['timestamp']); ?></p>
-                          <p class="menu-notification-mark-read" onclick="mark_read(<?php echo $notif['id']; ?>)">&#x2713;</p>
+                          <span class="menu-notification-mark-read" onclick="mark_read(<?php echo $notif['id']; ?>)" title="Mark as read">&#x2713;</span>
                         </div>
                       <?php } ?>
                       <div class="menu-notification-footer">
@@ -241,7 +241,7 @@
                             <?php echo $notif_data['data']['subject']; ?>
                           </a>
                           <p class="time"><?php echo date('D M d, Y g:i a', $notif['timestamp']); ?></p>
-                          <p class="menu-notification-mark-read" onclick="mark_read(<?php echo $notif['id']; ?>)">&#x2713;</p>
+                          <span class="menu-notification-mark-read" onclick="mark_read(<?php echo $notif['id']; ?>)" title="Mark as read">&#x2713;</span>
                         </div>
                       <?php } ?>
                       <div class="menu-notification-footer">
