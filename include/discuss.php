@@ -327,7 +327,7 @@ class discuss {
         'title' => $style['name'],
         'time' => $style['timestamp'],
         'edit_id' => $style['edit_id'],
-        'last_time' => $style['last_timestamp'],
+        'last_timestamp' => $style['last_timestamp'],
         'text' => $style['description'],
         'topic_id' => intval($topic_id)
       );
