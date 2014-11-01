@@ -103,7 +103,7 @@
           </nav>
           <?php } else { ?>
           <nav>
-            <?php if(isset($_SESSION['user_id'])) {
+            <?php if (isset($_SESSION['user_id'])) {
               global $notification;
               $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
               $notification_data = $notification->get_notifications($_SESSION['user_id'], 1000);
@@ -123,7 +123,7 @@
                       echo '<a href="javascript:;" onClick="mark_all_read(' . $_SESSION['user_id'] . ')" class="user-link menu-notification-link menu-notification-mark-all-read">Mark all read</a>';
                     ?>
                     <div class="menu-notification-body">
-                    <?php
+                      <?php
                       for ($i = 0; $i < count($notification_data); $i++) {
                         if ($i >= 5) break;
                         $notif = $notification_data[$i];
@@ -168,6 +168,13 @@
               });
               $(".user-menu").click(function (e) {
                 e.stopPropagation();
+              });
+              // modified from http://stackoverflow.com/a/3028037
+              $(document).click(function (e) {
+                if (!$(e.target).closest('.user-menu, .user').length) {
+                  $(".user-menu").hide();
+                  $(".user-active").removeClass("user-active");
+                }
               });
             </script>
           <?php } ?>
