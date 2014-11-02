@@ -45,7 +45,6 @@
 
 /*--GENERAL--*/
 #sidebar input:not([type='checkbox']),
-#sidebar select,
 #sidebar option {
   width: 100%;
   background-color: #212121;

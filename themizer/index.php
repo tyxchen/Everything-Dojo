@@ -5,12 +5,12 @@
     $_GET['mode'] = "index";
   }
 
-  if ($_GET["mode"] == "regular") {
+  if ($_GET["mode"] == "index") {
+    $title = "Themizer Index";
+  } elseif ($_GET["mode"] == "regular") {
     $title = "Themizer (Regular Mode)";
   } elseif ($_GET["mode"] == "development") {
     $title = "Themizer (Development Mode)";
-  } else {
-    $title = "Themizer (Index)";
   }
 
   session_start();
@@ -100,6 +100,7 @@
   <?php if ($_GET["mode"] == "regular") { ?>
   <link rel="stylesheet" href="/css/spectrum.min.css">
   <link rel="stylesheet" href="/css/prism.min.css">
+  <link rel="stylesheet" href="/css/selecter.min.css">
   <?php } else { ?>
   <link rel="stylesheet" href="/css/codemirror.min.css">
   <?php } ?>
@@ -116,6 +117,7 @@
   <script src="/js/spectrum-1.3.4.min.js" onload="$.fn.spectrum.load = false;"></script>
   <script src="/js/randomColor.min.js"></script>
   <script src="/js/prism.min.js"></script>
+  <script src="/js/selecter.min.js"></script>
   <script>
     $(function () {
       $('#lightbox, #close-button').click(function () {
@@ -125,6 +127,7 @@
         e.stopPropagation();
       });
       themizerRegular();
+      $("select").selecter();
     });
   </script>
   <?php } else { ?>
@@ -150,7 +153,7 @@
               <span class="collapsebutton"></span>
             </section>
             <section class="option-wrap">
-              <span class="title">Blog page</span>
+              <span class="title">Blog Page</span>
               <p>
                 <select name="view">
                   <option value="index">Index</option>
@@ -372,6 +375,7 @@
               $("#dev-style").html(input);
             });
           });
+          
           </script>
 
           <?php endif; ?>
