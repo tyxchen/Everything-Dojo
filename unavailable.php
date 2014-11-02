@@ -21,28 +21,96 @@
 
 <style>
   @import url(http://fonts.googleapis.com/css?family=Lato:400,700);
-  @-webkit-keyframes fullSpin{
+  @-o-keyframes fullSpin{
     0%{
+      -o-transform: rotateY(0deg) rotateX(0deg);
+      -ms-transform: rotateY(0deg) rotateX(0deg);
+      -moz-transform: rotateY(0deg) rotateX(0deg);
       -webkit-transform: rotateY(0deg) rotateX(0deg);
       transform: rotateY(0deg) rotateX(0deg);
     }
     50%{
+      -o-transform: rotateY(360deg) rotateX(0deg);
+      -ms-transform: rotateY(360deg) rotateX(0deg);
+      -moz-transform: rotateY(360deg) rotateX(0deg);
       -webkit-transform: rotateY(360deg) rotateX(0deg);
       transform: rotateY(360deg) rotateX(0deg);
     }
     100%{
+      -o-transform: rotateY(360deg) rotateX(360deg);
+      -ms-transform: rotateY(360deg) rotateX(360deg);
+      -moz-transform: rotateY(360deg) rotateX(360deg);
+      -webkit-transform: rotateY(360deg) rotateX(360deg);
+      transform: rotateY(360deg) rotateX(360deg);
+    }
+  }
+  @-moz-keyframes fullSpin{
+    0%{
+      -o-transform: rotateY(0deg) rotateX(0deg);
+      -ms-transform: rotateY(0deg) rotateX(0deg);
+      -moz-transform: rotateY(0deg) rotateX(0deg);
+      -webkit-transform: rotateY(0deg) rotateX(0deg);
+      transform: rotateY(0deg) rotateX(0deg);
+    }
+    50%{
+      -o-transform: rotateY(360deg) rotateX(0deg);
+      -ms-transform: rotateY(360deg) rotateX(0deg);
+      -moz-transform: rotateY(360deg) rotateX(0deg);
+      -webkit-transform: rotateY(360deg) rotateX(0deg);
+      transform: rotateY(360deg) rotateX(0deg);
+    }
+    100%{
+      -o-transform: rotateY(360deg) rotateX(360deg);
+      -ms-transform: rotateY(360deg) rotateX(360deg);
+      -moz-transform: rotateY(360deg) rotateX(360deg);
+      -webkit-transform: rotateY(360deg) rotateX(360deg);
+      transform: rotateY(360deg) rotateX(360deg);
+    }
+  }
+  @-webkit-keyframes fullSpin{
+    0%{
+      -o-transform: rotateY(0deg) rotateX(0deg);
+      -ms-transform: rotateY(0deg) rotateX(0deg);
+      -moz-transform: rotateY(0deg) rotateX(0deg);
+      -webkit-transform: rotateY(0deg) rotateX(0deg);
+      transform: rotateY(0deg) rotateX(0deg);
+    }
+    50%{
+      -o-transform: rotateY(360deg) rotateX(0deg);
+      -ms-transform: rotateY(360deg) rotateX(0deg);
+      -moz-transform: rotateY(360deg) rotateX(0deg);
+      -webkit-transform: rotateY(360deg) rotateX(0deg);
+      transform: rotateY(360deg) rotateX(0deg);
+    }
+    100%{
+      -o-transform: rotateY(360deg) rotateX(360deg);
+      -ms-transform: rotateY(360deg) rotateX(360deg);
+      -moz-transform: rotateY(360deg) rotateX(360deg);
       -webkit-transform: rotateY(360deg) rotateX(360deg);
       transform: rotateY(360deg) rotateX(360deg);
     }
   }
   @keyframes fullSpin{
     0%{
-      -webkit-transform: rotateY(0deg);
-      transform: rotateY(0deg);
+      -o-transform: rotateY(0deg) rotateX(0deg);
+      -ms-transform: rotateY(0deg) rotateX(0deg);
+      -moz-transform: rotateY(0deg) rotateX(0deg);
+      -webkit-transform: rotateY(0deg) rotateX(0deg);
+      transform: rotateY(0deg) rotateX(0deg);
+    }
+    50%{
+      -o-transform: rotateY(360deg) rotateX(0deg);
+      -ms-transform: rotateY(360deg) rotateX(0deg);
+      -moz-transform: rotateY(360deg) rotateX(0deg);
+      -webkit-transform: rotateY(360deg) rotateX(0deg);
+      transform: rotateY(360deg) rotateX(0deg);
     }
     100%{
-      -webkit-transform: rotateY(360deg);
-      transform: rotateY(360deg);
+      -o-transform: rotateY(360deg) rotateX(360deg);
+      -ms-transform: rotateY(360deg) rotateX(360deg);
+      -moz-transform: rotateY(360deg) rotateX(360deg);
+      -webkit-transform: rotateY(360deg) rotateX(360deg);
+      transform: rotateY(360deg) rotateX(360deg);
     }
   }
   html, body{
@@ -84,8 +152,15 @@
     height: 40%;
     min-width: 128px;
     min-height: 128px;
+    -o-animation: fullSpin 8000ms ease infinite;
+    -ms-animation: fullSpin 8000ms ease infinite;
+    -moz-animation: fullSpin 8000ms ease infinite;
     -webkit-animation: fullSpin 8000ms ease infinite;
-    animation: fullSpin 10000ms ease infinite;
+    animation: fullSpin 8000ms ease infinite;
+
+    -o-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
   }
