@@ -241,9 +241,9 @@
   -webkit-animation: none !important;
   animation: none !important;
 
-  -moz-box-shadow: 0 0 0 0 rgba(0,0,0,0);
-  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0);
-  box-shadow: 0 0 0 0 rgba(0,0,0,0);
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 /* Search icon (stolen from Nicholas Gallagher) */

@@ -5,52 +5,28 @@ Please do not plagiarize
 */
 
 /*Yosemite-like input box focus animation - thank you Apple!*/
-@-o-keyframes yosemite-box-focus{
-  0% {
-    -moz-box-shadow: 0 0 2em 1em rgba(255, 133, 9, 0);
-    -webkit-box-shadow: 0 0 2em 1em rgba(255, 133, 9, 0);
-    box-shadow: 0 0 2em 1em rgba(255, 133, 9, 0);
-  }
-  100% {
-    -moz-box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
-    -webkit-box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
-    box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
-  }
-}
-@-moz-keyframes yosemite-box-focus{
-  0% {
-    -moz-box-shadow: 0 0 2em 1em rgba(255, 133, 9, 0);
-    -webkit-box-shadow: 0 0 2em 1em rgba(255, 133, 9, 0);
-    box-shadow: 0 0 2em 1em rgba(255, 133, 9, 0);
-  }
-  100% {
-    -moz-box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
-    -webkit-box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
-    box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
-  }
-}
 @-webkit-keyframes yosemite-box-focus{
   0% {
-    -moz-box-shadow: 0 0 2em 1em rgba(255, 133, 9, 0);
-    -webkit-box-shadow: 0 0 2em 1em rgba(255, 133, 9, 0);
-    box-shadow: 0 0 2em 1em rgba(255, 133, 9, 0);
+    -moz-box-shadow: 0 0 2em 1em rgba(80, 154, 255, 0);
+    -webkit-box-shadow: 0 0 2em 1em rgba(80, 154, 255, 0);
+    box-shadow: 0 0 2em 1em rgba(80, 154, 255, 0);
   }
   100% {
-    -moz-box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
-    -webkit-box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
-    box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
+    -moz-box-shadow: 0 0 0 0.125em rgba(80, 154, 255, 1);
+    -webkit-box-shadow: 0 0 0 0.125em rgba(80, 154, 255, 1);
+    box-shadow: 0 0 0 0.125em rgba(80, 154, 255, 1);
   }
 }
 @keyframes yosemite-box-focus{
   0% {
-    -moz-box-shadow: 0 0 2em 1em rgba(255, 133, 9, 0);
-    -webkit-box-shadow: 0 0 2em 1em rgba(255, 133, 9, 0);
-    box-shadow: 0 0 2em 1em rgba(255, 133, 9, 0);
+    -moz-box-shadow: 0 0 2em 1em rgba(80, 154, 255, 0);
+    -webkit-box-shadow: 0 0 2em 1em rgba(80, 154, 255, 0);
+    box-shadow: 0 0 2em 1em rgba(80, 154, 255, 0);
   }
   100% {
-    -moz-box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
-    -webkit-box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
-    box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
+    -moz-box-shadow: 0 0 0 0.125em rgba(80, 154, 255, 1);
+    -webkit-box-shadow: 0 0 0 0.125em rgba(80, 154, 255, 1);
+    box-shadow: 0 0 0 0.125em rgba(80, 154, 255, 1);
   }
 }
 
@@ -165,15 +141,22 @@ textarea {
 }
 
 input:focus, textarea:focus {
+  outline: none;
+}
+
+[type="text"]:focus,
+[type="password"]:focus,
+textarea:focus {
   -ms-animation: yosemite-box-focus 250ms;
   -o-animation: yosemite-box-focus 250ms;
   -moz-animation: yosemite-box-focus 250ms;
   -webkit-animation: yosemite-box-focus 250ms;
   animation: yosemite-box-focus 250ms;
 
-  -moz-box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
-  -webkit-box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
-  box-shadow: 0 0 0 0.125em rgba(255, 133, 9, 1);
+  -moz-box-shadow: 0 0 0 0.125em rgba(80, 154, 255, 1);
+  -webkit-box-shadow: 0 0 0 0.125em rgba(80, 154, 255, 1);
+  box-shadow: 0 0 0 0.125em rgba(80, 154, 255, 1);
+  border-color: rgba(80, 154, 255, 1);
   outline: none;
 }
 
