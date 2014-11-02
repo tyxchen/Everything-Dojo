@@ -5,12 +5,12 @@
     $_GET['mode'] = "index";
   }
 
-  if ($_GET["mode"] == "index") {
-    $title = "Themizer Index";
-  } elseif ($_GET["mode"] == "regular") {
+  if ($_GET["mode"] == "regular") {
     $title = "Themizer (Regular Mode)";
   } elseif ($_GET["mode"] == "development") {
     $title = "Themizer (Development Mode)";
+  } else {
+    $title = "Themizer (Index)";
   }
 
   session_start();
@@ -153,32 +153,32 @@
               <span class="collapsebutton"></span>
             </section>
             <section class="option-wrap">
-              <span class="title">Blog Page</span>
-              <p>
+              <span class="title">Blog page</span>
+              <section data-name="blogPage">
                 <select name="view">
                   <option value="index">Index</option>
                   <option value="blog">Post</option>
                   <option value="post">Post New Entry</option>
                   <option value="comment">Post New Comment</option>
                 </select>
-              </p>
+              </section>
               <?php if ($_GET["mode"] == "regular"): ?>
               <span class="title">Base theme</span>
-              <p>
+              <section data-name="baseTheme">
                 <select name="base">
                   <?php
-                      foreach (scandir($_SERVER['DOCUMENT_ROOT'].'/blog/css') as $theme) {
-                        $disclude = array(".", "..", ".DS_Store", "blog-style.css");
+                    foreach (scandir($_SERVER['DOCUMENT_ROOT'].'/blog/css') as $theme) {
+                      $disclude = array(".", "..", ".DS_Store", "blog-style.css");
 
-                        if (!in_array($theme, $disclude) && $theme != "") {
-                            $name = strstr(str_replace("_", " ", $theme), '.', true); //Convert _ to spaces and remove .css
-                            $theme = strstr($theme, '.', true); //Remove .css from [value] as themizer.js adds it back in
-                            echo '<option value="'.$theme.'">'.$name."</option>";
-                        }
+                      if (!in_array($theme, $disclude) && $theme != "") {
+                        $name = strstr(str_replace("_", " ", $theme), '.', true); //Convert _ to spaces and remove .css
+                        $theme = strstr($theme, '.', true); //Remove .css from [value] as themizer.js adds it back in
+                        echo '<option value="'.$theme.'">'.$name."</option>";
                       }
+                    }
                   ?>
                 </select>
-              </p>
+              </section>
               <?php endif; ?>
             </section>
           </section>
@@ -375,7 +375,7 @@
               $("#dev-style").html(input);
             });
           });
-          
+
           </script>
 
           <?php endif; ?>
