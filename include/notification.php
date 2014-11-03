@@ -16,11 +16,15 @@ class notification {
     return $count;
   }
 
-  function get_notifications($user_id, $limit = 5) {
-    $query = "SELECT * FROM `notifications` WHERE `user_id` = :user_id ORDER BY `timestamp` DESC LIMIT $limit";
+  function get_notifications($user_id, $limit = 5, $only_unread = FALSE) {
+    if ($only_unread) {
+      $query = "SELECT * FROM `notifications` WHERE `user_id` = :user_id AND `read` = 0 ORDER BY `timestamp` DESC LIMIT $limit";
+    } else {
+      $query = "SELECT * FROM `notifications` WHERE `user_id` = :user_id ORDER BY `timestamp` DESC LIMIT $limit";
+    }
     $sth = $this->dbc->prepare($query);
     $sth->execute(array(
-      ':user_id'  => $user_id
+      ':user_id' => $user_id
     ));
 
     $result = $sth->fetchAll(PDO::FETCH_ASSOC);

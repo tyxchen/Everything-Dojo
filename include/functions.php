@@ -34,6 +34,17 @@
     return $name;
   }
 
+  function get_user_info($user_id) { /*Would like to see this and get_user() combined in the near future*/
+    global $dbc;
+
+    $sth = $dbc->prepare("SELECT * FROM `users` WHERE `id` = :id");
+    $sth->execute(array(
+      ':id' => intval($user_id)
+    ));
+    $user = $sth->fetch(PDO::FETCH_ASSOC);
+    return $user;
+  }
+
   function get_all_user($user_id) {
     global $dbc;
 
@@ -168,6 +179,7 @@
 
   // Password and salt generation
   function PwdHash($pwd) {
+//    include("include/password.php");
     return password_hash($pwd, PASSWORD_BCRYPT);
   }
 
@@ -268,71 +280,12 @@
     return $result;
   }
 
-
-  /*Notifications function (removes extra unnecessary code from PHP pages)*/
-  function notifications() {
-    global $notification;
-    global $notification_data;
-
-    echo
-        '<div id="notifications">
-        <div class="notification-arrow-up"></div>
-        <div id="notification-body">
-          <div id="notification-header">
-            <b>Notifications:</b>
-              <a href="javascript:;" style="float: right; margin-right: 2vw;" onClick="mark_all_read('.$_SESSION['user_id'].')">Mark all read</a>
-          </div>';
-          if (count($notification_data) == 0) {
-          echo '
-          <a href="javascript:;">
-          <div id="notification-0" class="notification read">
-            <div class="notification-color" style="background-color: #ccc"></div>
-            <div class="notification-text">No notifications</div>
-          </div>
-          </a>';
-          } else {
-            foreach ($notification_data as $notif) {
-              $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
-              echo '
-              <a href="'.$notif_data['url'].'" onClick="mark_read('.$notif['id'].')">
-              <div id="notification-'.$notif['id'].'" class="notification ';
-              if ($notif['read'] == 0) { echo 'unread'; } else { echo 'read'; }
-              echo
-              '">
-              <div class="notification-color" style="background-color: #'.$notif_data['data']['color'].'">'.substr($notif_data['data']['location'], 0, 1).'</div>
-              <div class="notification-text">
-                '.$notif_data['data']['subject'].'
-              </div>
-              <p class="time">
-                 '.date('D M d, Y g:i a', $notif['timestamp']).'
-              </p>
-            </div>
-          </a>';
-            }
-          }
-          echo '
-          <div id="notification-footer">
-            <a href="http://www.everythingdojo.com/notifications.php">See All</a>
-          </div>
-        </div>
-      </div>';
-  }
-
-  function notificationData() {
-    global $notification;
-    global $notification_data;
-    global $unread_count;
-    if ($_SESSION['user_id'] != NULL) {
-      $unread_count = $notification->count_unread($_SESSION['user_id']);
-      $notification_data = $notification->get_notifications($_SESSION['user_id']);
-    }
-  }
-
-
-  function gravatar($email) {
+  function gravatar($user_id) {
+    $row = get_user_info($user_id);
+    $email = $row['user_email'];
     $hash = md5(strtolower(trim($email)));
-    $user['photo'] = "http://www.gravatar.com/avatar/".$hash."?d=identicon";
-    return $user;
+    $avatar = "http://www.gravatar.com/avatar/".$hash."?d=identicon";
+    return $avatar;
   }
 
 ?>

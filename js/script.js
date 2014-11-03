@@ -465,21 +465,8 @@ function tryit () {
 /*******************
  *  NOTIFICATIONS  *
  *******************/
-$(function () {
-  $("#notifications").hide();
 
-  $('body').click(function (e) {
-    if($(e.target).closest('.notification-link, #notifications').length === 0) {
-      $("#notifications").hide("fast", "swing");
-    }
-  });
-});
-
-function show_notifications() {
-  $("#notifications").toggle(350);
-}
-
-function mark_read(id) {
+function mark_read (id) {
   $.ajax({
     url: '/include/ajax_handler.php',
     data: {
@@ -487,11 +474,25 @@ function mark_read(id) {
       notification_id: id
     },
     type: 'post',
-    success: function() {}
+    success: function () {
+      $("#menu-notification-" + id).removeClass("menu-notification-unread");
+      $("#menu-notification-" + id + " .menu-notification-mark-read").addClass("marked");
+      $("#notification-" + id).removeClass("unread").addClass("read");
+
+      $(".notification-unread-count").each(function () {
+        $(this).text((parseInt($(this).text()) - 1).toString());
+      });
+
+      setTimeout(function () {
+        $("#menu-notification-" + id).fadeOut(1000, function () {
+          $(this).remove();
+        });
+      }, 2000);
+    }
   });
 }
 
-function mark_all_read(user_id) {
+function mark_all_read (user_id) {
   $.ajax({
     url: '/include/ajax_handler.php',
     data: {
@@ -499,8 +500,19 @@ function mark_all_read(user_id) {
       user_id: user_id
     },
     type: 'post',
-    success: function() {
-      location.reload();
+    success: function () {
+      $(".menu-notification-unread").removeClass("menu-notification-unread");
+      $(".notification-item.unread").removeClass("unread").addClass("read");
+      $(".notification-unread-count").text("0");
+      $(".notification-left-unread-count").remove();
+      $(".user-notification-status").removeClass("new");
+
+      setTimeout(function () {
+        $(".menu-notification-item, .menu-notification-mark-all-read").fadeOut(1000, function () {
+          $(".menu-notification-body").html('<div id="menu-notification-0" class="menu-notification-item menu-notification-none"><div class="menu-notification-text">No new notifications</div></div>');
+        });
+      }, 2000);
+
     }
   });
 }
@@ -549,6 +561,30 @@ function getContent (timestamp) {
     }
   });
 }
+
 $(function () {
+
+  // Toggling user menu
+
+  $(".user").click(function (e) {
+    if (!$(e.target).closest(".user-menu").length) {
+      if ($(".user-menu").is(":visible")) {
+        $(".user-menu").hide();
+        $(this).removeClass("user-active");
+      } else {
+        $(".user-menu").show();
+        $(this).addClass("user-active");
+      }
+    }
+  });
+  // modified from http://stackoverflow.com/a/3028037
+  $(document).click(function (e) {
+    if (!$(e.target).closest('.user-menu, .user').length) {
+      $(".user-menu").hide();
+      $(".user-active").removeClass("user-active");
+    }
+  });
+
+  // start polling
   getContent();
 });

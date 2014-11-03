@@ -48,6 +48,25 @@
   padding-top: 0;
 }
 
+/**
+ * Menus
+ */
+
+.user {
+  right: 1vw;
+}
+
+.user-info {
+  color: #fff;
+}
+
+.user-active img {
+  box-shadow: 0 0 0.5em #fff;
+  /* autoprefixer: off */
+  -webkit-box-shadow: 0 0 1em #fff;
+  /* autoprefixer: on */
+}
+
 
 /*--NOTIFICATIONS--*/
 #notifications {
@@ -267,9 +286,11 @@
 
 /*--TOPICS--*/
 #topic-main {
+  position: relative;
   border: 1px solid black;
   border-radius: 5px 0 0 5px;
-  padding: 1em 1em;
+  padding: 1em;
+  padding-left: 8vh;
 }
 
 #discuss-topic-header {
@@ -334,7 +355,7 @@
 .topic-reply {
   position: relative;
   border: 1px solid black;
-
+  padding-left: 6vh; /*for avatars*/
   border-radius: 0;
   margin-left: 2.3em;
   border-left: none;
@@ -380,9 +401,17 @@
   padding-bottom: 1em;
 }
 
-.avatar {
+.unicorn {
   float: right;
   border-radius: 10%;
+}
+
+.avatar {
+  position: absolute;
+  top: 0.8rem;
+  left: 1rem;
+  max-height: 5vh;
+  max-width: 5vh;
 }
 
 .topic-text > pre[class*="language-"] {
@@ -427,6 +456,15 @@
 .topic-reply:target > a {
   color: #a3a312;
   opacity: 0.8;
+}
+
+.reply-avatar {
+  float: left;
+}
+
+.topic-avatar {
+  float: left;
+  margin-right: 3vw;
 }
 
 /*--POSTING--*/

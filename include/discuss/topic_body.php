@@ -37,6 +37,7 @@
   </div>
   <div id="topic-main">
     <?php if (isset($_GET["unicorns"])) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?> ><?php } ?>
+    <?php echo '<img class="avatar" src="'.gravatar($topic['user_id']).'"/>'; //Avatar ?>
     <div class="topic-text" id="topic-main-text">
       <?php $user = get_user(intval($topic['user_id'])); ?>
       <h2 style="display:inline-block; margin-right:0.5em;"><?php echo $topic['title'];?></h2>
@@ -88,10 +89,11 @@
   <?php if (!empty($posts)) { ?>
     <?php $thankedposts = [];
     // indice starts at 1 since get_posts deletes the first element (the root post)
-    for ($i = 1; $i <= sizeof($posts); $i++) {
+    for ($i = (($typearg == 1) ? 0 : 1); $i <= (($typearg == 1) ? sizeof($posts)-1 : sizeof($posts)); $i++) {
       $post = $posts[$i];?>
-      <div class="topic-reply" id="<?php echo "$i"; ?>">
-        <?php if (isset($_GET["unicorns"])) { ?><img class="avatar" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?>><?php } ?>
+      <div class="topic-reply" id="<?php echo $i; ?>">
+        <?php if (isset($_GET["unicorns"])) { ?><img class="unicorn" src=<?php echo "\"http://unicornify.appspot.com/avatar/" . md5(get_all_user(intval($post["user_id"]))["user_email"]) . "?s=128\"" ?>><?php } ?>
+        <img class="avatar" src="<?php echo gravatar($post['user_id']) ?>" />
         <div class="topic-text topic-reply-text" <?php if($post == end($posts)) echo 'id="last"'; ?>>
           <?php $user = get_all_user($post['user_id']);?>
           <div class="topic-reply-top" <?php if ($post['type'] == 1){ echo "style=\"padding:0.35em;\""; }?> >
@@ -114,7 +116,7 @@
           </div>
           <?php
             if ($post['type'] == 0) {
-              echo "<div id='topic-reply-message-".$post['post_id']."'>".$post['text']."</div>";
+              echo "<div id='topic-reply-message-{$post['post_id']}'>{$post['text']}</div>";
             }
             else{
               echo

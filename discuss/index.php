@@ -11,11 +11,6 @@
   <script>$(function(){\$('pre code').each(function(){var h=$(this).html();h=h.replace(/&amp;quot;/g,'\"').replace(/&amp;#039;/g,'\'');$(this).html(h)})})</script>";
   get_header();
 
-  if (isset($_SESSION['user_id'])) {
-    $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
-    $notification_data = $notification->get_notifications($_SESSION['user_id']);
-  }
-
   if (empty($_GET['view'])) {
     $view = '';
   } else {
@@ -55,14 +50,18 @@
 ?>
 <section id="content">
   <p class="msg" style="display:none"></p>
-  <?php notifications(); ?>
   <div id="navigation">
     <nav class="discuss-nav">
       <ul>
+        <?php if (!isset($_SESSION['user_id'])) { ?>
         <li><a href="/" id="nav-home">EvDo Home</a></li>
+<<<<<<< HEAD
       <?php if (isset($_SESSION['user_id'])) { ?>
         <li><a href="javascript:;" class="notification-link" onClick="show_notifications()">Notifications (<?php echo $notification_unread_count; ?>)</a></li>
       <?php } ?>
+=======
+        <?php } ?>
+>>>>>>> feature/avatar
       </ul>
     </nav>
   </div>

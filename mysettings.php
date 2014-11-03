@@ -56,16 +56,9 @@ $rs_settings->execute(array($_SESSION['user_id']));
   //dbc already included
   page_protect();
 
-  if (isset($_SESSION['user_id'])) {
-    $notification_unread_count = $notification->count_unread($_SESSION['user_id']);
-    $notification_data = $notification->get_notifications($_SESSION['user_id']);
-  }
-
   get_header(0);
 ?>
 <section id="content">
-  <?php notifications(); ?>
-
   <?php //spit out all errors
   if (!empty($err)) {
     echo "<p id=\"errors\">";
@@ -79,7 +72,8 @@ $rs_settings->execute(array($_SESSION['user_id']));
     echo "<div class=\"msg\">".$msg[0]."</div>";
   } else { ?>
   <h2>My Settings</h2>
-  <p>Here you can make changes to your profile. Right now, the only thing you can change is your password.</p>
+  <p>Here you can make changes to your profile. Right now, the only things you can change are your password and profile avatar.</p>
+  <p>Change your avatar by <a href="https://gravatar.com/connect/" target="_blank">signing into Gravatar through Wordpress.</a></p>
   <form name="pform" id="pform" method="post" action="mysettings.php">
     <label>Old Password</label>
     <input type="password" name="pwd_old">
