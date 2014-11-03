@@ -1,0 +1,57 @@
+.flash{
+  -moz-animation: flash 1s ease-out;
+  -moz-animation-iteration-count: 4;
+
+  -webkit-animation: flash 1s ease-out;
+  -webkit-animation-iteration-count: 4;
+
+  -ms-animation: flash 1s ease-out;
+  -ms-animation-iteration-count: 4;
+
+}
+
+@keyframes flash {
+    0% { background-color: none;}
+    50% { background-color: red;}        
+    100% {background-color: none;}
+}
+
+@-webkit-keyframes flash {
+    0% { background-color: none;}
+    50% { background-color: red;}        
+    100% {background-color: none;}
+}
+
+@-moz-keyframes flash {
+    0% { background-color: none;}
+    50% { background-color: red;}        
+    100% {background-color: none;}
+}
+
+@-o-keyframes flash {
+    0% { background-color: none;}
+    50% { background-color: red;}        
+    100% {background-color: none;}
+}
+
+img {
+  float: right;
+}
+
+.name {
+  font-family: monospace;
+  font-size: 800%;
+  color: whitesmoke;
+}
+
+.exit {
+  font-size: 300%;
+  font-family: sans-serif;
+  color: whitesmoke;
+}
+
+#countdown {
+  color: white;
+  font-family: monospace;
+  font-size: 200%;
+}

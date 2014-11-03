@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/unauthorized.min.css">
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <script>
+      $(function() {
+        $("body").children().css("display", "none");
+        $("body").css("background-color", "blue");
+        
+        $("body").addClass("flash");
+        setTimeout( function(){
+          $("body").removeClass("flash");
+        }, 4000);
+        
+        $("body").css("background-color", "#333");
+        $("body").children().delay(4000).fadeIn(400);
+        
+        function countdown(element, seconds) {
+          var time = seconds;
+          var interval = setInterval(function() {
+            var el = document.getElementById(element);
+            if(time == 0) {
+              clearInterval(interval);
+              window.location = "http://www.everythingdojo.com/";
+            }
+            var seconds = time % 60;
+            if (seconds < 10) seconds = "0" + seconds; 
+            var text = seconds;
+            el.innerHTML = text;
+            time--;
+          }, 1000);
+        }
+        
+        countdown("countdown", 8);
+      });
+    </script>
+  </head>
+  <body>
+    <img src="/images/camera.svg"/>
+    <div class="name">CRACKER!</div>
+    <div class="exit">We will shove you off this page in <span id="countdown"></span> seconds.</div>
+  </body>
+</html>
