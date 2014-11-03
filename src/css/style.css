@@ -340,6 +340,11 @@ nav ul a:hover {
   cursor: pointer;
 }
 
+#account {
+  top: -3vh;
+  font-size: 1.4em;
+}
+
 .user img { /*Copied from logo*/
   display: inline-block;
   min-width: 2.5rem;
@@ -437,6 +442,11 @@ nav ul a:hover {
   max-height: 80vh;
   padding: 0.5em 0;
   margin: 0;
+}
+
+.account-menu {
+  top: 11vh;
+  left: 5vh;
 }
 
 .menu-link {

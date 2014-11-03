@@ -342,6 +342,16 @@
                 </ul>
               </div>
             </div>
+            <?php } else { ?>
+            <div class="user" id="account">
+              Account
+              <div class="user-menu account-menu">
+                <ul class="user-menu-inner">
+                  <li><a href="/login.php" id="menu-login" class="menu-link">Login</a></li>
+                  <li><a href="/register.php" id="menu-register" class="menu-link">Register</a></li>
+                </ul>
+              </div>
+            </div>
             <?php } ?>
           </nav>
   <?php
