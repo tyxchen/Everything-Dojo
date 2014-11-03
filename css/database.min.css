@@ -233,6 +233,17 @@
 .search:focus {
   width: 50%;
   color: #000;
+
+  /* Next person who looks at this and decides that the Yosemite-like textbox animation should apply to the search box, uncomment the animation + boxshadow lines below. */
+  -ms-animation: none !important;
+  -o-animation: none !important;
+  -moz-animation: none !important;
+  -webkit-animation: none !important;
+  animation: none !important;
+
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 /* Search icon (stolen from Nicholas Gallagher) */
