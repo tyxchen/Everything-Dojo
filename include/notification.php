@@ -50,6 +50,17 @@ class notification {
     return $data;
   }
 
+  function get_last_notification_timestamp($user_id) {
+    $query = "SELECT `timestamp` FROM `notifications` WHERE `user_id` = :user_id ORDER BY `id` DESC LIMIT 1";
+    $sth = $this->dbc->prepare($query);
+    $sth->execute(array(
+      ':user_id' => $user_id
+    ));
+
+    $result = $sth->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
   function insert_notification($type_id, $item_id, $user_id) {
     echo $type_id . '~' . $item_id . '~' . $user_id;
     $query = "INSERT INTO `notifications` (`notification_type`, `item_id`, `user_id`, `timestamp`) VALUES (:type, :item, :user, :time)";

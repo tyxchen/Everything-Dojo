@@ -1,8 +1,47 @@
 <?php
-  $title = "Notifications";
+
   include("include/include.php");
-  $extra_js = "<script>$(function(){\$('.notification-link').hide()})</script>";
+
   session_start();
+
+// main loop
+if ((isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === "xmlhttprequest")) {
+
+  if (isset($_SESSION['user_id'])) {
+    $timestamp = isset($_GET['timestamp']) ? intval($_GET['timestamp']) : NULL;
+    $last_notification_timestamp = $notification->get_last_notification_timestamp($_SESSION['user_id']);
+
+    if ($timestamp === NULL || $timestamp > $last_notification_timestamp) {
+      $notif = $notification->get_notifications($_SESSION['user_id'], 1)[0];
+      $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
+
+      $result = array(
+        'id' => $notif['id'],
+        'timestamp' => date('D M d, Y g:i a', $notif['timestamp']),
+        'data' => array(
+          'text' => $notif_data['data']['subject'],
+          'color' => $notif_data['data']['color'],
+          'url' => $notif_data['url'],
+          'read' => $notif['read']
+        )
+      );
+
+      $json = json_encode($result);
+
+      echo $json;
+    }
+  } else
+    echo json_encode(array('data'=>array('text' => 'Hey, you\'re not logged in!')));
+
+  exit();
+}
+
+
+?>
+
+<?php
+  $title = "Notifications";
+  $extra_js = "<script>$(function(){\$('.notification-link').hide()})</script>";
 
   if (isset($_SESSION['user_id'])) {
     $notification_unread_count = $notification->count_unread($_SESSION['user_id']);

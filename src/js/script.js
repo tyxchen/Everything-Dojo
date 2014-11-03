@@ -504,3 +504,38 @@ function mark_all_read(user_id) {
     }
   });
 }
+
+// from https://github.com/panique/php-long-polling
+
+function getContent (timestamp) {
+  var queryString = {'timestamp' : timestamp};
+  $.ajax({
+    type: 'GET',
+    url: '/notifications.php',
+    data: queryString,
+    success: function (data) {
+      // put result data into "obj"
+      var resp = JSON.parse(data);
+
+      // put the data_from_file into #response
+      // call the function again, this time with the timestamp we just got from server.php
+      if (resp.timestamp !== 0 && parseInt(resp.data.read) !== 0) {
+        var content = '<div id="menu-notification-' + resp.id + '" class="menu-notification-item menu-notification-unread" style="border-left: 3px solid #' + resp.data.color + '">' +
+                          '<a href="' + resp.data.url + '" class="menu-link menu-notification-text">' + resp.data.text + '</a>' +
+                          '<p class="time">' + resp.timestamp + '</p>' +
+                          '<span class="menu-notification-mark-read" onclick="mark_read(' + resp.id + ')" title="Mark as read">&#x2713;</span>' +
+                        '</div>';
+        $(".menu-notification-body").append(content);
+        $(".user-notification-status").addClass("new");
+        $(".notification-unread-count").each(function () {
+          $(this).text(parseInt($(this).text()) + 1);
+        });
+      }
+    }
+  });
+}
+$(function () {
+  setInterval(function () {
+    getContent();
+  }, 5000);
+});
