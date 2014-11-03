@@ -508,18 +508,17 @@ function mark_all_read(user_id) {
 // from https://github.com/panique/php-long-polling
 
 function getContent (timestamp) {
-  var queryString = {'timestamp' : timestamp};
+  var queryString;
+  queryString.unix_time = timestamp;
+
   $.ajax({
     type: 'GET',
     url: '/notifications.php',
     data: queryString,
     success: function (data) {
-      // put result data into "obj"
       var resp = JSON.parse(data);
 
-      // put the data_from_file into #response
-      // call the function again, this time with the timestamp we just got from server.php
-      if (resp.timestamp !== 0 && parseInt(resp.data.read) !== 0) {
+      if (resp.hasOwnProperty("data") && parseInt(resp.data.read) !== 0) {
         var content = '<div id="menu-notification-' + resp.id + '" class="menu-notification-item menu-notification-unread" style="border-left: 3px solid #' + resp.data.color + '">' +
                           '<a href="' + resp.data.url + '" class="menu-link menu-notification-text">' + resp.data.text + '</a>' +
                           '<p class="time">' + resp.timestamp + '</p>' +
@@ -531,11 +530,14 @@ function getContent (timestamp) {
           $(this).text(parseInt($(this).text()) + 1);
         });
       }
+
+      // call function again w/ 5 second timeout
+      setTimeout(function () {
+        getContent(resp.unix_time);
+      }, 5000);
     }
   });
 }
 $(function () {
-  setInterval(function () {
-    getContent();
-  }, 5000);
+  getContent();
 });

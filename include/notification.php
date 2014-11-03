@@ -58,7 +58,7 @@ class notification {
     ));
 
     $result = $sth->fetch(PDO::FETCH_ASSOC);
-    return $result;
+    return $result['timestamp'];
   }
 
   function insert_notification($type_id, $item_id, $user_id) {
