@@ -520,11 +520,22 @@ function getContent (timestamp) {
 
       if (resp.hasOwnProperty("data") && parseInt(resp.data.read) !== 0) {
         var content = '<div id="menu-notification-' + resp.id + '" class="menu-notification-item menu-notification-unread" style="border-left: 3px solid #' + resp.data.color + '">' +
-                          '<a href="' + resp.data.url + '" class="menu-link menu-notification-text">' + resp.data.text + '</a>' +
-                          '<p class="time">' + resp.timestamp + '</p>' +
-                          '<span class="menu-notification-mark-read" onclick="mark_read(' + resp.id + ')" title="Mark as read">&#x2713;</span>' +
-                        '</div>';
-        $(".menu-notification-body").append(content);
+          '<a href="' + resp.data.url + '" class="menu-link menu-notification-text">' + resp.data.text + '</a>' +
+          '<p class="time">' + resp.timestamp + '</p>' +
+          '<span class="menu-notification-mark-read" onclick="mark_read(' + resp.id + ')" title="Mark as read">&#x2713;</span>' +
+        '</div>';
+        if (!!$(".menu-notification-body").length) {
+          $(".menu-notification-footer").before(content);
+        } else {
+          $(".menu-notification-none").remove();
+          $(".menu-notification").append('<a href="javascript:;" onClick="mark_all_read(' + resp.user_id + ')" class="menu-link menu-notification-mark-all-read">Mark all read</a>' +
+          '<div class="menu-notification-body">' +
+            content +
+            '<div class="menu-notification-footer">' +
+              '<a href="/notifications.php" class="menu-link menu-notification-link">See All</a>' +
+            '</div>' +
+          '</div>');
+        }
         $(".user-notification-status").addClass("new");
         $(".notification-unread-count").each(function () {
           $(this).text(parseInt($(this).text()) + 1);

@@ -17,6 +17,7 @@ if ((isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
 
       $result = array(
         'id' => $notif['id'],
+        'user_id' => $_SESSION['user_id'],
         'timestamp' => date('D M d, Y g:i a', $notif['timestamp']),
         'unix_time' => $last_notification_timestamp,
         'data' => array(
