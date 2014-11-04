@@ -13,13 +13,21 @@
   }
   $extra_style .= "<link rel=\"stylesheet\" href=\"/css/slidersidebar.min.css\">
     <link href=\"/css/fonts.min.css\" rel=\"stylesheet\">";
-  $extra_js = "<script>
+  $extra_js = '<script>
   $(function () {
     tryit();
-  });</script>";
+  });</script>';
 
   get_header(1);
 ?>
+
+<link rel="stylesheet" href="/css/selecter.min.css">
+<script src="/js/selecter.min.js"></script>
+<script>
+$(function() {
+  $("select").selecter();
+});
+</script>
 
 <aside id="sidebar">
   <h2 id="sideheadbar" class="tryit">Try-It</h2>

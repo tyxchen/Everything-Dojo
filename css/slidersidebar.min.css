@@ -45,7 +45,6 @@
 
 /*--GENERAL--*/
 #sidebar input:not([type='checkbox']),
-#sidebar select,
 #sidebar option {
   width: 100%;
   background-color: #212121;
@@ -377,6 +376,54 @@
 .sp-alpha-inner {
   background-image: -webkit-linear-gradient(left, transparent, black) !important;
   background-image: linear-gradient(to right, transparent, black) !important;
+}
+
+/**
+ * Selecter
+ */
+
+.selecter,
+.selecter-selected,
+.selecter-options {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.selecter-selected,
+.selecter-item {
+  font-size: 0.75em;
+  background-color: #1c1c1c !important;
+  color: #fafafa !important;
+  border-color: #333 !important;
+}
+
+.selecter-selected:hover {
+  border-color: #444 !important;
+}
+
+.selecter.open.selecter-selected,
+.selecter.focus .selecter-selected {
+  background-color: #222 !important;
+  border-color: #555 !important;
+}
+
+.selecter-options {
+  background-color: transparent !important;
+  border-width: 1px !important;
+  border-color: #555 !important;
+}
+
+.selecter-item {
+  background-color: #333 !important;
+  border-color: #444 !important
+}
+
+.selecter-item.selected {
+  background-color: #444 !important;
+}
+
+.selecter-item:hover {
+  background-color: #474747 !important;
 }
 
 

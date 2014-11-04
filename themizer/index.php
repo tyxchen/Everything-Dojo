@@ -100,6 +100,7 @@
   <?php if ($_GET["mode"] == "regular") { ?>
   <link rel="stylesheet" href="/css/spectrum.min.css">
   <link rel="stylesheet" href="/css/prism.min.css">
+  <link rel="stylesheet" href="/css/selecter.min.css">
   <?php } else { ?>
   <link rel="stylesheet" href="/css/codemirror.min.css">
   <?php } ?>
@@ -116,6 +117,7 @@
   <script src="/js/spectrum-1.3.4.min.js" onload="$.fn.spectrum.load = false;"></script>
   <script src="/js/randomColor.min.js"></script>
   <script src="/js/prism.min.js"></script>
+  <script src="/js/selecter.min.js"></script>
   <script>
     $(function () {
       $('#lightbox, #close-button').click(function () {
@@ -125,6 +127,7 @@
         e.stopPropagation();
       });
       themizerRegular();
+      $("select").selecter();
     });
   </script>
   <?php } else { ?>
@@ -151,31 +154,31 @@
             </section>
             <section class="option-wrap">
               <span class="title">Blog page</span>
-              <p>
+              <section data-name="blogPage">
                 <select name="view">
                   <option value="index">Index</option>
                   <option value="blog">Post</option>
                   <option value="post">Post New Entry</option>
                   <option value="comment">Post New Comment</option>
                 </select>
-              </p>
+              </section>
               <?php if ($_GET["mode"] == "regular"): ?>
               <span class="title">Base theme</span>
-              <p>
+              <section data-name="baseTheme">
                 <select name="base">
                   <?php
-                      foreach (scandir($_SERVER['DOCUMENT_ROOT'].'/blog/css') as $theme) {
-                        $disclude = array(".", "..", ".DS_Store", "blog-style.css");
+                    foreach (scandir($_SERVER['DOCUMENT_ROOT'].'/blog/css') as $theme) {
+                      $disclude = array(".", "..", ".DS_Store", "blog-style.css");
 
-                        if (!in_array($theme, $disclude) && $theme != "") {
-                            $name = strstr(str_replace("_", " ", $theme), '.', true); //Convert _ to spaces and remove .css
-                            $theme = strstr($theme, '.', true); //Remove .css from [value] as themizer.js adds it back in
-                            echo '<option value="'.$theme.'">'.$name."</option>";
-                        }
+                      if (!in_array($theme, $disclude) && $theme != "") {
+                        $name = strstr(str_replace("_", " ", $theme), '.', true); //Convert _ to spaces and remove .css
+                        $theme = strstr($theme, '.', true); //Remove .css from [value] as themizer.js adds it back in
+                        echo '<option value="'.$theme.'">'.$name."</option>";
                       }
+                    }
                   ?>
                 </select>
-              </p>
+              </section>
               <?php endif; ?>
             </section>
           </section>
@@ -372,6 +375,7 @@
               $("#dev-style").html(input);
             });
           });
+
           </script>
 
           <?php endif; ?>
