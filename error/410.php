@@ -8,12 +8,12 @@
   <h1 class="error-header">410 Gone</h1>
   <p class="error-explain">We're sorry, but the page you were looking for has been nuked from our servers. But since you're already here, why not:</p>
   <ul class="error-action">
-    <li>Go to the <a class="index-link" href="/">index</a>.</li>
-    <li>Take a look at all the fancy-schmancy styles available to you on the <a class="db-link" href="/database/">Theme Database</a> page.</li>
+    <li>Go to the <a class="index-link" href="/">home page</a>.</li>
+    <li>Take a look at all the fancy-schmancy styles available to you in the <a class="db-link" href="/database/">Database</a>.</li>
     <li>Build your own theme with the <a class="themizer-link" href="/themizer/">Themizer</a>.</li>
     <li>If you want to test out a theme before using it on your blog, <a class="tryit-link" href="/tryit/">Try-it</a> is the place for you.</li>
-    <li>Talk about stuff (like themes, HTML, and rants on 404 pages) on the <a class="discussion-link" href="/discuss/">fora</a> of this site.</li>
-    <li>Report this page to us at <a class="email" href="mailto:everythingdojo@gmail.com">everythingdojo@gmail.com</a></li>
+    <li>Talk about stuff (like themes, HTML, and rants on 410 pages) in the <a class="discussion-link" href="/discuss/">Discuss</a> fora.</li>
+    <li>Report this error to us through the <a href="/contact.php">contact form</a>.</li>
   </ul>
 </section>
 
