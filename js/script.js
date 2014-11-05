@@ -520,46 +520,90 @@ function mark_all_read (user_id) {
 // from https://github.com/panique/php-long-polling
 
 function getContent (timestamp) {
-  var queryString;
-  queryString.unix_time = timestamp;
+  if (!!window.EventSource) {
+    var sse = new EventSource("/ajax/stream.php");
 
-  $.ajax({
-    type: 'GET',
-    url: '/notifications.php',
-    data: queryString,
-    success: function (data) {
-      var resp = JSON.parse(data);
+    sse.addEventListener('message', function (e) {
+      var resp = JSON.parse(e.data);
 
-      if (resp.hasOwnProperty("data") && parseInt(resp.data.read) !== 0) {
-        var content = '<div id="menu-notification-' + resp.id + '" class="menu-notification-item menu-notification-unread" style="border-left: 3px solid #' + resp.data.color + '">' +
-          '<a href="' + resp.data.url + '" class="menu-link menu-notification-text">' + resp.data.text + '</a>' +
-          '<p class="time">' + resp.timestamp + '</p>' +
-          '<span class="menu-notification-mark-read" onclick="mark_read(' + resp.id + ')" title="Mark as read">&#x2713;</span>' +
-        '</div>';
-        if (!!$(".menu-notification-body").length) {
-          $(".menu-notification-footer").before(content);
-        } else {
-          $(".menu-notification-none").remove();
-          $(".menu-notification").append('<a href="javascript:;" onClick="mark_all_read(' + resp.user_id + ')" class="menu-link menu-notification-mark-all-read">Mark all read</a>' +
-          '<div class="menu-notification-body">' +
-            content +
-            '<div class="menu-notification-footer">' +
-              '<a href="/notifications.php" class="menu-link menu-notification-link">See All</a>' +
-            '</div>' +
-          '</div>');
+      console.log(resp.timestamp);
+
+      if (resp.hasOwnProperty("data") && typeof resp.data === "object" && parseInt(resp.data.read) === 0) {
+        parseContent(resp);
+      }
+    }, false);
+
+  } else { // screw you IE for not supporting SSEs, so here's a bunch of short polling for you because we couldn't get COMET or WebSockets to work
+    var queryString = {},
+        timeout;
+    queryString.timestamp = timestamp || 0;
+
+    $.ajax({
+      type: 'GET',
+      url: '/notifications.php',
+      data: queryString,
+      success: function (data) {
+        var resp = JSON.parse(data);
+
+
+        if (resp.hasOwnProperty("data") && typeof resp.data === "object" && parseInt(resp.data.read) === 0) {
+          parseContent(resp);
         }
-        $(".user-notification-status").addClass("new");
-        $(".notification-unread-count").each(function () {
+
+        setTimeout(function () {
+          getContent(resp.timestamp);
+        }, 10000);
+      },
+      error: function (type, status, error) {
+        switch (status) {
+          case "abort":
+            status = "The AJAX request was aborted. Please refresh the page and try again. (abort)";
+            break;
+          case "timeout":
+            status = "The AJAX request timed out. Please check your internet connection. (timeout)";
+            break;
+          case "parsererror":
+            status = "The parser received an invalid response. Please refresh the page and try again. (parsererror)";
+            break;
+          default:
+            status = "Something went wrong on your side. Please refresh the page and try again. (" + status + ")";
+        }
+        alert("A " + type.status + " " + error + " error occured: " + status);
+
+        return;
+      }
+    });
+  }
+
+  function parseContent (resp) {
+    var content = '<div id="menu-notification-' + resp.id + '" class="menu-notification-item menu-notification-unread" style="border-left: 3px solid #' + resp.data.color + '">' +
+      '<a href="' + resp.data.url + '" class="menu-link menu-notification-text">' + resp.data.text + '</a>' +
+      '<p class="time">' + resp.date + '</p>' +
+      '<span class="menu-notification-mark-read" onclick="mark_read(' + resp.id + ')" title="Mark as read">&#x2713;</span>' +
+    '</div>';
+    if (!!$(".menu-notification-body").length) {
+      if ($(".menu-notification-item").length >= 3) {
+        $(".menu-notification-item:last").remove();
+        $(".notification-left-unread-count").each(function () {
           $(this).text(parseInt($(this).text()) + 1);
         });
       }
-
-      // call function again w/ 5 second timeout
-      setTimeout(function () {
-        getContent(resp.unix_time);
-      }, 5000);
+      $(".menu-notification-body").prepend(content);
+    } else {
+      $(".menu-notification-none").remove();
+      $(".menu-notification").append('<a href="javascript:;" onClick="mark_all_read(' + resp.user_id + ')" class="menu-link menu-notification-mark-all-read">Mark all read</a>' +
+      '<div class="menu-notification-body">' +
+        content +
+        '<div class="menu-notification-footer">' +
+          '<a href="/notifications.php" class="menu-link menu-notification-link">See All</a>' +
+        '</div>' +
+      '</div>');
     }
-  });
+    $(".user-notification-status").addClass("new");
+    $(".notification-unread-count").each(function () {
+      $(this).text(parseInt($(this).text()) + 1);
+    });
+  }
 }
 
 $(function () {

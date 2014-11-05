@@ -8,34 +8,39 @@
   if ((isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === "xmlhttprequest")) {
 
     if (isset($_SESSION['user_id'])) {
-      $timestamp = isset($_GET['unix_time']) ? intval($_GET['unix_time']) : NULL;
+      $timestamp = isset($_GET['timestamp']) ? intval($_GET['timestamp']) : NULL;
       $last_notification_timestamp = $notification->get_last_notification_timestamp($_SESSION['user_id']);
 
-      if ($timestamp === 0 || $timestamp < $last_notification_timestamp) {
+      if ($timestamp !== 0 && $timestamp < $last_notification_timestamp) {
         $notif = $notification->get_notifications($_SESSION['user_id'], 1)[0];
         $notif_data = $notification->get_notif_obj($notif['notification_type'], $notif['item_id']);
 
-        $result = array(
-          'id' => $notif['id'],
-          'user_id' => $_SESSION['user_id'],
-          'timestamp' => date('D M d, Y g:i a', $notif['timestamp']),
-          'unix_time' => $last_notification_timestamp,
-          'data' => array(
-            'text' => $notif_data['data']['subject'],
-            'color' => $notif_data['data']['color'],
-            'url' => $notif_data['url'],
-            'read' => $notif['read']
-          )
-        );
+        if (intval($notif['read']) === 0) {
+          $result = array(
+            'id' => $notif['id'],
+            'user_id' => $_SESSION['user_id'],
+            'date' => date('D M d, Y g:i a', $notif['timestamp']),
+            'timestamp' => $last_notification_timestamp,
+            'data' => array(
+              'text' => $notif_data['data']['subject'],
+              'color' => $notif_data['data']['color'],
+              'url' => $notif_data['url'],
+              'read' => $notif['read']
+            )
+          );
+        } else {
+          $result = array(
+            'timestamp' => $last_notification_timestamp
+          );
+        }
 
-        echo json_encode($result);
       } else {
         $result = array(
-          'unix_time' => $last_notification_timestamp
+          'timestamp' => $last_notification_timestamp
         );
-
-        echo json_encode($result);
       }
+
+      echo json_encode($result);
     }
 
     exit();
